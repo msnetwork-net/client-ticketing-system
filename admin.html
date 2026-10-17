@@ -1,52 +1,375 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Ticketing Portal</title>
+    <title>Admin Dashboard | Support Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        body { background-color: #f8f9fa; padding: 20px; color: #333; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: #343a40; color: white; border-radius: 8px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #dee2e6; padding: 10px; text-align: left; font-size: 14px; }
-        th { background-color: #e9ecef; }
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; color: white; font-weight: bold; }
-        .bg-Network { background-color: #17a2b8; }
-        .bg-Camera { background-color: #fd7e14; }
-        .bg-Telecom { background-color: #6f42c1; }
-        .status-select { padding: 5px; border-radius: 4px; font-weight: bold; }
-        .whatsapp-btn { background-color: #25D366; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; display: inline-block; font-weight: bold; }
-        .whatsapp-btn:hover { background-color: #1ebe5d; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Glowing Orbs Background */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            z-index: 0;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+        .orb-1 { width: 350px; height: 350px; background: #6366f1; top: -80px; left: -80px; }
+        .orb-2 { width: 400px; height: 400px; background: #ec4899; bottom: -80px; right: -80px; animation-delay: -6s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.15); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .stat-total { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .stat-open { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .stat-progress { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .stat-resolved { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+
+        .stat-info h3 { font-size: 1.6rem; font-weight: 800; color: #fff; }
+        .stat-info p { font-size: 0.85rem; color: #94a3b8; font-weight: 600; }
+
+        /* Main Table Card */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.6);
+            color: #cbd5e1;
+            padding: 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+        th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+        td {
+            padding: 16px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .client-info strong { color: #fff; font-size: 0.95rem; }
+        .client-info span { color: #94a3b8; font-size: 0.82rem; display: block; margin-top: 2px; }
+
+        /* Badges */
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bg-Network { background: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+        .bg-Camera { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+        .bg-Telecom { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+        /* Select Input */
+        .status-select {
+            background: rgba(15, 23, 42, 0.8);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .status-select:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+        }
+
+        /* Buttons */
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Password Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 35px;
+            border-radius: 24px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal h2 { margin-bottom: 8px; color: #fff; }
+        .modal p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; }
+
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- Password Protection Modal -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <i class="fa-solid fa-lock" style="font-size: 2.5rem; color: #818cf8; margin-bottom: 15px;"></i>
+        <h2>Admin Portal Access</h2>
+        <p>Please enter your master password to continue</p>
+        <input type="password" id="adminPass" placeholder="Enter Password">
+        <button onclick="checkPass()">Unlock Dashboard</button>
+    </div>
+</div>
+
+<div class="container" id="mainContent" style="display: none;">
     <header>
-        <h2>Admin Dashboard - Tickets Control</h2>
-        <button onclick="location.reload()" style="background: #6c757d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Refresh</button>
+        <h1><i class="fa-solid fa-shield-halved"></i> Support Admin Dashboard</h1>
+        <button class="refresh-btn" onclick="loadAdminTickets()">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+        </button>
     </header>
 
+    <!-- Stat Summary Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon stat-total"><i class="fa-solid fa-ticket"></i></div>
+            <div class="stat-info"><h3 id="countTotal">0</h3><p>Total Tickets</p></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon stat-open"><i class="fa-solid fa-folder-open"></i></div>
+            <div class="stat-info"><h3 id="countOpen">0</h3><p>Open Issues</p></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon stat-progress"><i class="fa-solid fa-spinner"></i></div>
+            <div class="stat-info"><h3 id="countProgress">0</h3><p>In Progress</p></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon stat-resolved"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="stat-info"><h3 id="countResolved">0</h3><p>Resolved</p></div>
+        </div>
+    </div>
+
+    <!-- Active Tickets Table -->
     <div class="card">
-        <h3>All Client Tickets</h3>
-        <div style="overflow-x:auto;">
+        <div class="card-header">
+            <h2>Active Support Requests</h2>
+        </div>
+        <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
-                        <th>ID & Time</th>
+                        <th>Ticket ID</th>
                         <th>Client Details</th>
                         <th>Category</th>
-                        <th>Issue</th>
-                        <th>Priority</th>
+                        <th>Issue Description</th>
                         <th>Status</th>
-                        <th>Contact</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="adminTable">
-                    <!-- Dynamic Data -->
+                    <!-- Dynamic Data Load Here -->
                 </tbody>
             </table>
         </div>
@@ -54,48 +377,75 @@
 </div>
 
 <script>
-    // Simple Admin Password Check
-    const pass = prompt("Enter Admin Password:");
-    if (pass !== "admin123") { // Ningalkku ishtamulla password vekkam
-        alert("Incorrect Password!");
-        window.location.href = "/";
+    function checkPass() {
+        const pass = document.getElementById('adminPass').value;
+        if (pass === "admin123") { // Ningalude password
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            loadAdminTickets();
+        } else {
+            alert("Incorrect Password!");
+        }
     }
+
+    // Allow Enter Key on password field
+    document.getElementById('adminPass').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') checkPass();
+    });
 
     const API_URL = '/api/tickets';
 
     async function loadAdminTickets() {
-        const res = await fetch(API_URL);
-        const tickets = await res.json();
-        const table = document.getElementById('adminTable');
-        table.innerHTML = '';
+        try {
+            const res = await fetch(API_URL);
+            const tickets = await res.json();
+            const table = document.getElementById('adminTable');
+            table.innerHTML = '';
 
-        if(tickets.length === 0) {
-            table.innerHTML = `<tr><td colspan="7" style="text-align:center;">No tickets found.</td></tr>`;
-            return;
+            // Update Counts
+            document.getElementById('countTotal').innerText = tickets.length;
+            document.getElementById('countOpen').innerText = tickets.filter(t => t.status === 'Open').length;
+            document.getElementById('countProgress').innerText = tickets.filter(t => t.status === 'In Progress').length;
+            document.getElementById('countResolved').innerText = tickets.filter(t => t.status === 'Resolved').length;
+
+            if (tickets.length === 0) {
+                table.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 30px; color: #94a3b8;">No tickets found.</td></tr>`;
+                return;
+            }
+
+            tickets.forEach(t => {
+                const row = `
+                    <tr>
+                        <td>
+                            <strong style="color: #818cf8;">${t.id}</strong>
+                            <span style="display:block; font-size:0.75rem; color:#94a3b8; margin-top:2px;">${t.createdAt}</span>
+                        </td>
+                        <td class="client-info">
+                            <strong>${t.clientName}</strong>
+                            <span>📞 ${t.phone}</span>
+                            ${t.email && t.email !== 'N/A' ? `<span>✉️ ${t.email}</span>` : ''}
+                        </td>
+                        <td><span class="badge bg-${t.category}">${t.category}</span></td>
+                        <td style="max-width: 300px; line-height: 1.4;">${t.issue}</td>
+                        <td>
+                            <select onchange="updateStatus('${t.id}', this.value)" class="status-select">
+                                <option value="Open" ${t.status === 'Open' ? 'selected' : ''}>Open</option>
+                                <option value="In Progress" ${t.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                                <option value="Resolved" ${t.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a class="whatsapp-btn" href="https://wa.me/91${t.phone}?text=Hi%20${t.clientName},%20regarding%20your%20ticket%20${t.id}%20about%20${t.category}%20issue." target="_blank">
+                                <i class="fa-brands fa-whatsapp"></i> Contact
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                table.innerHTML += row;
+            });
+        } catch (err) {
+            console.error("Error loading tickets:", err);
         }
-
-        tickets.forEach(t => {
-            const row = `
-                <tr>
-                    <td><strong>${t.id}</strong><br><small>${t.createdAt}</small></td>
-                    <td><strong>${t.clientName}</strong><br>📞 ${t.phone}<br>✉️ ${t.email}</td>
-                    <td><span class="badge bg-${t.category}">${t.category}</span></td>
-                    <td>${t.issue}</td>
-                    <td><b>${t.priority}</b></td>
-                    <td>
-                        <select onchange="updateStatus('${t.id}', this.value)" class="status-select">
-                            <option value="Open" ${t.status === 'Open' ? 'selected' : ''}>Open</option>
-                            <option value="In Progress" ${t.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                            <option value="Resolved" ${t.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
-                        </select>
-                    </td>
-                    <td>
-                        <a class="whatsapp-btn" href="https://wa.me/91${t.phone}?text=Hi%20${t.clientName},%20regarding%20your%20ticket%20${t.id}%20about%20${t.category}%20issue." target="_blank">💬 WhatsApp</a>
-                    </td>
-                </tr>
-            `;
-            table.innerHTML += row;
-        });
     }
 
     async function updateStatus(id, status) {
@@ -104,10 +454,8 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status })
         });
-        alert('Status updated successfully!');
+        loadAdminTickets();
     }
-
-    loadAdminTickets();
 </script>
 
 </body>

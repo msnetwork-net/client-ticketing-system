@@ -1,0 +1,14 @@
+{
+  "name": "client-ticketing-system",
+  "version": "1.0.0",
+  "description": "Client Ticketing Tool for Network, Camera, and Telecom Issues",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.10"
+  }
+}

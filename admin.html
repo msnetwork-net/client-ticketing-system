@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Ticketing Portal</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f8f9fa; padding: 20px; color: #333; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: #343a40; color: white; border-radius: 8px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #dee2e6; padding: 10px; text-align: left; font-size: 14px; }
+        th { background-color: #e9ecef; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; color: white; font-weight: bold; }
+        .bg-Network { background-color: #17a2b8; }
+        .bg-Camera { background-color: #fd7e14; }
+        .bg-Telecom { background-color: #6f42c1; }
+        .status-select { padding: 5px; border-radius: 4px; font-weight: bold; }
+        .whatsapp-btn { background-color: #25D366; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-size: 12px; display: inline-block; font-weight: bold; }
+        .whatsapp-btn:hover { background-color: #1ebe5d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h2>Admin Dashboard - Tickets Control</h2>
+        <button onclick="location.reload()" style="background: #6c757d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Refresh</button>
+    </header>
+
+    <div class="card">
+        <h3>All Client Tickets</h3>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID & Time</th>
+                        <th>Client Details</th>
+                        <th>Category</th>
+                        <th>Issue</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTable">
+                    <!-- Dynamic Data -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple Admin Password Check
+    const pass = prompt("Enter Admin Password:");
+    if (pass !== "admin123") { // Ningalkku ishtamulla password vekkam
+        alert("Incorrect Password!");
+        window.location.href = "/";
+    }
+
+    const API_URL = '/api/tickets';
+
+    async function loadAdminTickets() {
+        const res = await fetch(API_URL);
+        const tickets = await res.json();
+        const table = document.getElementById('adminTable');
+        table.innerHTML = '';
+
+        if(tickets.length === 0) {
+            table.innerHTML = `<tr><td colspan="7" style="text-align:center;">No tickets found.</td></tr>`;
+            return;
+        }
+
+        tickets.forEach(t => {
+            const row = `
+                <tr>
+                    <td><strong>${t.id}</strong><br><small>${t.createdAt}</small></td>
+                    <td><strong>${t.clientName}</strong><br>📞 ${t.phone}<br>✉️ ${t.email}</td>
+                    <td><span class="badge bg-${t.category}">${t.category}</span></td>
+                    <td>${t.issue}</td>
+                    <td><b>${t.priority}</b></td>
+                    <td>
+                        <select onchange="updateStatus('${t.id}', this.value)" class="status-select">
+                            <option value="Open" ${t.status === 'Open' ? 'selected' : ''}>Open</option>
+                            <option value="In Progress" ${t.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                            <option value="Resolved" ${t.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                        </select>
+                    </td>
+                    <td>
+                        <a class="whatsapp-btn" href="https://wa.me/91${t.phone}?text=Hi%20${t.clientName},%20regarding%20your%20ticket%20${t.id}%20about%20${t.category}%20issue." target="_blank">💬 WhatsApp</a>
+                    </td>
+                </tr>
+            `;
+            table.innerHTML += row;
+        });
+    }
+
+    async function updateStatus(id, status) {
+        await fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status })
+        });
+        alert('Status updated successfully!');
+    }
+
+    loadAdminTickets();
+</script>
+
+</body>
+</html>

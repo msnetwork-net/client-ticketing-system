@@ -2,49 +2,87 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'tickets.json');
+const USERS_FILE = path.join(__dirname, 'users.json');
 
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
 
-// Ticket-ukal JSON file-il save cheyan ullath
-function readTickets() {
-    if (!fs.existsSync(DATA_FILE)) {
-        fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+// Configure Nodemailer (Gmail notifications)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'YOUR_GMAIL@gmail.com',        // 👈 Ningalude Gmail ID
+        pass: 'YOUR_16_DIGIT_APP_PASSWORD'   // 👈 Gmail App Password
     }
-    const data = fs.readFileSync(DATA_FILE);
-    return JSON.parse(data);
-}
-
-function writeTickets(tickets) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(tickets, null, 2));
-}
-
-// Client tickets list get cheyyan
-app.get('/api/tickets', (req, res) => {
-    const tickets = readTickets();
-    res.json(tickets);
 });
 
-// New Ticket register cheyyan
-app.post('/api/tickets', (req, res) => {
+// Helper Functions
+function readData(filePath) {
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify([]));
+    }
+    return JSON.parse(fs.readFileSync(filePath));
+}
+
+function writeData(filePath, data) {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
+
+// 1. User Register API
+app.post('/api/register', (req, res) => {
+    const { name, email, phone, password } = req.body;
+    let users = readData(USERS_FILE);
+
+    if (users.find(u => u.email === email)) {
+        return res.status(400).json({ error: 'Email already registered!' });
+    }
+
+    const newUser = { id: 'USER-' + Date.now(), name, email, phone, password };
+    users.push(newUser);
+    writeData(USERS_FILE, users);
+
+    res.status(201).json({ message: 'Registration successful!', user: { name, email, phone } });
+});
+
+// 2. User Login API
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+    let users = readData(USERS_FILE);
+
+    const user = users.find(u => u.email === email && u.password === password);
+    if (!user) {
+        return res.status(400).json({ error: 'Invalid email or password!' });
+    }
+
+    res.json({ message: 'Login successful!', user: { name: user.name, email: user.email, phone: user.phone } });
+});
+
+// 3. Get Tickets API
+app.get('/api/tickets', (req, res) => {
+    res.json(readData(DATA_FILE));
+});
+
+// 4. Create Ticket API & Email Notification
+app.post('/api/tickets', async (req, res) => {
     const { clientName, phone, email, category, priority, issue } = req.body;
 
     if (!clientName || !phone || !category || !issue) {
         return res.status(400).json({ error: 'Please fill all required fields' });
     }
 
-    const tickets = readTickets();
+    let tickets = readData(DATA_FILE);
     const newTicket = {
         id: 'TICK-' + Math.floor(100000 + Math.random() * 900000),
         clientName,
         phone,
         email: email || 'N/A',
-        category, // Network, Camera, or Telecom
+        category,
         priority: priority || 'Medium',
         issue,
         status: 'Open',
@@ -52,22 +90,36 @@ app.post('/api/tickets', (req, res) => {
     };
 
     tickets.unshift(newTicket);
-    writeTickets(tickets);
+    writeData(DATA_FILE, tickets);
+
+    // Email to Admin
+    const mailOptions = {
+        from: 'YOUR_GMAIL@gmail.com',
+        to: 'YOUR_GMAIL@gmail.com',
+        subject: `🚨 New Support Ticket: ${newTicket.id} (${category})`,
+        text: `New ticket raised!\n\nID: ${newTicket.id}\nClient: ${clientName}\nPhone: ${phone}\nCategory: ${category}\nIssue: ${issue}`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+    } catch (error) {
+        console.error('Email error:', error);
+    }
 
     res.status(201).json({ message: 'Ticket Created Successfully', ticket: newTicket });
 });
 
-// Status update cheyyan (Resolved / In Progress)
+// 5. Update Status API
 app.put('/api/tickets/:id', (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    let tickets = readTickets();
+    let tickets = readData(DATA_FILE);
     const index = tickets.findIndex(t => t.id === id);
 
     if (index !== -1) {
         tickets[index].status = status;
-        writeTickets(tickets);
+        writeData(DATA_FILE, tickets);
         res.json({ message: 'Status Updated', ticket: tickets[index] });
     } else {
         res.status(404).json({ error: 'Ticket Not Found' });

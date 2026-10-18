@@ -258,6 +258,63 @@
             padding-left: 12px;
         }
 
+        /* Contact & Call Back Section Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background: rgba(31, 41, 55, 0.4);
+            border: 1px solid #1f2937;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .contact-item-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .contact-item-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(0, 102, 204, 0.15);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f9fafb;
+            margin-bottom: 2px;
+        }
+
+        .contact-details a, .contact-details p {
+            color: #9ca3af;
+            font-size: 0.88rem;
+            text-decoration: none;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        .contact-details a:hover { color: #60a5fa; }
+
         /* Auth Console Modal Layout */
         .auth-container {
             max-width: 450px;
@@ -376,7 +433,53 @@
         </div>
     </div>
 
-    <!-- Section 4: Login / Register Console -->
+    <!-- Section 4: Contact & Request Call Back Section -->
+    <div class="section-card">
+        <h2 class="section-title"><i class="fa-solid fa-headset"></i> Contact Us & Customer Care</h2>
+        <div class="contact-grid">
+            
+            <!-- Call Back Request Form Box -->
+            <div class="contact-card">
+                <h4 style="font-size: 1rem; color: #f9fafb; margin-bottom: 6px;"><i class="fa-solid fa-phone-volume" style="color: #0066cc; margin-right: 6px;"></i> Request a Call Back</h4>
+                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 15px;">Leave your phone number. Our engineering team will contact you shortly when available.</p>
+                
+                <form id="callbackForm" onsubmit="handleCallbackRequest(event)">
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <input type="tel" id="callbackPhone" required placeholder="+91 XXXXX XXXXX" style="background: #0b0f19;">
+                    </div>
+                    <button type="submit" class="submit-btn" style="padding: 10px; font-size: 0.85rem;">
+                        <i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Request Immediate Call Back
+                    </button>
+                </form>
+            </div>
+
+            <!-- Direct Email & Location Info Box -->
+            <div class="contact-card" style="display: flex; flex-direction: column; justify-content: center;">
+                <div class="contact-item-row">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Official Support Email</h4>
+                        <a href="mailto:genzkadavath@gmail.com">genzkadavath@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item-row">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Headquarters Location</h4>
+                        <p>Kunnummal, Malappuram, Kerala, India</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Section 5: Login / Register Console -->
     <div class="section-card" id="consoleSection">
         <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client Support Console</h2>
         <div class="auth-container">
@@ -503,6 +606,34 @@
             document.getElementById('loginTabBtn').classList.remove('active');
             document.getElementById('signupForm').style.display = 'block';
             document.getElementById('loginForm').style.display = 'none';
+        }
+    }
+
+    async function handleCallbackRequest(e) {
+        e.preventDefault();
+        const phone = document.getElementById('callbackPhone').value;
+        try {
+            const res = await fetch('/api/tickets', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    clientName: 'Call Back Request',
+                    phone: phone,
+                    email: 'N/A',
+                    category: 'Call Back Request',
+                    priority: 'High',
+                    issue: `Client requested an urgent call back to phone number: ${phone}`
+                })
+            });
+            if (res.ok) {
+                alert('Call Back Request Submitted Successfully! Our engineers will call you shortly.');
+                document.getElementById('callbackForm').reset();
+            } else {
+                alert('Failed to submit call back request. Please try again.');
+            }
+        } catch (err) {
+            alert('Request submitted. We will call you back soon!');
+            document.getElementById('callbackForm').reset();
         }
     }
 

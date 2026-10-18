@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MS NETWORK | Enterprise Support & Solutions Console</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- QRCode JS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -309,6 +311,71 @@
 
         .contact-details a:hover { color: #60a5fa; }
 
+        /* SHARE OUR SERVICE & QR CODE STYLING */
+        .share-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .share-info { flex: 1; min-width: 280px; }
+        .share-info h3 { font-size: 1.2rem; font-weight: 700; color: #f9fafb; margin-bottom: 6px; }
+        .share-info p { font-size: 0.88rem; color: #9ca3af; margin-bottom: 18px; line-height: 1.5; }
+
+        .share-buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .share-btn {
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .share-btn:hover { opacity: 0.85; }
+        .share-whatsapp { background: #25D366; }
+        .share-copy { background: #0066cc; }
+        .share-native { background: #4f46e5; }
+
+        .qr-box-wrapper {
+            background: #ffffff;
+            padding: 14px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #0066cc;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-box-wrapper p {
+            color: #111827;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         /* Auth Console Modal Layout */
         .auth-container {
             max-width: 450px;
@@ -490,7 +557,32 @@
         </div>
     </div>
 
-    <!-- Section 5: Login / Register Console -->
+    <!-- Section 5: SHARE OUR SERVICE & DYNAMIC QR CODE -->
+    <div class="share-card">
+        <div class="share-info">
+            <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
+            <p>Scan the QR code or share our portal link with friends and business partners who need expert IT, Network, CCTV, or Telecom support.</p>
+            
+            <div class="share-buttons-grid">
+                <button onclick="shareOnWhatsApp()" class="share-btn share-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+                </button>
+                <button onclick="copyWebsiteLink()" class="share-btn share-copy">
+                    <i class="fa-solid fa-copy"></i> Copy Link
+                </button>
+                <button onclick="nativeMobileShare()" class="share-btn share-native">
+                    <i class="fa-solid fa-share-nodes"></i> Share Console
+                </button>
+            </div>
+        </div>
+
+        <div class="qr-box-wrapper">
+            <div id="qrcode"></div>
+            <p>Scan to Visit</p>
+        </div>
+    </div>
+
+    <!-- Section 6: Login / Register Console -->
     <div class="section-card" id="consoleSection">
         <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client Support Console</h2>
         <div class="auth-container">
@@ -601,6 +693,45 @@
 <script>
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     if (currentUser) { showPortal(); }
+
+    // DYNAMIC QR CODE GENERATION
+    window.addEventListener('load', () => {
+        const currentUrl = window.location.href;
+        new QRCode(document.getElementById("qrcode"), {
+            text: currentUrl,
+            width: 110,
+            height: 110,
+            colorDark : "#0b0f19",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    });
+
+    // SHARE FUNCTIONS
+    function shareOnWhatsApp() {
+        const url = window.location.href;
+        const message = `Check out MS NETWORK Enterprise Support & Solutions Console for fast IT, CCTV, Network & Telecom Support: ${url}`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function copyWebsiteLink() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            alert('MS NETWORK Portal Link Copied to Clipboard!');
+        });
+    }
+
+    function nativeMobileShare() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'MS NETWORK Support Desk',
+                text: 'Need IT, CCTV, Network, or Telecom Support? Check out MS NETWORK Support Desk:',
+                url: window.location.href
+            }).catch(err => console.log('Share canceled'));
+        } else {
+            copyWebsiteLink();
+        }
+    }
 
     function scrollToConsole() {
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });

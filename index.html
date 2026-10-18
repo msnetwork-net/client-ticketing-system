@@ -36,7 +36,12 @@
         input:focus, select:focus, textarea:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2); }
         
         button.submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); border: none; border-radius: 12px; color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
-        .toast { display: none; margin-top: 15px; padding: 12px; border-radius: 10px; background: rgba(34, 197, 94, 0.2); border: 1px solid #22c55e; color: #4ade80; text-align: center; font-weight: 600; }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -99,7 +104,8 @@
         </div>
     </div>
 
-    <div class="card">
+    <!-- Ticket Form Card -->
+    <div class="card" id="formCard">
         <h2 style="margin-bottom: 20px; font-size: 1.2rem;">Raise a New Ticket</h2>
         <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
             <div class="form-group">
@@ -128,7 +134,20 @@
 
             <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Submit Ticket</button>
         </form>
-        <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> Ticket Submitted Successfully!</div>
+    </div>
+
+    <!-- Thank You / Success Card (Initially Hidden) -->
+    <div class="card" id="successCard" style="display: none; text-align: center; padding: 40px 20px;">
+        <div style="font-size: 4rem; color: #4ade80; margin-bottom: 15px; animation: bounceIn 0.6s ease;">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2 style="font-size: 1.8rem; margin-bottom: 10px; color: #fff;">Thank You for Contacting Us!</h2>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">
+            Your support ticket has been successfully registered (<strong id="assignedTicketId" style="color: #818cf8;"></strong>). Our technical team has been notified and will resolve your problem soon.
+        </p>
+        <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
+            <i class="fa-solid fa-plus"></i> Raise Another Ticket
+        </button>
     </div>
 </div>
 
@@ -232,14 +251,21 @@
             body: JSON.stringify(data)
         });
 
+        const result = await res.json();
+
         if (res.ok) {
             document.getElementById('ticketForm').reset();
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+            document.getElementById('formCard').style.display = 'none';
+            document.getElementById('assignedTicketId').innerText = result.ticket.id;
+            document.getElementById('successCard').style.display = 'block';
         } else {
             alert('Failed to submit ticket.');
         }
+    }
+
+    function resetToNewTicket() {
+        document.getElementById('successCard').style.display = 'none';
+        document.getElementById('formCard').style.display = 'block';
     }
 </script>
 

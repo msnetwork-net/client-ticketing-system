@@ -311,6 +311,24 @@
 
         .contact-details a:hover { color: #60a5fa; }
 
+        /* Auth Console Modal Layout */
+        .auth-container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
+        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .tab-btn.active { background: #0066cc; color: #fff; }
+
+        .form-group { margin-bottom: 16px; text-align: left; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #9ca3af; }
+        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: #0066cc; }
+        
+        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button.submit-btn:hover { background: #0052a3; }
+
         /* SHARE OUR SERVICE & QR CODE STYLING */
         .share-card {
             background: rgba(17, 24, 39, 0.9);
@@ -376,24 +394,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Auth Console Modal Layout */
-        .auth-container {
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
-        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
-        .tab-btn.active { background: #0066cc; color: #fff; }
-
-        .form-group { margin-bottom: 16px; text-align: left; }
-        label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #9ca3af; }
-        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; }
-        input:focus, select:focus, textarea:focus { border-color: #0066cc; }
-        
-        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        button.submit-btn:hover { background: #0052a3; }
-
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
@@ -410,7 +410,7 @@
         </button>
     </div>
 
-    <!-- Hero Banner -->
+    <!-- 1. Hero Banner -->
     <div class="hero-banner">
         <span class="hero-tag">MS Network Support Desk</span>
         <h1 class="hero-headline">
@@ -424,7 +424,7 @@
         </button>
     </div>
 
-    <!-- Section 1: Services & Platform Features -->
+    <!-- 2. Key Capabilities & Services -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
@@ -451,7 +451,7 @@
         </div>
     </div>
 
-    <!-- Section 2: Deep MS NETWORK Journey & History -->
+    <!-- 3. About MS NETWORK -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-building-flag"></i> About MS NETWORK</h2>
         <p class="history-text">
@@ -475,7 +475,7 @@
         </div>
     </div>
 
-    <!-- Section 3: CEO & Founder Leadership Profile -->
+    <!-- 4. Leadership & Vision (CEO Profile) -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Leadership & Vision</h2>
         <div class="ceo-card">
@@ -494,7 +494,7 @@
         </div>
     </div>
 
-    <!-- Section 4: Contact & Request Call Back Section -->
+    <!-- 5. Contact Us & Request Call Back Section -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-headset"></i> Contact Us & Customer Care</h2>
         <div class="contact-grid">
@@ -557,32 +557,7 @@
         </div>
     </div>
 
-    <!-- Section 5: SHARE OUR SERVICE & DYNAMIC QR CODE -->
-    <div class="share-card">
-        <div class="share-info">
-            <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
-            <p>Scan the QR code or share our portal link with friends and business partners who need expert IT, Network, CCTV, or Telecom support.</p>
-            
-            <div class="share-buttons-grid">
-                <button onclick="shareOnWhatsApp()" class="share-btn share-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
-                </button>
-                <button onclick="copyWebsiteLink()" class="share-btn share-copy">
-                    <i class="fa-solid fa-copy"></i> Copy Link
-                </button>
-                <button onclick="nativeMobileShare()" class="share-btn share-native">
-                    <i class="fa-solid fa-share-nodes"></i> Share Console
-                </button>
-            </div>
-        </div>
-
-        <div class="qr-box-wrapper">
-            <div id="qrcode"></div>
-            <p>Scan to Visit</p>
-        </div>
-    </div>
-
-    <!-- Section 6: Login / Register Console -->
+    <!-- 6. Client Support Console (Login / Register Console) -->
     <div class="section-card" id="consoleSection">
         <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client Support Console</h2>
         <div class="auth-container">
@@ -626,6 +601,32 @@
             </form>
         </div>
     </div>
+
+    <!-- 7. SHARE OUR SERVICE & DYNAMIC QR CODE (At Bottom) -->
+    <div class="share-card">
+        <div class="share-info">
+            <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
+            <p>Scan the QR code or share our portal link with friends and business partners who need expert IT, Network, CCTV, or Telecom support.</p>
+            
+            <div class="share-buttons-grid">
+                <button onclick="shareOnWhatsApp()" class="share-btn share-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+                </button>
+                <button onclick="copyWebsiteLink()" class="share-btn share-copy">
+                    <i class="fa-solid fa-copy"></i> Copy Link
+                </button>
+                <button onclick="nativeMobileShare()" class="share-btn share-native">
+                    <i class="fa-solid fa-share-nodes"></i> Share Console
+                </button>
+            </div>
+        </div>
+
+        <div class="qr-box-wrapper">
+            <div id="qrcode"></div>
+            <p>Scan to Visit</p>
+        </div>
+    </div>
+
 </div>
 
 <!-- Main Ticketing Portal (Hidden Initially) -->

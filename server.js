@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname)));
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'YOUR_GMAIL@gmail.com',        // 👈 Ningalude Gmail ID ivide kodukkuka
-        pass: 'YOUR_16_DIGIT_APP_PASSWORD'   // 👈 Gmail App Password ivide kodukkuka
+        user: 'genztest@gmail.com',        // 👈 Ningalude Gmail ID ivide kodukkuka
+        pass: 'wnhwhmtywljvuwrg'   // 👈 Gmail App Password ivide kodukkuka
     }
 });
 

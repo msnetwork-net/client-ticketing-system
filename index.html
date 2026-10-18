@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Support Console | Enterprise Ticketing</title>
+    <title>MS NETWORK | Enterprise Support Console</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -24,7 +24,7 @@
         .main-wrapper {
             display: flex;
             gap: 40px;
-            max-width: 1000px;
+            max-width: 1050px;
             width: 100%;
             align-items: center;
             justify-content: center;
@@ -36,14 +36,14 @@
         .intro-section {
             flex: 1;
             min-width: 320px;
-            max-width: 480px;
+            max-width: 500px;
         }
 
         .intro-section h1 {
             font-size: 2rem;
             font-weight: 700;
             color: #f9fafb;
-            margin-bottom: 15px;
+            margin-bottom: 6px;
             line-height: 1.2;
             display: flex;
             align-items: center;
@@ -54,9 +54,9 @@
 
         .intro-section p {
             color: #9ca3af;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .feature-list {
@@ -101,7 +101,7 @@
             padding: 30px;
             border-radius: 12px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
             flex: 1;
             min-width: 320px;
@@ -134,31 +134,47 @@
 <body>
 
 <div class="main-wrapper" id="authWrapper">
-    <!-- Introduction Section -->
+    <!-- MS NETWORK Introduction Section -->
     <div class="intro-section">
-        <h1><i class="fa-solid fa-cloud"></i> Cloud Support Console</h1>
-        <p>Enterprise Support Console is a centralized IT incident management platform designed to streamline infrastructure support across networks, CCTV hardware, and telecommunication systems with absolute transparency.</p>
-        
+        <h1><i class="fa-solid fa-network-wired"></i> MS NETWORK</h1>
+        <p style="color: #60a5fa; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            Headquartered in Kunnummal, Malappuram
+        </p>
+        <p>
+            Over <strong>10+ years of excellence</strong> in providing budget-friendly, high-reliability solutions for Network, CCTV Camera, Telecom, and IT Hardware issues.
+        </p>
+
+        <!-- Why Choose Us Highlight Box -->
+        <div style="background: rgba(17, 24, 39, 0.8); border: 1px solid #1f2937; padding: 16px; border-radius: 10px; margin-bottom: 20px;">
+            <h3 style="font-size: 0.95rem; color: #f9fafb; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-circle-question" style="color: #38bdf8;"></i> Why Choose MS NETWORK Console?
+            </h3>
+            <p style="font-size: 0.85rem; color: #9ca3af; line-height: 1.5; margin: 0;">
+                From our roots in Kunnummal, Malappuram, our soft customer-centric approach has enabled us to serve clients across <strong>all districts in Kerala</strong> and major centers including <strong>Bangalore, Chennai, Mumbai, Tamil Nadu, and Karnataka</strong>. This support platform ensures 24/7 online access for fast technical assistance.
+            </p>
+        </div>
+
+        <!-- Core Features List -->
         <div class="feature-list">
             <div class="feature-item">
-                <i class="fa-solid fa-ticket"></i>
+                <i class="fa-solid fa-headset"></i>
                 <div>
-                    <h4>Centralized Ticketing</h4>
-                    <p>Every support request generates a unique secure incident ID to monitor real-time progress.</p>
+                    <h4>Online & On-Site Support</h4>
+                    <p>Register complaints easily for Network, CCTV, Telecom, and Hardware issues from anywhere.</p>
                 </div>
             </div>
             <div class="feature-item">
-                <i class="fa-solid fa-envelope-circle-check"></i>
+                <i class="fa-solid fa-hand-holding-dollar"></i>
                 <div>
-                    <h4>Automated Email Alerts</h4>
-                    <p>Instant dispatch logic triggers notifications to engineering teams the moment an issue is raised.</p>
+                    <h4>Budget-Friendly & Friendly Care</h4>
+                    <p>10+ years of trusted service with transparent pricing and soft, helpful customer support.</p>
                 </div>
             </div>
             <div class="feature-item">
-                <i class="fa-solid fa-sliders"></i>
+                <i class="fa-solid fa-globe"></i>
                 <div>
-                    <h4>Priority Routing</h4>
-                    <p>Issues are categorized by severity levels to prioritize critical operations effectively.</p>
+                    <h4>Multi-State Presence</h4>
+                    <p>Serving enterprise and retail clients across Kerala, Bangalore, Chennai, Mumbai, Karnataka, and Tamil Nadu.</p>
                 </div>
             </div>
         </div>
@@ -166,7 +182,7 @@
 
     <!-- Login / Signup Card -->
     <div class="auth-card">
-        <h2 id="authTitle">Sign In to Console</h2>
+        <h2 id="authTitle">Sign In to MS Console</h2>
         <div class="tab-btns">
             <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
             <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Register</button>
@@ -189,7 +205,7 @@
         <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
             <div class="form-group">
                 <label>Organization / Full Name</label>
-                <input type="text" id="signupName" required placeholder="Enterprise Name">
+                <input type="text" id="signupName" required placeholder="Enterprise / Client Name">
             </div>
             <div class="form-group">
                 <label>Work Email</label>
@@ -212,7 +228,7 @@
 <div class="container" id="mainPortal" style="display: none; max-width: 600px; width: 100%; margin: auto;">
     <div class="card">
         <div class="header">
-            <h1><i class="fa-solid fa-cloud"></i> Enterprise Support Desk</h1>
+            <h1><i class="fa-solid fa-network-wired"></i> MS NETWORK Support Desk</h1>
             <div>
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
                 <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
@@ -226,28 +242,29 @@
                 <div class="form-group">
                     <label>Service Category</label>
                     <select id="category" required>
-                        <option value="" style="background: #111827;">Select Cloud Service / Infrastructure</option>
-                        <option value="Network" style="background: #111827;">Network / VPC Connectivity</option>
-                        <option value="Camera" style="background: #111827;">CCTV / Edge Hardware</option>
-                        <option value="Telecom" style="background: #111827;">Telecom / VOIP Gateway</option>
+                        <option value="" style="background: #111827;">Select Issue Category</option>
+                        <option value="Network" style="background: #111827;">Network / Wi-Fi / Router Issue</option>
+                        <option value="Camera" style="background: #111827;">CCTV Camera / DVR / NVR Issue</option>
+                        <option value="Telecom" style="background: #111827;">Telecom / Intercom / EPABX Issue</option>
+                        <option value="Hardware" style="background: #111827;">IT Hardware / Server Issue</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Severity Level</label>
                     <select id="priority">
-                        <option value="Low">Low - General Inquiry</option>
-                        <option value="Medium" selected>Medium - Degraded Performance</option>
-                        <option value="High">High - Critical Service Outage</option>
+                        <option value="Low">Low - General Request</option>
+                        <option value="Medium" selected>Medium - Performance Issue</option>
+                        <option value="High">High - Critical System Down</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Incident Description</label>
-                    <textarea id="issue" rows="4" placeholder="Provide detailed technical logs or issue context..." required></textarea>
+                    <label>Problem Description</label>
+                    <textarea id="issue" rows="4" placeholder="Describe the issue in detail..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-print submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Support Ticket</button>
+                <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Support Ticket</button>
             </form>
         </div>
 
@@ -256,12 +273,12 @@
             <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
-            <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Ticket Successfully Registered</h2>
+            <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Thank You for Contacting Us!</h2>
             <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                Your incident ticket has been assigned ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our cloud support engineers have been notified and are reviewing your request.
+                Your support ticket has been registered with ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our MS NETWORK technical team has been notified and will resolve your problem soon.
             </p>
             <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
-                Create Another Ticket
+                Raise Another Ticket
             </button>
         </div>
     </div>
@@ -277,7 +294,7 @@
             document.getElementById('signupTabBtn').classList.remove('active');
             document.getElementById('loginForm').style.display = 'block';
             document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('authTitle').innerText = 'Sign In to Console';
+            document.getElementById('authTitle').innerText = 'Sign In to MS Console';
         } else {
             document.getElementById('signupTabBtn').classList.add('active');
             document.getElementById('loginTabBtn').classList.remove('active');
@@ -350,7 +367,7 @@
             phone: currentUser.phone,
             email: currentUser.email,
             category: document.getElementById('category').value,
-            priority: document.getElementById('priority'].value,
+            priority: document.getElementById('priority').value,
             issue: document.getElementById('issue').value
         };
         const res = await fetch('/api/tickets', {

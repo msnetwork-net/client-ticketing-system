@@ -96,9 +96,6 @@
             display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;
         }
 
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .feature-box { background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; }
-
         .auth-container { max-width: 450px; margin: 0 auto; }
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
         .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; }
@@ -275,6 +272,9 @@
     if (!localStorage.getItem('ms_tickets_db')) {
         localStorage.setItem('ms_tickets_db', JSON.stringify([]));
     }
+    if (!localStorage.getItem('ms_notifs_db')) {
+        localStorage.setItem('ms_notifs_db', JSON.stringify([]));
+    }
 
     if (currentUser) { showPortal(); }
 
@@ -298,7 +298,6 @@
             currentUser = { name: foundSysUser.name, email: foundSysUser.email, role: foundSysUser.role };
             localStorage.setItem('supportUser', JSON.stringify(currentUser));
             
-            // Register Mobile Device in OneSignal with User Email
             window.OneSignalDeferred = window.OneSignalDeferred || [];
             OneSignalDeferred.push(function(OneSignal) {
                 OneSignal.login(currentUser.email);
@@ -307,7 +306,36 @@
             showPortal();
             return;
         }
+
+        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
+        const foundClient = clientDB.find(c => c.email.toLowerCase() === email.toLowerCase() && c.password === password);
+
+        if (foundClient) {
+            currentUser = { name: foundClient.name, email: foundClient.email, phone: foundClient.phone, role: 'CLIENT' };
+            localStorage.setItem('supportUser', JSON.stringify(currentUser));
+            showPortal();
+            return;
+        }
+
         alert('Invalid Email or Password!');
+    }
+
+    function handleSignup(e) {
+        e.preventDefault();
+        const newClient = {
+            name: document.getElementById('signupName').value,
+            email: document.getElementById('signupEmail').value,
+            phone: document.getElementById('signupPhone').value,
+            password: document.getElementById('signupPassword').value,
+            role: 'CLIENT'
+        };
+
+        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
+        clientDB.push(newClient);
+        localStorage.setItem('ms_clients_db', JSON.stringify(clientDB));
+
+        alert('Client Account Created Successfully! Please Sign In.');
+        switchTab('login');
     }
 
     function showPortal() {
@@ -323,6 +351,7 @@
             document.getElementById('adminPanelSection').style.display = 'block';
             loadAdminPanel();
         }
+        loadNotifications();
     }
 
     function handleLogout() {
@@ -332,32 +361,28 @@
         document.getElementById('landingPage').style.display = 'block';
     }
 
-    // FUNCTION TO SEND REALTIME PUSH NOTIFICATION WITH SOUND VIA ONESIGNAL
     async function sendPushNotification(targetEmail, title, message) {
         const options = {
             method: 'POST',
-            headers: {
-                'accept': 'application/json',
-                'content-type': 'application/json'
-            },
+            headers: { 'accept': 'application/json', 'content-type': 'application/json' },
             body: JSON.stringify({
-                app_id: "56e2717d-c699-4c22-8e4c-40a12c19149d", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
+                app_id: "YOUR_ONESIGNAL_APP_ID_HERE", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
                 include_aliases: { external_id: [targetEmail] },
                 target_channel: "push",
                 headings: { en: title },
                 contents: { en: message },
-                sound: "default" // Plays sound on mobile devices
+                sound: "default"
             })
         };
-
-        try {
-            await fetch('https://onesignal.com/api/v1/notifications', options);
-        } catch (err) {
-            console.log("Notification send error:", err);
-        }
+        try { await fetch('https://onesignal.com/api/v1/notifications', options); } catch (err) { console.log(err); }
     }
 
-    // CLIENT RAISES TICKET -> SENDS SOUND PUSH NOTIFICATION TO CEO & CO-CEO
+    function addNotification(targetRoleOrName, text) {
+        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+        notifs.unshift({ id: Date.now(), target: targetRoleOrName, text: text, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        localStorage.setItem('ms_notifs_db', JSON.stringify(notifs));
+    }
+
     function handleTicketSubmit(e) {
         e.preventDefault();
         const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
@@ -370,11 +395,11 @@
         db.unshift(newTicket);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
-        // Send Mobile Push Notification with sound to CEO & Co-CEO
+        addNotification('CEO', `🎫 New Ticket (${tckId}) raised by ${currentUser.name}`);
         sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
         sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
-        alert(`Ticket Submitted! ID: ${tckId}`);
+        alert(`Ticket Submitted Successfully! ID: ${tckId}`);
         document.getElementById('ticketForm').reset();
     }
 
@@ -385,21 +410,29 @@
 
         let filteredList = currentUser.role === 'CEO' ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
 
+        if (filteredList.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found.</td></tr>`;
+            return;
+        }
+
         filteredList.forEach((item) => {
             const tr = document.createElement('tr');
             let optionsHTML = '<option value="Unassigned">Unassigned</option>';
             TEAM_LIST.forEach(m => optionsHTML += `<option value="${m}" ${item.assignedTo === m ? 'selected' : ''}>${m}</option>`);
 
             let actionHTML = currentUser.role === 'CEO' 
-                ? `<select onchange="assignTechnician('${item.id}', this.value)">${optionsHTML}</select>`
-                : `<button onclick="updateTicketStatus('${item.id}', 'Resolved')">Mark Resolved</button>`;
+                ? `<select onchange="assignTechnician('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:4px;">${optionsHTML}</select>`
+                : `<select onchange="updateTicketStatus('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:4px;">
+                     <option value="Pending" ${item.status === 'Pending'?'selected':''}>Pending</option>
+                     <option value="In Progress" ${item.status === 'In Progress'?'selected':''}>In Progress</option>
+                     <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>
+                   </select>`;
 
-            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td>${item.status}</td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'resolved' : 'pending'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }
 
-    // CEO ASSIGNS WORK -> SENDS SOUND PUSH NOTIFICATION TO PARTICULAR TEAM MEMBER
     function assignTechnician(id, techName) {
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         const item = db.find(t => t.id === id);
@@ -408,15 +441,53 @@
             item.status = 'In Progress';
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
-            // Find tech email and send sound notification
             const sysUser = SYSTEM_USERS.find(u => u.name.toUpperCase() === techName.toUpperCase());
             if (sysUser) {
+                addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} to you.`);
                 sendPushNotification(sysUser.email, "⚡ New Work Assigned!", `CEO assigned Ticket ${id} to you.`);
             }
 
             alert(`Assigned ${id} to ${techName}`);
             loadAdminPanel();
         }
+    }
+
+    function updateTicketStatus(id, newStatus) {
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        const item = db.find(t => t.id === id);
+        if (item) {
+            item.status = newStatus;
+            localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+            addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
+            alert(`Updated status to ${newStatus}`);
+            loadAdminPanel();
+        }
+    }
+
+    function loadNotifications() {
+        if (!currentUser) return;
+        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+        const notifList = document.getElementById('notifList');
+        const notifBadge = document.getElementById('notifBadge');
+
+        const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
+
+        if (userNotifs.length > 0) {
+            notifBadge.style.display = 'inline-block';
+            notifBadge.innerText = userNotifs.length;
+            notifList.innerHTML = '';
+            userNotifs.forEach(n => {
+                notifList.innerHTML += `<div class="notif-item">${n.text}<span style="font-size:0.7rem; color:#6b7280; display:block; margin-top:2px;">${n.time}</span></div>`;
+            });
+        } else {
+            notifBadge.style.display = 'none';
+            notifList.innerHTML = '<div class="notif-item">No new notifications.</div>';
+        }
+    }
+
+    function toggleNotifDropdown() {
+        const drop = document.getElementById('notifDropdown');
+        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 </script>
 

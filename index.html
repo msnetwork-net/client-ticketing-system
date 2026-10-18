@@ -21,19 +21,100 @@
             padding: 20px;
         }
 
-        .container { width: 100%; max-width: 600px; position: relative; z-index: 10; }
+        .main-wrapper {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            z-index: 10;
+        }
 
-        /* Enterprise Auth Modal */
-        .auth-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; }
-        .auth-card { background: #111827; border: 1px solid #1f2937; padding: 35px; border-radius: 12px; width: 90%; max-width: 420px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
-        .auth-card h2 { text-align: center; margin-bottom: 20px; color: #f9fafb; font-size: 1.4rem; font-weight: 700; }
+        /* Introduction Info Column */
+        .intro-section {
+            flex: 1;
+            min-width: 320px;
+            max-width: 480px;
+        }
+
+        .intro-section h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f9fafb;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .intro-section h1 i { color: #0066cc; }
+
+        .intro-section p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            background: rgba(31, 41, 55, 0.4);
+            border: 1px solid #1f2937;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .feature-item i {
+            color: #60a5fa;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .feature-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f9fafb;
+            margin-bottom: 2px;
+        }
+
+        .feature-item p {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        /* Enterprise Auth Modal Card */
+        .auth-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .auth-card h2 { text-align: center; margin-bottom: 20px; color: #f9fafb; font-size: 1.25rem; font-weight: 600; }
         
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
-        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s; }
         .tab-btn.active { background: #0066cc; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 
         /* Cloud Enterprise Card Style */
-        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); width: 100%; max-width: 600px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #1f2937; padding-bottom: 15px; }
         .header h1 { font-size: 1.25rem; font-weight: 600; color: #f9fafb; display: flex; align-items: center; gap: 10px; }
         .header h1 i { color: #0066cc; }
@@ -41,26 +122,51 @@
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
         .logout-btn:hover { background: rgba(239, 68, 68, 0.2); }
 
-        .form-group { margin-bottom: 18px; }
+        .form-group { margin-bottom: 16px; }
         label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #9ca3af; }
-        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
         input:focus, select:focus, textarea:focus { border-color: #0066cc; box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2); }
         
-        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
         button.submit-btn:hover { background: #0052a3; }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
 
-<!-- Login / Signup Modal -->
-<div class="auth-overlay" id="authModal">
+<div class="main-wrapper" id="authWrapper">
+    <!-- Introduction Section -->
+    <div class="intro-section">
+        <h1><i class="fa-solid fa-cloud"></i> Cloud Support Console</h1>
+        <p>Enterprise Support Console is a centralized IT incident management platform designed to streamline infrastructure support across networks, CCTV hardware, and telecommunication systems with absolute transparency.</p>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <i class="fa-solid fa-ticket"></i>
+                <div>
+                    <h4>Centralized Ticketing</h4>
+                    <p>Every support request generates a unique secure incident ID to monitor real-time progress.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-envelope-circle-check"></i>
+                <div>
+                    <h4>Automated Email Alerts</h4>
+                    <p>Instant dispatch logic triggers notifications to engineering teams the moment an issue is raised.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-sliders"></i>
+                <div>
+                    <h4>Priority Routing</h4>
+                    <p>Issues are categorized by severity levels to prioritize critical operations effectively.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login / Signup Card -->
     <div class="auth-card">
-        <h2 id="authTitle">Cloud Support Console</h2>
+        <h2 id="authTitle">Sign In to Console</h2>
         <div class="tab-btns">
             <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
             <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Register</button>
@@ -102,60 +208,62 @@
     </div>
 </div>
 
-<!-- Main Ticketing Portal -->
-<div class="container" id="mainPortal" style="display: none;">
-    <div class="header">
-        <h1><i class="fa-solid fa-cloud"></i> Enterprise Support Desk</h1>
-        <div>
-            <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
-            <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+<!-- Main Ticketing Portal (Hidden initially) -->
+<div class="container" id="mainPortal" style="display: none; max-width: 600px; width: 100%; margin: auto;">
+    <div class="card">
+        <div class="header">
+            <h1><i class="fa-solid fa-cloud"></i> Enterprise Support Desk</h1>
+            <div>
+                <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
+                <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+            </div>
         </div>
-    </div>
 
-    <!-- Ticket Form Card -->
-    <div class="card" id="formCard">
-        <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Support Ticket</h2>
-        <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
-            <div class="form-group">
-                <label>Service Category</label>
-                <select id="category" required>
-                    <option value="" style="background: #111827;">Select Cloud Service / Infrastructure</option>
-                    <option value="Network" style="background: #111827;">Network / VPC Connectivity</option>
-                    <option value="Camera" style="background: #111827;">CCTV / Edge Hardware</option>
-                    <option value="Telecom" style="background: #111827;">Telecom / VOIP Gateway</option>
-                </select>
-            </div>
+        <!-- Ticket Form Card -->
+        <div id="formCard">
+            <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Support Ticket</h2>
+            <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
+                <div class="form-group">
+                    <label>Service Category</label>
+                    <select id="category" required>
+                        <option value="" style="background: #111827;">Select Cloud Service / Infrastructure</option>
+                        <option value="Network" style="background: #111827;">Network / VPC Connectivity</option>
+                        <option value="Camera" style="background: #111827;">CCTV / Edge Hardware</option>
+                        <option value="Telecom" style="background: #111827;">Telecom / VOIP Gateway</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label>Severity Level</label>
-                <select id="priority">
-                    <option value="Low">Low - General Inquiry</option>
-                    <option value="Medium" selected>Medium - Degraded Performance</option>
-                    <option value="High">High - Critical Service Outage</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label>Severity Level</label>
+                    <select id="priority">
+                        <option value="Low">Low - General Inquiry</option>
+                        <option value="Medium" selected>Medium - Degraded Performance</option>
+                        <option value="High">High - Critical Service Outage</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label>Incident Description</label>
-                <textarea id="issue" rows="4" placeholder="Provide detailed technical logs or issue context..." required></textarea>
-            </div>
+                <div class="form-group">
+                    <label>Incident Description</label>
+                    <textarea id="issue" rows="4" placeholder="Provide detailed technical logs or issue context..." required></textarea>
+                </div>
 
-            <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Support Ticket</button>
-        </form>
-    </div>
-
-    <!-- Thank You / Success Card -->
-    <div class="card" id="successCard" style="display: none; text-align: center; padding: 40px 20px;">
-        <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
-            <i class="fa-solid fa-circle-check"></i>
+                <button type="submit" class="submit-print submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Support Ticket</button>
+            </form>
         </div>
-        <h2 style="font-size: 1.4rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Ticket Successfully Registered</h2>
-        <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-            Your incident ticket has been assigned ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our cloud support engineers have been notified and are reviewing your request.
-        </p>
-        <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
-            Create Another Ticket
-        </button>
+
+        <!-- Thank You / Success Card -->
+        <div id="successCard" style="display: none; text-align: center; padding: 30px 10px;">
+            <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Ticket Successfully Registered</h2>
+            <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
+                Your incident ticket has been assigned ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our cloud support engineers have been notified and are reviewing your request.
+            </p>
+            <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
+                Create Another Ticket
+            </button>
+        </div>
     </div>
 </div>
 
@@ -169,7 +277,7 @@
             document.getElementById('signupTabBtn').classList.remove('active');
             document.getElementById('loginForm').style.display = 'block';
             document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('authTitle').innerText = 'Cloud Support Console';
+            document.getElementById('authTitle').innerText = 'Sign In to Console';
         } else {
             document.getElementById('signupTabBtn').classList.add('active');
             document.getElementById('loginTabBtn').classList.remove('active');
@@ -223,7 +331,7 @@
     }
 
     function showPortal() {
-        document.getElementById('authModal').style.display = 'none';
+        document.getElementById('authWrapper').style.display = 'none';
         document.getElementById('mainPortal').style.display = 'block';
         document.getElementById('welcomeUser').innerText = `👤 ${currentUser.name}`;
     }
@@ -231,7 +339,7 @@
     function handleLogout() {
         localStorage.removeItem('supportUser');
         currentUser = null;
-        document.getElementById('authModal').style.display = 'flex';
+        document.getElementById('authWrapper').style.display = 'flex';
         document.getElementById('mainPortal').style.display = 'none';
     }
 
@@ -242,7 +350,7 @@
             phone: currentUser.phone,
             email: currentUser.email,
             category: document.getElementById('category').value,
-            priority: document.getElementById('priority').value,
+            priority: document.getElementById('priority'].value,
             issue: document.getElementById('issue').value
         };
         const res = await fetch('/api/tickets', {

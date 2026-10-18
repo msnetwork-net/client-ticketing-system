@@ -347,31 +347,59 @@
         .share-info h3 { font-size: 1.2rem; font-weight: 700; color: #f9fafb; margin-bottom: 6px; }
         .share-info p { font-size: 0.88rem; color: #9ca3af; margin-bottom: 18px; line-height: 1.5; }
 
-        .share-buttons-grid {
+        /* Social Icon-Only Buttons */
+        .social-icons-grid {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            text-decoration: none;
+        }
+
+        .social-icon-btn:hover { transform: translateY(-3px); opacity: 0.9; }
+
+        .bg-whatsapp { background: #25D366; }
+        .bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .bg-twitter { background: #000000; border: 1px solid #374151; }
+        .bg-facebook { background: #1877F2; }
+
+        /* Other Utility Share Buttons */
+        .share-utility-btns {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .share-btn {
-            padding: 9px 16px;
+        .utility-btn {
+            padding: 8px 14px;
             border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #fff;
             border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: opacity 0.2s;
+            gap: 6px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            transition: background 0.2s;
         }
 
-        .share-btn:hover { opacity: 0.85; }
-        .share-whatsapp { background: #25D366; }
-        .share-copy { background: #0066cc; }
-        .share-native { background: #4f46e5; }
+        .utility-btn:hover { background: #374151; }
 
         .qr-box-wrapper {
             background: #ffffff;
@@ -393,6 +421,26 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
+        .share-qr-btn {
+            margin-top: 10px;
+            background: #0066cc;
+            color: #fff;
+            border: none;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: background 0.2s;
+        }
+
+        .share-qr-btn:hover { background: #0052a3; }
 
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
     </style>
@@ -424,7 +472,7 @@
         </button>
     </div>
 
-    <!-- 2. Key Capabilities & Services (Updated with 6 Options) -->
+    <!-- 2. Key Capabilities & Services -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
@@ -489,9 +537,7 @@
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Leadership & Vision</h2>
         <div class="ceo-card">
-            <!-- CEO Photo Slot -->
             <div class="ceo-avatar-wrapper">
-                <!-- <img src="ceo.jpg" alt="SHAJEEL MS"> -->
                 <i class="fa-solid fa-user-tie ceo-avatar-placeholder"></i>
             </div>
             <div class="ceo-info">
@@ -616,17 +662,31 @@
     <div class="share-card">
         <div class="share-info">
             <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
-            <p>Scan the QR code or share our portal link with friends and business partners who need expert IT, Network, CCTV, or Telecom support.</p>
+            <p>Share our portal link quickly via social channels or scan the QR code to visit instantly.</p>
             
-            <div class="share-buttons-grid">
-                <button onclick="shareOnWhatsApp()" class="share-btn share-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+            <!-- Icon-only Social Share Buttons -->
+            <div class="social-icons-grid">
+                <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp" title="Share on WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
                 </button>
-                <button onclick="copyWebsiteLink()" class="share-btn share-copy">
+                <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram" title="Share on Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </button>
+                <button onclick="shareOnTwitter()" class="social-icon-btn bg-twitter" title="Share on Twitter/X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </button>
+                <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook" title="Share on Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </button>
+            </div>
+
+            <!-- Utility Share Options -->
+            <div class="share-utility-btns">
+                <button onclick="copyWebsiteLink()" class="utility-btn">
                     <i class="fa-solid fa-copy"></i> Copy Link
                 </button>
-                <button onclick="nativeMobileShare()" class="share-btn share-native">
-                    <i class="fa-solid fa-share-nodes"></i> Share Console
+                <button onclick="nativeMobileShare()" class="utility-btn">
+                    <i class="fa-solid fa-share-nodes"></i> More Share Options
                 </button>
             </div>
         </div>
@@ -634,6 +694,10 @@
         <div class="qr-box-wrapper">
             <div id="qrcode"></div>
             <p>Scan to Visit</p>
+            <!-- Share QR Button -->
+            <button onclick="shareQRCode()" class="share-qr-btn">
+                <i class="fa-solid fa-qrcode"></i> Share QR
+            </button>
         </div>
     </div>
 
@@ -718,11 +782,27 @@
         });
     });
 
-    // SHARE FUNCTIONS
+    // SOCIAL SHARE FUNCTIONS (Icon-only)
     function shareOnWhatsApp() {
         const url = window.location.href;
         const message = `Check out MS NETWORK Enterprise Support & Solutions Console for fast IT, CCTV, Network & Telecom Support: ${url}`;
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function shareOnInstagram() {
+        alert('Instagram direct web-sharing is restricted. Please copy link or use mobile share options to share on Instagram story/DM!');
+        copyWebsiteLink();
+    }
+
+    function shareOnTwitter() {
+        const url = window.location.href;
+        const text = `Check out MS NETWORK Enterprise Support & Solutions Console:`;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function shareOnFacebook() {
+        const url = window.location.href;
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
     }
 
     function copyWebsiteLink() {
@@ -741,6 +821,21 @@
             }).catch(err => console.log('Share canceled'));
         } else {
             copyWebsiteLink();
+        }
+    }
+
+    // SHARE QR CODE FUNCTION
+    function shareQRCode() {
+        const url = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: 'MS NETWORK QR Code & Portal',
+                text: 'Scan the QR code or visit our support portal:',
+                url: url
+            }).catch(err => console.log('Share canceled'));
+        } else {
+            copyWebsiteLink();
+            alert('Link copied! You can share it anywhere to let others scan/visit.');
         }
     }
 

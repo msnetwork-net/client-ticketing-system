@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname)));
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'YOUR_GMAIL@gmail.com',        // 👈 Ningalude Gmail ID
-        pass: 'YOUR_16_DIGIT_APP_PASSWORD'   // 👈 Gmail App Password
+        user: 'YOUR_GMAIL@gmail.com',        // 👈 Ningalude Gmail ID ivide kodukkuka
+        pass: 'YOUR_16_DIGIT_APP_PASSWORD'   // 👈 Gmail App Password ivide kodukkuka
     }
 });
 
@@ -68,8 +68,8 @@ app.get('/api/tickets', (req, res) => {
     res.json(readData(DATA_FILE));
 });
 
-// 4. Create Ticket API & Email Notification
-app.post('/api/tickets', async (req, res) => {
+// 4. Create Ticket API & Instant Fast Response (Background Email)
+app.post('/api/tickets', (req, res) => {
     const { clientName, phone, email, category, priority, issue } = req.body;
 
     if (!clientName || !phone || !category || !issue) {
@@ -92,21 +92,18 @@ app.post('/api/tickets', async (req, res) => {
     tickets.unshift(newTicket);
     writeData(DATA_FILE, tickets);
 
-    // Email to Admin
+    // ⚡ 1. Client-inu okamthanne response ayakkunnu (No Delay!)
+    res.status(201).json({ message: 'Ticket Created Successfully', ticket: newTicket });
+
+    // 📩 2. Email background-il ayakkunnu (Client wait cheyyenda)
     const mailOptions = {
         from: 'YOUR_GMAIL@gmail.com',
         to: 'YOUR_GMAIL@gmail.com',
         subject: `🚨 New Support Ticket: ${newTicket.id} (${category})`,
-        text: `New ticket raised!\n\nID: ${newTicket.id}\nClient: ${clientName}\nPhone: ${phone}\nCategory: ${category}\nIssue: ${issue}`
+        text: `New ticket raised!\n\nID: ${newTicket.id}\nClient: ${clientName}\nPhone: ${phone}\nCategory: ${category}\nPriority: ${priority}\nIssue: ${issue}`
     };
 
-    try {
-        await transporter.sendMail(mailOptions);
-    } catch (error) {
-        console.error('Email error:', error);
-    }
-
-    res.status(201).json({ message: 'Ticket Created Successfully', ticket: newTicket });
+    transporter.sendMail(mailOptions).catch(err => console.error('Email background error:', err));
 });
 
 // 5. Update Status API

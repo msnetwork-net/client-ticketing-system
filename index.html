@@ -220,12 +220,6 @@
             flex-shrink: 0;
         }
 
-        .ceo-avatar-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .ceo-avatar-placeholder {
             font-size: 3rem;
             color: #60a5fa;
@@ -441,14 +435,31 @@
             <!-- Call Back Request Form Box -->
             <div class="contact-card">
                 <h4 style="font-size: 1rem; color: #f9fafb; margin-bottom: 6px;"><i class="fa-solid fa-phone-volume" style="color: #0066cc; margin-right: 6px;"></i> Request a Call Back</h4>
-                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 15px;">Leave your phone number. Our engineering team will contact you shortly when available.</p>
+                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 15px;">Leave your contact info and reason. Our team will call you back shortly.</p>
                 
                 <form id="callbackForm" onsubmit="handleCallbackRequest(event)">
                     <div class="form-group" style="margin-bottom: 12px;">
+                        <label>Phone Number</label>
                         <input type="tel" id="callbackPhone" required placeholder="+91 XXXXX XXXXX" style="background: #0b0f19;">
                     </div>
+
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label>Reason for Call Back</label>
+                        <select id="callbackReason" style="background: #0b0f19;" onchange="toggleCustomReason(this.value)">
+                            <option value="Emergency Technical Issue">Emergency Technical Issue</option>
+                            <option value="New Installation Inquiry">New Installation Inquiry</option>
+                            <option value="Bill & Pricing Query">Bill & Pricing Query</option>
+                            <option value="General Support & Guidance">General Support & Guidance</option>
+                            <option value="Other">Other Reason...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="customReasonBox" style="display: none; margin-bottom: 12px;">
+                        <input type="text" id="callbackCustomText" placeholder="Please specify your reason..." style="background: #0b0f19;">
+                    </div>
+
                     <button type="submit" class="submit-btn" style="padding: 10px; font-size: 0.85rem;">
-                        <i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Request Immediate Call Back
+                        <i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Request Call Back
                     </button>
                 </form>
             </div>
@@ -609,9 +620,26 @@
         }
     }
 
+    function toggleCustomReason(value) {
+        const customBox = document.getElementById('customReasonBox');
+        if (value === 'Other') {
+            customBox.style.display = 'block';
+            document.getElementById('callbackCustomText').setAttribute('required', 'true');
+        } else {
+            customBox.style.display = 'none';
+            document.getElementById('callbackCustomText').removeAttribute('required');
+        }
+    }
+
     async function handleCallbackRequest(e) {
         e.preventDefault();
         const phone = document.getElementById('callbackPhone').value;
+        let selectedReason = document.getElementById('callbackReason').value;
+
+        if (selectedReason === 'Other') {
+            selectedReason = document.getElementById('callbackCustomText').value;
+        }
+
         try {
             const res = await fetch('/api/tickets', {
                 method: 'POST',
@@ -622,14 +650,15 @@
                     email: 'N/A',
                     category: 'Call Back Request',
                     priority: 'High',
-                    issue: `Client requested an urgent call back to phone number: ${phone}`
+                    issue: selectedReason
                 })
             });
             if (res.ok) {
-                alert('Call Back Request Submitted Successfully! Our engineers will call you shortly.');
+                alert('Call Back Request Submitted! Our team will review the reason and call you shortly.');
                 document.getElementById('callbackForm').reset();
+                toggleCustomReason('Emergency Technical Issue');
             } else {
-                alert('Failed to submit call back request. Please try again.');
+                alert('Failed to submit request. Please try again.');
             }
         } catch (err) {
             alert('Request submitted. We will call you back soon!');

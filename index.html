@@ -64,21 +64,9 @@
 
         .navbar-brand i { color: #0066cc; }
 
-        .nav-buttons-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-
         .signin-nav-btn {
             background: #0066cc; color: #fff; border: none; padding: 8px 18px;
             border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
-        }
-
-        .admin-nav-btn {
-            background: #7c3aed; color: #fff; border: none; padding: 8px 14px;
-            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
-        }
-
-        .call-nav-btn {
-            background: #10b981; color: #fff; border: none; padding: 8px 14px;
-            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
         }
 
         .hero-banner {
@@ -177,6 +165,7 @@
         input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; outline: none; }
 
         button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; }
+        button.call-submit-btn { width: 100%; padding: 12px; background: #10b981; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
 
@@ -205,9 +194,7 @@
     <div class="navbar">
         <div class="navbar-brand"><i class="fa-solid fa-network-wired"></i> MS NETWORK</div>
         <div class="nav-buttons-group">
-            <button class="call-nav-btn" onclick="requestCallback()"><i class="fa-solid fa-phone-volume"></i> Call Request</button>
-            <button class="admin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-user-shield"></i> Staff Login</button>
-            <button class="signin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
+            <button class="signin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-right-to-bracket"></i> Sign In / Portal</button>
         </div>
     </div>
 
@@ -215,10 +202,7 @@
     <div class="hero-banner">
         <h1 class="hero-headline">"Your technical challenges and their precise resolution form the foundation of our growth."</h1>
         <p class="hero-subtext">For over 10+ years, MS NETWORK has been delivering high-reliability, budget-friendly infrastructure services across Network, CCTV, Telecom, and IT Hardware solutions.</p>
-        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-            <button class="submit-btn" style="max-width: 220px;" onclick="scrollToConsole()">Access Support Console</button>
-            <button class="submit-btn" style="max-width: 220px; background: #10b981;" onclick="requestCallback()"><i class="fa-solid fa-phone"></i> Request Callback</button>
-        </div>
+        <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
     </div>
 
     <!-- 6 Key Services -->
@@ -271,15 +255,17 @@
         </div>
     </div>
 
-    <!-- Portal Login Console -->
+    <!-- Portal Login & Call Request Console -->
     <div class="section-card" id="consoleSection">
         <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client & Staff Portal Login</h2>
         <div class="auth-container">
             <div class="tab-btns">
                 <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
                 <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Client Register</button>
+                <button class="tab-btn" id="callTabBtn" onclick="switchTab('call')" style="background: #059669; color: #fff;"><i class="fa-solid fa-phone"></i> Call Request</button>
             </div>
 
+            <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Work Email / ID</label>
@@ -292,6 +278,7 @@
                 <button type="submit" class="submit-btn">Sign In to Dashboard</button>
             </form>
 
+            <!-- Signup Form -->
             <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
                 <div class="form-group">
                     <label>Organization / Client Name</label>
@@ -310,6 +297,23 @@
                     <input type="password" id="signupPassword" required placeholder="Create strong password">
                 </div>
                 <button type="submit" class="submit-btn">Create Client Account</button>
+            </form>
+
+            <!-- Call Request Form with Reason -->
+            <form id="callRequestForm" style="display: none;" onsubmit="handleCallRequestSubmit(event)">
+                <div class="form-group">
+                    <label>Your Name / Organization</label>
+                    <input type="text" id="callName" required placeholder="Name or Company">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="callPhone" required placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Reason for Callback / Call Request</label>
+                    <textarea id="callReason" rows="3" required placeholder="Specify why you need a call (e.g., Network outage, CCTV installation inquiry)..."></textarea>
+                </div>
+                <button type="submit" class="call-submit-btn"><i class="fa-solid fa-paper-plane"></i> Submit Call Request</button>
             </form>
         </div>
     </div>
@@ -330,7 +334,6 @@
             <div class="share-utility-btns">
                 <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
                 <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
-                <button onclick="requestCallback()" class="utility-btn" style="background:#10b981;"><i class="fa-solid fa-phone"></i> Call Request</button>
             </div>
         </div>
 
@@ -448,20 +451,30 @@
     function switchTab(tab) {
         document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
         document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
+        document.getElementById('callRequestForm').style.display = tab === 'call' ? 'block' : 'none';
+        
+        document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
+        document.getElementById('signupTabBtn').classList.toggle('active', tab === 'signup');
+        document.getElementById('callTabBtn').style.opacity = tab === 'call' ? '1' : '0.8';
     }
 
     function scrollToConsole() {
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function requestCallback() {
-        const phone = prompt("Enter your phone number for callback request:");
-        if (phone) {
-            alert("Call Request Submitted Successfully! Our team will contact you shortly.");
-            addNotification('CEO', `📞 Callback Requested by Phone: ${phone}`);
-            sendPushNotification("ceo@msnetwork.com", "📞 Call Request Received!", `Phone: ${phone} requested a callback.`);
-            sendPushNotification("coceo@msnetwork.com", "📞 Call Request Received!", `Phone: ${phone} requested a callback.`);
-        }
+    function handleCallRequestSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('callName').value.trim();
+        const phone = document.getElementById('callPhone').value.trim();
+        const reason = document.getElementById('callReason').value.trim();
+
+        addNotification('CEO', `📞 Call Request from ${name} (${phone}) - Reason: ${reason}`);
+        sendPushNotification("ceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
+        sendPushNotification("coceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
+
+        alert("Call Request Submitted Successfully! CEO & Co-CEO have been notified with your reason.");
+        document.getElementById('callRequestForm').reset();
+        switchTab('login');
     }
 
     function shareOnWhatsApp() {

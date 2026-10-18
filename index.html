@@ -373,7 +373,7 @@
 
         .bg-whatsapp { background: #25D366; }
         .bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .bg-twitter { background: #1DA1F2; } /* Classic Twitter Blue */
+        .bg-twitter { background: #1DA1F2; }
         .bg-facebook { background: #1877F2; }
 
         /* Other Utility Share Buttons */
@@ -745,7 +745,7 @@
             </div>
             <div>
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
-                <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+                <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
             </div>
         </div>
 
@@ -826,7 +826,7 @@
 </div>
 
 <script>
-    // PRE-DEFINED SYSTEM USERS & ROLES (Includes GENZ as 10th Team Member)
+    // PRE-DEFINED SYSTEM USERS & INDIVIDUAL CREDENTIALS
     const SYSTEM_USERS = [
         { email: 'ceo@msnetwork.com', pass: 'shajeel123', name: 'SHAJEEL MS (Founder & CEO)', role: 'CEO' },
         { email: 'coceo@msnetwork.com', pass: 'coceo123', name: 'Co-CEO / System Admin', role: 'CEO' },
@@ -953,7 +953,7 @@
         }
     }
 
-    // CALL BACK REQUEST (Directly goes to CEO / Admin Console)
+    // CALL BACK REQUEST (Goes directly to CEO / Admin console)
     function handleCallbackRequest(e) {
         e.preventDefault();
         const phone = document.getElementById('callbackPhone').value;
@@ -990,7 +990,7 @@
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
 
-        // 1. Check System Users (CEO, Co-CEO, 10 Team Members)
+        // 1. Check System Users (CEO, Co-CEO, 10 Staff Members)
         const foundSysUser = SYSTEM_USERS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === password);
 
         if (foundSysUser) {
@@ -1062,8 +1062,9 @@
     function handleLogout() {
         localStorage.removeItem('supportUser');
         currentUser = null;
-        document.getElementById('landingPage').style.display = 'block';
         document.getElementById('mainPortal').style.display = 'none';
+        document.getElementById('landingPage').style.display = 'block';
+        document.getElementById('loginForm').reset();
     }
 
     // TICKET SUBMISSION BY CLIENT
@@ -1109,14 +1110,14 @@
             filteredList = db;
             document.getElementById('adminTitle').innerHTML = '<i class="fa-solid fa-crown" style="color: #f59e0b;"></i> CEO Management Control Panel (Assign & Monitor)';
         } else {
-            // Team Members (1-10) ONLY see tickets assigned to their name
+            // Individual Staff Member ONLY sees tickets assigned to their name
             const techName = currentUser.name.trim();
             filteredList = db.filter(item => item.assignedTo.toUpperCase() === techName.toUpperCase());
             document.getElementById('adminTitle').innerHTML = `<i class="fa-solid fa-user-gear" style="color: #38bdf8;"></i> Assigned Work Orders for ${currentUser.name}`;
         }
 
         if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found for you right now.</td></tr>`;
             return;
         }
 

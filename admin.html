@@ -160,6 +160,17 @@
         .priority-medium { color: #fbbf24; font-weight: 600; }
         .priority-low { color: #34d399; font-weight: 600; }
 
+        .reason-tag {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
         select.status-select {
             background: #0b0f19;
             border: 1px solid #374151;
@@ -284,8 +295,8 @@
                 <thead>
                     <tr>
                         <th>Request ID</th>
-                        <th>Requested Phone Number</th>
-                        <th>Urgency</th>
+                        <th>Requested Phone</th>
+                        <th>Call Back Reason</th>
                         <th>Time Requested</th>
                         <th>Direct Action</th>
                         <th>Status</th>
@@ -381,7 +392,7 @@
             });
         }
 
-        // 2. Render Call Back Requests Table
+        // 2. Render Call Back Requests Table with Call Reason
         if (callbackRequests.length === 0) {
             callbackBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 30px;">No pending call back requests.</td></tr>';
         } else {
@@ -393,7 +404,7 @@
                 tr.innerHTML = `
                     <td><strong style="color: #38bdf8;">${req.id}</strong></td>
                     <td><strong style="font-size: 1rem; color: #f9fafb;"><i class="fa-solid fa-phone" style="color: #10b981; margin-right: 6px;"></i>${req.phone}</strong></td>
-                    <td><span class="priority-high">High / Immediate</span></td>
+                    <td><span class="reason-tag">${req.issue}</span></td>
                     <td style="font-size: 0.8rem; color: #9ca3af;">${req.createdAt || 'N/A'}</td>
                     <td>
                         <a href="tel:${req.phone}" class="call-btn"><i class="fa-solid fa-phone"></i> Call Client</a>

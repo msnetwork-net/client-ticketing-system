@@ -55,6 +55,12 @@
 
         .navbar-brand i { color: #0066cc; }
 
+        .nav-buttons-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
         .signin-nav-btn {
             background: #0066cc;
             color: #fff;
@@ -68,6 +74,20 @@
         }
 
         .signin-nav-btn:hover { background: #0052a3; }
+
+        .admin-nav-btn {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .admin-nav-btn:hover { background: #6d28d9; }
 
         /* Hero Banner */
         .hero-banner {
@@ -347,7 +367,6 @@
         .share-info h3 { font-size: 1.2rem; font-weight: 700; color: #f9fafb; margin-bottom: 6px; }
         .share-info p { font-size: 0.88rem; color: #9ca3af; margin-bottom: 18px; line-height: 1.5; }
 
-        /* Social Icon-Only Buttons */
         .social-icons-grid {
             display: flex;
             gap: 12px;
@@ -376,7 +395,6 @@
         .bg-twitter { background: #1DA1F2; }
         .bg-facebook { background: #1877F2; }
 
-        /* Other Utility Share Buttons */
         .share-utility-btns {
             display: flex;
             flex-wrap: wrap;
@@ -444,7 +462,6 @@
 
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
 
-        /* Admin Table & Badges */
         .admin-table {
             width: 100%;
             border-collapse: collapse;
@@ -476,6 +493,62 @@
 
         .role-tag-ceo { background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
         .role-tag-member { background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
+
+        /* Notification Bell & Dropdown Styles */
+        .notif-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .notif-bell-btn {
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #f9fafb;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            width: 320px;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .notif-item {
+            padding: 10px;
+            border-bottom: 1px solid #1f2937;
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        .notif-item:last-child { border-bottom: none; }
+        .notif-time { font-size: 0.7rem; color: #6b7280; display: block; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -486,9 +559,14 @@
         <div class="navbar-brand">
             <i class="fa-solid fa-network-wired"></i> MS NETWORK
         </div>
-        <button class="signin-nav-btn" onclick="scrollToConsole()">
-            <i class="fa-solid fa-right-to-bracket" style="margin-right: 6px;"></i> Sign In
-        </button>
+        <div class="nav-buttons-group">
+            <button class="admin-nav-btn" onclick="scrollToConsole()">
+                <i class="fa-solid fa-user-shield" style="margin-right: 5px;"></i> Staff / Admin Login
+            </button>
+            <button class="signin-nav-btn" onclick="scrollToConsole()">
+                <i class="fa-solid fa-right-to-bracket" style="margin-right: 5px;"></i> Sign In
+            </button>
+        </div>
     </div>
 
     <!-- 1. Hero Banner -->
@@ -588,7 +666,6 @@
         <h2 class="section-title"><i class="fa-solid fa-headset"></i> Contact Us & Customer Care</h2>
         <div class="contact-grid">
             
-            <!-- Call Back Request Form Box -->
             <div class="contact-card">
                 <h4 style="font-size: 1rem; color: #f9fafb; margin-bottom: 6px;"><i class="fa-solid fa-phone-volume" style="color: #0066cc; margin-right: 6px;"></i> Request a Call Back</h4>
                 <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 15px;">Leave your contact info and reason. Our team will call you back shortly.</p>
@@ -620,7 +697,6 @@
                 </form>
             </div>
 
-            <!-- Direct Email & Location Info Box -->
             <div class="contact-card" style="display: flex; flex-direction: column; justify-content: center;">
                 <div class="contact-item-row">
                     <div class="contact-icon">
@@ -659,7 +735,7 @@
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Work Email / ID</label>
-                    <input type="email" id="loginEmail" required placeholder="name@msnetwork.com or client email">
+                    <input type="email" id="loginEmail" required placeholder="ceo@msnetwork.com or client email">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -743,7 +819,22 @@
                 </h1>
                 <span id="userRoleBadge" class="role-tag-member" style="margin-top: 5px; display: inline-block;">Member</span>
             </div>
-            <div>
+            
+            <div style="display: flex; align-items: center;">
+                <!-- Realtime Notifications Bell Dropdown -->
+                <div class="notif-wrapper">
+                    <button class="notif-bell-btn" onclick="toggleNotifDropdown()">
+                        <i class="fa-solid fa-bell"></i>
+                        <span id="notifBadge" class="notif-badge" style="display: none;">0</span>
+                    </button>
+                    <div class="notif-dropdown" id="notifDropdown">
+                        <div style="font-weight: 700; color: #f9fafb; border-bottom: 1px solid #1f2937; padding-bottom: 6px; margin-bottom: 8px;">Notifications</div>
+                        <div id="notifList">
+                            <div class="notif-item">No new notifications.</div>
+                        </div>
+                    </div>
+                </div>
+
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
                 <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
             </div>
@@ -826,7 +917,7 @@
 </div>
 
 <script>
-    // PRE-DEFINED SYSTEM USERS & INDIVIDUAL CREDENTIALS
+    // PRE-DEFINED SYSTEM USERS & CREDENTIALS
     const SYSTEM_USERS = [
         { email: 'ceo@msnetwork.com', pass: 'shajeel123', name: 'SHAJEEL MS (Founder & CEO)', role: 'CEO' },
         { email: 'coceo@msnetwork.com', pass: 'coceo123', name: 'Co-CEO / System Admin', role: 'CEO' },
@@ -844,7 +935,6 @@
 
     const TEAM_LIST = ['VIPIN', 'ASWIN', 'RABEEB', 'SAHEER', 'MURSHID', 'SINAN', 'IBNU', 'NASEEB', 'VISHNU', 'GENZ'];
 
-    // DEMO LOCAL STORAGE INITIAL DATABASE
     if (!localStorage.getItem('ms_tickets_db')) {
         const initialDB = [
             { id: 'CALL-101', type: 'Call Back Request', clientName: 'Call Back Request', phone: '+91 9895000001', category: 'Call Back', priority: 'High', issue: 'Emergency Fiber Line Issue', assignedTo: 'Unassigned', status: 'Pending' },
@@ -853,10 +943,13 @@
         localStorage.setItem('ms_tickets_db', JSON.stringify(initialDB));
     }
 
+    if (!localStorage.getItem('ms_notifs_db')) {
+        localStorage.setItem('ms_notifs_db', JSON.stringify([]));
+    }
+
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     if (currentUser) { showPortal(); }
 
-    // DYNAMIC QR CODE GENERATION
     window.addEventListener('load', () => {
         const currentUrl = window.location.href;
         new QRCode(document.getElementById("qrcode"), {
@@ -867,9 +960,18 @@
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
+
+        // Realtime Periodic Notification Sync (every 3 seconds)
+        setInterval(() => {
+            if (currentUser) {
+                loadNotifications();
+                if (currentUser.role !== 'CLIENT') {
+                    loadAdminPanel();
+                }
+            }
+        }, 3000);
     });
 
-    // SOCIAL SHARE FUNCTIONS
     function shareOnWhatsApp() {
         const url = window.location.href;
         const message = `Check out MS NETWORK Enterprise Support & Solutions Console for fast IT, CCTV, Network & Telecom Support: ${url}`;
@@ -953,7 +1055,20 @@
         }
     }
 
-    // CALL BACK REQUEST (Goes directly to CEO / Admin console)
+    // HELPER: CREATE & STORE NOTIFICATION
+    function addNotification(targetUserRoleOrName, text) {
+        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+        const newNotif = {
+            id: Date.now(),
+            target: targetUserRoleOrName, // 'CEO' or Member Name like 'VIPIN'
+            text: text,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        notifs.unshift(newNotif);
+        localStorage.setItem('ms_notifs_db', JSON.stringify(notifs));
+    }
+
+    // CALL BACK REQUEST (Triggers Notification for CEO)
     function handleCallbackRequest(e) {
         e.preventDefault();
         const phone = document.getElementById('callbackPhone').value;
@@ -963,8 +1078,9 @@
             selectedReason = document.getElementById('callbackCustomText').value;
         }
 
+        const callId = 'CALL-' + Math.floor(100 + Math.random() * 900);
         const newCallReq = {
-            id: 'CALL-' + Math.floor(100 + Math.random() * 900),
+            id: callId,
             type: 'Call Back Request',
             clientName: 'Call Back Request',
             phone: phone,
@@ -979,18 +1095,19 @@
         db.unshift(newCallReq);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
+        // Send Notification to CEO & Co-CEO
+        addNotification('CEO', `📞 New Call Back Request (${callId}) from Phone: ${phone}`);
+
         alert('Call Back Request Submitted! Our CEO & Management team will assign a technician to call you shortly.');
         document.getElementById('callbackForm').reset();
         toggleCustomReason('Emergency Technical Issue');
     }
 
-    // AUTHENTICATION SYSTEM
     function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
 
-        // 1. Check System Users (CEO, Co-CEO, 10 Staff Members)
         const foundSysUser = SYSTEM_USERS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === password);
 
         if (foundSysUser) {
@@ -1000,7 +1117,6 @@
             return;
         }
 
-        // 2. Check Client Local Users
         const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
         const foundClient = clientDB.find(c => c.email.toLowerCase() === email.toLowerCase() && c.password === password);
 
@@ -1057,6 +1173,8 @@
             document.getElementById('adminPanelSection').style.display = 'block';
             loadAdminPanel();
         }
+
+        loadNotifications();
     }
 
     function handleLogout() {
@@ -1067,11 +1185,12 @@
         document.getElementById('loginForm').reset();
     }
 
-    // TICKET SUBMISSION BY CLIENT
+    // CLIENT TICKET SUBMISSION (Triggers Notification to CEO)
     function handleTicketSubmit(e) {
         e.preventDefault();
+        const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
         const newTicket = {
-            id: 'TCK-' + Math.floor(100 + Math.random() * 900),
+            id: tckId,
             type: 'Support Ticket',
             clientName: currentUser.name,
             phone: currentUser.phone || 'N/A',
@@ -1086,6 +1205,9 @@
         db.unshift(newTicket);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
+        // Send Notification to CEO & Co-CEO
+        addNotification('CEO', `🎫 New Ticket (${tckId}) raised by ${currentUser.name}`);
+
         document.getElementById('ticketForm').reset();
         document.getElementById('ticketForm').style.display = 'none';
         document.getElementById('assignedTicketId').innerText = newTicket.id;
@@ -1097,7 +1219,6 @@
         document.getElementById('ticketForm').style.display = 'block';
     }
 
-    // ADMIN & TEAM MEMBER DASHBOARD LOGIC
     function loadAdminPanel() {
         const tbody = document.getElementById('adminTableBody');
         tbody.innerHTML = '';
@@ -1106,11 +1227,9 @@
         let filteredList = [];
 
         if (currentUser.role === 'CEO') {
-            // CEO sees ALL tickets and Call Back Requests
             filteredList = db;
             document.getElementById('adminTitle').innerHTML = '<i class="fa-solid fa-crown" style="color: #f59e0b;"></i> CEO Management Control Panel (Assign & Monitor)';
         } else {
-            // Individual Staff Member ONLY sees tickets assigned to their name
             const techName = currentUser.name.trim();
             filteredList = db.filter(item => item.assignedTo.toUpperCase() === techName.toUpperCase());
             document.getElementById('adminTitle').innerHTML = `<i class="fa-solid fa-user-gear" style="color: #38bdf8;"></i> Assigned Work Orders for ${currentUser.name}`;
@@ -1161,7 +1280,7 @@
         });
     }
 
-    // CEO DELEGATES WORK TO TEAM MEMBER
+    // CEO ASSIGNS WORK (Triggers Notification to Team Member)
     function assignTechnician(id, techName) {
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         const item = db.find(t => t.id === id);
@@ -1171,21 +1290,62 @@
                 item.status = 'In Progress';
             }
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+
+            // Send Notification to Team Member
+            if (techName !== 'Unassigned') {
+                addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} [${item.category}] to you.`);
+            }
+
             alert(`Assigned ${id} to ${techName}`);
             loadAdminPanel();
         }
     }
 
-    // TEAM MEMBER UPDATES STATUS
     function updateTicketStatus(id, newStatus) {
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         const item = db.find(t => t.id === id);
         if (item) {
             item.status = newStatus;
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+
+            // Notify CEO about status update
+            addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
+
             alert(`Updated status of ${id} to ${newStatus}`);
             loadAdminPanel();
         }
+    }
+
+    // NOTIFICATION DROPDOWN LOGIC
+    function loadNotifications() {
+        if (!currentUser) return;
+        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+        const notifList = document.getElementById('notifList');
+        const notifBadge = document.getElementById('notifBadge');
+
+        const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
+
+        if (userNotifs.length > 0) {
+            notifBadge.style.display = 'inline-block';
+            notifBadge.innerText = userNotifs.length;
+            notifList.innerHTML = '';
+            userNotifs.forEach(n => {
+                notifList.innerHTML += `
+                    <div class="notif-item">
+                        ${n.text}
+                        <span class="notif-time">${n.time}</span>
+                    </div>
+                `;
+            });
+        } else {
+            notifBadge.style.display = 'none';
+            notifList.innerHTML = '<div class="notif-item">No new notifications.</div>';
+        }
+    }
+
+    function toggleNotifDropdown() {
+        const drop = document.getElementById('notifDropdown');
+        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 </script>
 

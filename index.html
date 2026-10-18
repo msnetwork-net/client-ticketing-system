@@ -124,6 +124,45 @@
         .ceo-info { flex: 1; min-width: 250px; }
         .ceo-quote { font-size: 0.9rem; color: #9ca3af; font-style: italic; line-height: 1.6; border-left: 3px solid #0066cc; padding-left: 12px; margin-top: 8px; }
 
+        /* Share & QR Code Styling */
+        .share-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .share-info { flex: 1; min-width: 280px; }
+        .social-icons-grid { display: flex; gap: 12px; margin-bottom: 15px; margin-top: 12px; }
+        .social-icon-btn {
+            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 1rem; border: none; cursor: pointer; text-decoration: none;
+        }
+        .bg-whatsapp { background: #25D366; }
+        .bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .bg-twitter { background: #1DA1F2; }
+        .bg-facebook { background: #1877F2; }
+
+        .share-utility-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+        .utility-btn {
+            padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #fff;
+            background: #1f2937; border: 1px solid #374151; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .qr-box-wrapper {
+            background: #ffffff; padding: 14px; border-radius: 12px; display: flex;
+            flex-direction: column; align-items: center; justify-content: center; border: 2px solid #0066cc;
+        }
+        .qr-box-wrapper p { color: #111827; font-size: 0.75rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
+        .share-qr-btn {
+            margin-top: 10px; background: #0066cc; color: #fff; border: none; padding: 6px 10px;
+            font-size: 0.75rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%;
+        }
+
         .auth-container { max-width: 450px; margin: 0 auto; }
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
         .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; }
@@ -174,7 +213,7 @@
         <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
     </div>
 
-    <!-- Services / Key Capabilities -->
+    <!-- 6 Key Services -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
@@ -198,6 +237,16 @@
                 <h4>IT Hardware & Server Care</h4>
                 <p>On-site and remote repair of server hardware, workstation maintenance, and IT infrastructure health.</p>
             </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-fingerprint"></i>
+                <h4>Biometric & Access Control</h4>
+                <p>Fingerprint, face recognition attendance punch systems, door access control setups, and software integration.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-diagram-project"></i>
+                <h4>Structured Cabling & Fiber Optics</h4>
+                <p>Cat6/Cat7 LAN cabling layout, rack dressing, fiber optic splicing, and high-speed managed switch configuration.</p>
+            </div>
         </div>
     </div>
 
@@ -207,7 +256,7 @@
         <div class="ceo-card">
             <div class="ceo-avatar-wrapper"><i class="fa-solid fa-user-tie"></i></div>
             <div class="ceo-info">
-                <h3 style="font-size: 1.25font-weight: 700; color: #f9fafb;">SHAJEEL MS</h3>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;">SHAJEEL MS</h3>
                 <p style="font-size: 0.85rem; color: #60a5fa; font-weight: 600; text-transform: uppercase;">Founder & CEO, MS NETWORK</p>
                 <p class="ceo-quote">"No matter how advanced technology becomes, the true strength of our service lies in our unwavering loyalty and support to our clients. Whether your issue is minor or critical, you can reach out to us anytime, anywhere."</p>
             </div>
@@ -256,6 +305,32 @@
             </form>
         </div>
     </div>
+
+    <!-- Share Our Service & QR Code Section -->
+    <div class="share-card">
+        <div class="share-info">
+            <h3 style="font-size: 1.2rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
+            <p style="font-size: 0.88rem; color: #9ca3af; margin-top: 4px;">Share our portal link quickly via social channels or scan the QR code to visit instantly.</p>
+            
+            <div class="social-icons-grid">
+                <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram" title="Share on Instagram"><i class="fa-brands fa-instagram"></i></button>
+                <button onclick="shareOnTwitter()" class="social-icon-btn bg-twitter" title="Share on Twitter"><i class="fa-brands fa-twitter"></i></button>
+                <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook" title="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+            </div>
+
+            <div class="share-utility-btns">
+                <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
+                <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
+            </div>
+        </div>
+
+        <div class="qr-box-wrapper">
+            <div id="qrcode"></div>
+            <p>Scan to Visit</p>
+            <button onclick="shareQRCode()" class="share-qr-btn"><i class="fa-solid fa-qrcode"></i> Share QR</button>
+        </div>
+    </div>
 </div>
 
 <div class="container" id="mainPortal" style="display: none; max-width: 950px;">
@@ -289,15 +364,17 @@
                 <div class="form-group">
                     <label>Service Category</label>
                     <select id="category" required>
-                        <option value="Network">Network Issue</option>
-                        <option value="Camera">CCTV Issue</option>
-                        <option value="Telecom">Telecom Issue</option>
-                        <option value="Hardware">IT Hardware Issue</option>
+                        <option value="Network">Network / Wi-Fi / Router Issue</option>
+                        <option value="Camera">CCTV Camera / DVR / NVR Issue</option>
+                        <option value="Telecom">Telecom / Intercom / EPABX Issue</option>
+                        <option value="Hardware">IT Hardware / Server Issue</option>
+                        <option value="Biometric">Biometric / Access Control Issue</option>
+                        <option value="Cabling">Fiber Splicing / LAN Cabling Issue</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Problem Description</label>
-                    <textarea id="issue" rows="4" required></textarea>
+                    <textarea id="issue" rows="4" required placeholder="Describe your issue..."></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Submit Ticket</button>
             </form>
@@ -346,6 +423,17 @@
         localStorage.setItem('ms_notifs_db', JSON.stringify([]));
     }
 
+    window.addEventListener('load', () => {
+        new QRCode(document.getElementById("qrcode"), {
+            text: window.location.href,
+            width: 110,
+            height: 110,
+            colorDark : "#0b0f19",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    });
+
     if (currentUser) { showPortal(); }
 
     function switchTab(tab) {
@@ -356,6 +444,19 @@
     function scrollToConsole() {
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
     }
+
+    function shareOnWhatsApp() {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+    function shareOnInstagram() { alert('Link copied! Share it on Instagram.'); copyWebsiteLink(); }
+    function shareOnTwitter() { window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}`, '_blank'); }
+    function shareOnFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank'); }
+    function copyWebsiteLink() { navigator.clipboard.writeText(window.location.href).then(() => alert('Link Copied!')); }
+    function nativeMobileShare() {
+        if (navigator.share) navigator.share({ title: 'MS NETWORK', url: window.location.href }).catch(() => {});
+        else copyWebsiteLink();
+    }
+    function shareQRCode() { nativeMobileShare(); }
 
     function handleLogin(e) {
         e.preventDefault();
@@ -523,7 +624,7 @@
     }
 
     function updateTicketStatus(id, newStatus) {
-        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || planilla = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         const item = db.find(t => t.id === id);
         if (item) {
             item.status = newStatus;

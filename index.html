@@ -129,7 +129,6 @@
         .ceo-info { flex: 1; min-width: 250px; }
         .ceo-quote { font-size: 0.9rem; color: #9ca3af; font-style: italic; line-height: 1.6; border-left: 3px solid #0066cc; padding-left: 12px; margin-top: 8px; }
 
-        /* Share & QR Code Styling */
         .share-card {
             background: rgba(17, 24, 39, 0.9);
             border: 1px solid #1f2937;
@@ -206,7 +205,7 @@
     <div class="navbar">
         <div class="navbar-brand"><i class="fa-solid fa-network-wired"></i> MS NETWORK</div>
         <div class="nav-buttons-group">
-            <a href="tel:+919846000000" class="call-nav-btn"><i class="fa-solid fa-phone-volume"></i> Call Now</a>
+            <button class="call-nav-btn" onclick="requestCallback()"><i class="fa-solid fa-phone-volume"></i> Call Request</button>
             <button class="admin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-user-shield"></i> Staff Login</button>
             <button class="signin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
         </div>
@@ -218,7 +217,7 @@
         <p class="hero-subtext">For over 10+ years, MS NETWORK has been delivering high-reliability, budget-friendly infrastructure services across Network, CCTV, Telecom, and IT Hardware solutions.</p>
         <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
             <button class="submit-btn" style="max-width: 220px;" onclick="scrollToConsole()">Access Support Console</button>
-            <a href="tel:+919846000000" class="submit-btn" style="max-width: 200px; background: #10b981; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-phone"></i> Request Callback</a>
+            <button class="submit-btn" style="max-width: 220px; background: #10b981;" onclick="requestCallback()"><i class="fa-solid fa-phone"></i> Request Callback</button>
         </div>
     </div>
 
@@ -331,7 +330,7 @@
             <div class="share-utility-btns">
                 <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
                 <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
-                <a href="tel:+919846000000" class="utility-btn" style="text-decoration:none;"><i class="fa-solid fa-phone"></i> Direct Call Support</a>
+                <button onclick="requestCallback()" class="utility-btn" style="background:#10b981;"><i class="fa-solid fa-phone"></i> Call Request</button>
             </div>
         </div>
 
@@ -453,6 +452,16 @@
 
     function scrollToConsole() {
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function requestCallback() {
+        const phone = prompt("Enter your phone number for callback request:");
+        if (phone) {
+            alert("Call Request Submitted Successfully! Our team will contact you shortly.");
+            addNotification('CEO', `📞 Callback Requested by Phone: ${phone}`);
+            sendPushNotification("ceo@msnetwork.com", "📞 Call Request Received!", `Phone: ${phone} requested a callback.`);
+            sendPushNotification("coceo@msnetwork.com", "📞 Call Request Received!", `Phone: ${phone} requested a callback.`);
+        }
     }
 
     function shareOnWhatsApp() {

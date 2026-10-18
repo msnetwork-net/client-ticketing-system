@@ -7,6 +7,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- QRCode JS Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- ONESIGNAL SDK FOR REALTIME MOBILE PUSH NOTIFICATION WITH SOUND -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "YOUR_ONESIGNAL_APP_ID_HERE", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
+          safari_web_id: "web.onesignal.auto.xxxxxx",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -21,12 +37,8 @@
             scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1000px; margin: 0 auto; }
 
-        /* Top Navigation Bar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -50,443 +62,61 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            letter-spacing: 0.5px;
         }
 
         .navbar-brand i { color: #0066cc; }
 
-        .nav-buttons-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+        .nav-buttons-group { display: flex; gap: 10px; align-items: center; }
 
         .signin-nav-btn {
-            background: #0066cc;
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: background 0.2s;
+            background: #0066cc; color: #fff; border: none; padding: 8px 18px;
+            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
         }
-
-        .signin-nav-btn:hover { background: #0052a3; }
 
         .admin-nav-btn {
-            background: #7c3aed;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: background 0.2s;
+            background: #7c3aed; color: #fff; border: none; padding: 8px 14px;
+            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
         }
 
-        .admin-nav-btn:hover { background: #6d28d9; }
-
-        /* Hero Banner */
         .hero-banner {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
+            padding: 40px 30px; text-align: center; margin-bottom: 30px;
         }
 
-        .hero-tag {
-            display: inline-block;
-            background: rgba(0, 102, 204, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(0, 102, 204, 0.3);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
+        .hero-headline { font-size: 1.8rem; font-weight: 800; color: #f9fafb; margin-bottom: 16px; }
+        .hero-subtext { color: #9ca3af; font-size: 1rem; line-height: 1.6; max-width: 750px; margin: 0 auto 24px; }
 
-        .hero-headline {
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1.4;
-            color: #f9fafb;
-            margin-bottom: 16px;
-        }
-
-        .hero-subtext {
-            color: #9ca3af;
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 750px;
-            margin: 0 auto 24px;
-        }
-
-        /* Section Cards Styling */
         .section-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 35px 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
+            padding: 35px 30px; margin-bottom: 30px;
         }
 
         .section-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #f9fafb;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #1f2937;
-            padding-bottom: 12px;
+            font-size: 1.35rem; font-weight: 700; color: #f9fafb; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;
         }
 
-        .section-title i { color: #0066cc; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .feature-box { background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; }
 
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .feature-box {
-            background: rgba(31, 41, 55, 0.4);
-            border: 1px solid #1f2937;
-            padding: 20px;
-            border-radius: 12px;
-            transition: transform 0.2s;
-        }
-
-        .feature-box:hover { transform: translateY(-3px); }
-
-        .feature-box i {
-            font-size: 1.5rem;
-            color: #38bdf8;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .feature-box h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #f9fafb;
-            margin-bottom: 6px;
-        }
-
-        .feature-box p {
-            font-size: 0.85rem;
-            color: #9ca3af;
-            line-height: 1.5;
-        }
-
-        /* Deep Company Info Paragraphs */
-        .history-text {
-            color: #d1d5db;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .region-badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .region-badge {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #9ca3af;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* CEO / Founder Profile Section */
-        .ceo-card {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid #1f2937;
-            padding: 25px;
-            border-radius: 14px;
-            flex-wrap: wrap;
-        }
-
-        .ceo-avatar-wrapper {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #0066cc;
-            overflow: hidden;
-            background: #1f2937;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .ceo-avatar-placeholder {
-            font-size: 3rem;
-            color: #60a5fa;
-        }
-
-        .ceo-info { flex: 1; min-width: 260px; }
-
-        .ceo-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #f9fafb;
-            margin-bottom: 2px;
-        }
-
-        .ceo-title {
-            font-size: 0.85rem;
-            color: #60a5fa;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .ceo-quote {
-            font-size: 0.9rem;
-            color: #9ca3af;
-            font-style: italic;
-            line-height: 1.6;
-            border-left: 3px solid #0066cc;
-            padding-left: 12px;
-        }
-
-        /* Contact & Call Back Section Grid */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .contact-card {
-            background: rgba(31, 41, 55, 0.4);
-            border: 1px solid #1f2937;
-            padding: 22px;
-            border-radius: 12px;
-        }
-
-        .contact-item-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .contact-item-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .contact-icon {
-            width: 42px;
-            height: 42px;
-            background: rgba(0, 102, 204, 0.15);
-            border: 1px solid rgba(0, 102, 204, 0.3);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #60a5fa;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .contact-details h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #f9fafb;
-            margin-bottom: 2px;
-        }
-
-        .contact-details a, .contact-details p {
-            color: #9ca3af;
-            font-size: 0.88rem;
-            text-decoration: none;
-            word-break: break-all;
-            line-height: 1.4;
-        }
-
-        .contact-details a:hover { color: #60a5fa; }
-
-        /* Auth Console Modal Layout */
-        .auth-container {
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
+        .auth-container { max-width: 450px; margin: 0 auto; }
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
-        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; }
         .tab-btn.active { background: #0066cc; color: #fff; }
 
         .form-group { margin-bottom: 16px; text-align: left; }
-        label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #9ca3af; }
-        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; }
-        input:focus, select:focus, textarea:focus { border-color: #0066cc; }
-        
-        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        button.submit-btn:hover { background: #0052a3; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #9ca3af; }
+        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; outline: none; }
 
-        /* SHARE OUR SERVICE & QR CODE STYLING */
-        .share-card {
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
+        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; }
 
-        .share-info { flex: 1; min-width: 280px; }
-        .share-info h3 { font-size: 1.2rem; font-weight: 700; color: #f9fafb; margin-bottom: 6px; }
-        .share-info p { font-size: 0.88rem; color: #9ca3af; margin-bottom: 18px; line-height: 1.5; }
+        .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
 
-        .social-icons-grid {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
+        .admin-table th, .admin-table td { border: 1px solid #1f2937; padding: 12px; text-align: left; }
+        .admin-table th { background: #1f2937; color: #60a5fa; }
 
-        .social-icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
-            text-decoration: none;
-        }
-
-        .social-icon-btn:hover { transform: translateY(-3px); opacity: 0.9; }
-
-        .bg-whatsapp { background: #25D366; }
-        .bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .bg-twitter { background: #1DA1F2; }
-        .bg-facebook { background: #1877F2; }
-
-        .share-utility-btns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .utility-btn {
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #1f2937;
-            border: 1px solid #374151;
-            transition: background 0.2s;
-        }
-
-        .utility-btn:hover { background: #374151; }
-
-        .qr-box-wrapper {
-            background: #ffffff;
-            padding: 14px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #0066cc;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .qr-box-wrapper p {
-            color: #111827;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .share-qr-btn {
-            margin-top: 10px;
-            background: #0066cc;
-            color: #fff;
-            border: none;
-            padding: 6px 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: background 0.2s;
-        }
-
-        .share-qr-btn:hover { background: #0052a3; }
-
-        .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.85rem;
-        }
-
-        .admin-table th, .admin-table td {
-            border: 1px solid #1f2937;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .admin-table th {
-            background: #1f2937;
-            color: #60a5fa;
-        }
-
-        .badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
         .badge-pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
         .badge-assigned { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
         .badge-resolved { background: rgba(16, 185, 129, 0.2); color: #10b981; }
@@ -494,244 +124,38 @@
         .role-tag-ceo { background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
         .role-tag-member { background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
 
-        /* Notification Bell & Dropdown Styles */
-        .notif-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .notif-bell-btn {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #f9fafb;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            position: relative;
-            font-size: 1rem;
-        }
-
-        .notif-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ef4444;
-            color: #fff;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-
-        .notif-dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 40px;
-            width: 320px;
-            background: #111827;
-            border: 1px solid #374151;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 1000;
-            padding: 10px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .notif-item {
-            padding: 10px;
-            border-bottom: 1px solid #1f2937;
-            font-size: 0.8rem;
-            color: #d1d5db;
-        }
-
-        .notif-item:last-child { border-bottom: none; }
-        .notif-time { font-size: 0.7rem; color: #6b7280; display: block; margin-top: 4px; }
+        .notif-wrapper { position: relative; display: inline-block; margin-right: 15px; }
+        .notif-bell-btn { background: #1f2937; border: 1px solid #374151; color: #f9fafb; padding: 8px 12px; border-radius: 8px; cursor: pointer; position: relative; }
+        .notif-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: 800; }
+        .notif-dropdown { display: none; position: absolute; right: 0; top: 40px; width: 320px; background: #111827; border: 1px solid #374151; border-radius: 12px; z-index: 1000; padding: 10px; max-height: 300px; overflow-y: auto; }
+        .notif-item { padding: 10px; border-bottom: 1px solid #1f2937; font-size: 0.8rem; color: #d1d5db; }
     </style>
 </head>
 <body>
 
 <div class="container" id="landingPage">
-    <!-- Navbar -->
     <div class="navbar">
-        <div class="navbar-brand">
-            <i class="fa-solid fa-network-wired"></i> MS NETWORK
-        </div>
+        <div class="navbar-brand"><i class="fa-solid fa-network-wired"></i> MS NETWORK</div>
         <div class="nav-buttons-group">
-            <button class="admin-nav-btn" onclick="scrollToConsole()">
-                <i class="fa-solid fa-user-shield" style="margin-right: 5px;"></i> Staff / Admin Login
-            </button>
-            <button class="signin-nav-btn" onclick="scrollToConsole()">
-                <i class="fa-solid fa-right-to-bracket" style="margin-right: 5px;"></i> Sign In
-            </button>
+            <button class="admin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-user-shield"></i> Staff / Admin Login</button>
+            <button class="signin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
         </div>
     </div>
 
-    <!-- 1. Hero Banner -->
     <div class="hero-banner">
-        <span class="hero-tag">MS Network Support Desk</span>
-        <h1 class="hero-headline">
-            "Your technical challenges and their precise resolution form the foundation of our growth."
-        </h1>
-        <p class="hero-subtext">
-            For over 10+ years, MS NETWORK has been delivering high-reliability, budget-friendly infrastructure services across Network, CCTV, Telecom, and IT Hardware solutions.
-        </p>
-        <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">
-            <i class="fa-solid fa-headset" style="margin-right: 8px;"></i> Access Support Console
-        </button>
+        <h1 class="hero-headline">"Your technical challenges and their precise resolution form the foundation of our growth."</h1>
+        <p class="hero-subtext">MS NETWORK Enterprise Support & Operations Console</p>
+        <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
     </div>
 
-    <!-- 2. Key Capabilities & Services -->
-    <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
-        <div class="features-grid">
-            <div class="feature-box">
-                <i class="fa-solid fa-wifi"></i>
-                <h4>Network & Connectivity</h4>
-                <p>Complete enterprise networking, VPC setups, router configurations, and broadband troubleshooting.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-video"></i>
-                <h4>CCTV & Security Hardware</h4>
-                <p>Advanced CCTV installations, DVR/NVR maintenance, IP camera configurations, and cloud backups.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-phone-volume"></i>
-                <h4>Telecom & VOIP Gateways</h4>
-                <p>EPABX systems, intercom networking, telecom routing, and business voice solutions.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-microchip"></i>
-                <h4>IT Hardware & Server Care</h4>
-                <p>On-site and remote repair of server hardware, workstation maintenance, and IT infrastructure health.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-fingerprint"></i>
-                <h4>Biometric & Access Control</h4>
-                <p>Fingerprint, face recognition attendance punch systems, door access control setups, and software integration.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-diagram-project"></i>
-                <h4>Structured Cabling & Fiber Optics</h4>
-                <p>Cat6/Cat7 LAN cabling layout, rack dressing, fiber optic splicing, and high-speed managed switch configuration.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. About MS NETWORK -->
-    <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-building-flag"></i> About MS NETWORK</h2>
-        <p class="history-text">
-            Headquartered in <strong>Kunnummal, Malappuram</strong>, MS NETWORK started over a decade ago with a simple mission: providing high-quality, budget-friendly, and customer-centric IT and networking services. Through sheer technical expertise and friendly, transparent client care, our team has grown exponentially over the last 10+ years.
-        </p>
-        <p class="history-text">
-            What began as a localized team in Malappuram has now expanded its operational footprint across <strong>all 14 districts in Kerala</strong>, as well as establishing a strong operational presence in major economic and tech hubs including <strong>Bangalore, Chennai, Mumbai, Karnataka, and Tamil Nadu</strong>.
-        </p>
-        
-        <div style="margin-top: 20px;">
-            <p style="font-size: 0.85rem; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Active Regional Operations:</p>
-            <div class="region-badge-list">
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Malappuram (HQ)</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> All Kerala Districts</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Bangalore</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Chennai</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Mumbai</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Karnataka</span>
-                <span class="region-badge"><i class="fa-solid fa-location-dot" style="color: #60a5fa; margin-right: 4px;"></i> Tamil Nadu</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. Leadership & Vision (CEO Profile) -->
-    <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Leadership & Vision</h2>
-        <div class="ceo-card">
-            <div class="ceo-avatar-wrapper">
-                <i class="fa-solid fa-user-tie ceo-avatar-placeholder"></i>
-            </div>
-            <div class="ceo-info">
-                <h3 class="ceo-name">SHAJEEL MS</h3>
-                <p class="ceo-title">Founder & CEO, MS NETWORK</p>
-                <p class="ceo-quote">
-                    "No matter how advanced technology becomes, the true strength of our service lies in our unwavering loyalty and support to our clients. Whether your issue is minor or critical, you can reach out to us anytime, anywhere."
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. Contact Us & Request Call Back Section -->
-    <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-headset"></i> Contact Us & Customer Care</h2>
-        <div class="contact-grid">
-            
-            <div class="contact-card">
-                <h4 style="font-size: 1rem; color: #f9fafb; margin-bottom: 6px;"><i class="fa-solid fa-phone-volume" style="color: #0066cc; margin-right: 6px;"></i> Request a Call Back</h4>
-                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 15px;">Leave your contact info and reason. Our team will call you back shortly.</p>
-                
-                <form id="callbackForm" onsubmit="handleCallbackRequest(event)">
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label>Phone Number</label>
-                        <input type="tel" id="callbackPhone" required placeholder="+91 XXXXX XXXXX" style="background: #0b0f19;">
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label>Reason for Call Back</label>
-                        <select id="callbackReason" style="background: #0b0f19;" onchange="toggleCustomReason(this.value)">
-                            <option value="Emergency Technical Issue">Emergency Technical Issue</option>
-                            <option value="New Installation Inquiry">New Installation Inquiry</option>
-                            <option value="Bill & Pricing Query">Bill & Pricing Query</option>
-                            <option value="General Support & Guidance">General Support & Guidance</option>
-                            <option value="Other">Other Reason...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" id="customReasonBox" style="display: none; margin-bottom: 12px;">
-                        <input type="text" id="callbackCustomText" placeholder="Please specify your reason..." style="background: #0b0f19;">
-                    </div>
-
-                    <button type="submit" class="submit-btn" style="padding: 10px; font-size: 0.85rem;">
-                        <i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Request Call Back
-                    </button>
-                </form>
-            </div>
-
-            <div class="contact-card" style="display: flex; flex-direction: column; justify-content: center;">
-                <div class="contact-item-row">
-                    <div class="contact-icon">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Official Support Email</h4>
-                        <a href="mailto:genzkadavath@gmail.com">genzkadavath@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="contact-item-row">
-                    <div class="contact-icon">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Headquarters Location</h4>
-                        <p>Kunnummal, Malappuram, Kerala, India</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- 6. Client Support Console (Login / Register Console) -->
     <div class="section-card" id="consoleSection">
-        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client & Staff Portal Login</h2>
+        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Portal Login</h2>
         <div class="auth-container">
             <div class="tab-btns">
                 <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
                 <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Client Register</button>
             </div>
 
-            <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Work Email / ID</label>
@@ -744,7 +168,6 @@
                 <button type="submit" class="submit-btn">Sign In to Dashboard</button>
             </form>
 
-            <!-- Signup Form -->
             <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
                 <div class="form-group">
                     <label>Organization / Client Name</label>
@@ -766,62 +189,17 @@
             </form>
         </div>
     </div>
-
-    <!-- 7. SHARE OUR SERVICE & DYNAMIC QR CODE -->
-    <div class="share-card">
-        <div class="share-info">
-            <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
-            <p>Share our portal link quickly via social channels or scan the QR code to visit instantly.</p>
-            
-            <div class="social-icons-grid">
-                <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp" title="Share on WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </button>
-                <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram" title="Share on Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </button>
-                <button onclick="shareOnTwitter()" class="social-icon-btn bg-twitter" title="Share on Twitter">
-                    <i class="fa-brands fa-twitter"></i>
-                </button>
-                <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook" title="Share on Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </button>
-            </div>
-
-            <div class="share-utility-btns">
-                <button onclick="copyWebsiteLink()" class="utility-btn">
-                    <i class="fa-solid fa-copy"></i> Copy Link
-                </button>
-                <button onclick="nativeMobileShare()" class="utility-btn">
-                    <i class="fa-solid fa-share-nodes"></i> More Share Options
-                </button>
-            </div>
-        </div>
-
-        <div class="qr-box-wrapper">
-            <div id="qrcode"></div>
-            <p>Scan to Visit</p>
-            <button onclick="shareQRCode()" class="share-qr-btn">
-                <i class="fa-solid fa-qrcode"></i> Share QR
-            </button>
-        </div>
-    </div>
-
 </div>
 
-<!-- Portal Dashboard for Client & Admin Team -->
 <div class="container" id="mainPortal" style="display: none; max-width: 950px;">
     <div class="section-card" style="margin-top: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 20px;">
             <div>
-                <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb; display: flex; align-items: center; gap: 10px;">
-                    <i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Support Management Dashboard
-                </h1>
-                <span id="userRoleBadge" class="role-tag-member" style="margin-top: 5px; display: inline-block;">Member</span>
+                <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Operations Dashboard</h1>
+                <span id="userRoleBadge" class="role-tag-member">Member</span>
             </div>
             
             <div style="display: flex; align-items: center;">
-                <!-- Realtime Notifications Bell Dropdown -->
                 <div class="notif-wrapper">
                     <button class="notif-bell-btn" onclick="toggleNotifDropdown()">
                         <i class="fa-solid fa-bell"></i>
@@ -829,9 +207,7 @@
                     </button>
                     <div class="notif-dropdown" id="notifDropdown">
                         <div style="font-weight: 700; color: #f9fafb; border-bottom: 1px solid #1f2937; padding-bottom: 6px; margin-bottom: 8px;">Notifications</div>
-                        <div id="notifList">
-                            <div class="notif-item">No new notifications.</div>
-                        </div>
+                        <div id="notifList"><div class="notif-item">No new notifications.</div></div>
                     </div>
                 </div>
 
@@ -840,84 +216,43 @@
             </div>
         </div>
 
-        <!-- 1. Client View: Create Ticket -->
         <div id="clientTicketSection" style="display: none;">
-            <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Support Ticket</h2>
+            <h2 style="margin-bottom: 20px; font-size: 1.1rem; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
                 <div class="form-group">
                     <label>Service Category</label>
                     <select id="category" required>
-                        <option value="" style="background: #111827;">Select Issue Category</option>
-                        <option value="Network" style="background: #111827;">Network / Wi-Fi / Router Issue</option>
-                        <option value="Camera" style="background: #111827;">CCTV Camera / DVR / NVR Issue</option>
-                        <option value="Telecom" style="background: #111827;">Telecom / Intercom / EPABX Issue</option>
-                        <option value="Hardware" style="background: #111827;">IT Hardware / Server Issue</option>
-                        <option value="Biometric" style="background: #111827;">Biometric / Attendance Machine Issue</option>
-                        <option value="Cabling" style="background: #111827;">Fiber Splicing / LAN Cabling Issue</option>
+                        <option value="Network">Network Issue</option>
+                        <option value="Camera">CCTV Issue</option>
+                        <option value="Telecom">Telecom Issue</option>
+                        <option value="Hardware">IT Hardware Issue</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label>Severity Level</label>
-                    <select id="priority">
-                        <option value="Low">Low - General Request</option>
-                        <option value="Medium" selected>Medium - Performance Issue</option>
-                        <option value="High">High - Critical System Down</option>
-                    </select>
-                </div>
-
                 <div class="form-group">
                     <label>Problem Description</label>
-                    <textarea id="issue" rows="4" placeholder="Describe the technical issue in detail..." required></textarea>
+                    <textarea id="issue" rows="4" required></textarea>
                 </div>
-
-                <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Ticket</button>
+                <button type="submit" class="submit-btn">Submit Ticket</button>
             </form>
-
-            <div id="successCard" style="display: none; text-align: center; padding: 30px 10px;">
-                <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
-                    <i class="fa-solid fa-circle-check"></i>
-                </div>
-                <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Ticket Submitted Successfully!</h2>
-                <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                    Your ticket ID is <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our Founder & CEO SHAJEEL MS will review and assign an expert team member to resolve it shortly.
-                </p>
-                <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
-                    Raise Another Ticket
-                </button>
-            </div>
         </div>
 
-        <!-- 2. Admin / CEO / Team Panel View -->
         <div id="adminPanelSection" style="display: none;">
-            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">
-                <i class="fa-solid fa-list-check" style="color: #0066cc;"></i> Active Operations Console
-            </h3>
-
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">Active Operations Console</h3>
             <div style="overflow-x: auto;">
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>Type / ID</th>
-                            <th>Client Info</th>
-                            <th>Details / Reason</th>
-                            <th>Status</th>
-                            <th>Assigned Tech</th>
-                            <th>Actions</th>
+                            <th>ID</th><th>Client</th><th>Issue</th><th>Status</th><th>Assigned To</th><th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="adminTableBody">
-                        <!-- Table Rows Generated Dynamically -->
-                    </tbody>
+                    <tbody id="adminTableBody"></tbody>
                 </table>
             </div>
         </div>
-
     </div>
 </div>
 
 <script>
-    // PRE-DEFINED SYSTEM USERS & CREDENTIALS
     const SYSTEM_USERS = [
         { email: 'ceo@msnetwork.com', pass: 'shajeel123', name: 'SHAJEEL MS (Founder & CEO)', role: 'CEO' },
         { email: 'coceo@msnetwork.com', pass: 'coceo123', name: 'Co-CEO / System Admin', role: 'CEO' },
@@ -935,172 +270,21 @@
 
     const TEAM_LIST = ['VIPIN', 'ASWIN', 'RABEEB', 'SAHEER', 'MURSHID', 'SINAN', 'IBNU', 'NASEEB', 'VISHNU', 'GENZ'];
 
-    if (!localStorage.getItem('ms_tickets_db')) {
-        const initialDB = [
-            { id: 'CALL-101', type: 'Call Back Request', clientName: 'Call Back Request', phone: '+91 9895000001', category: 'Call Back', priority: 'High', issue: 'Emergency Fiber Line Issue', assignedTo: 'Unassigned', status: 'Pending' },
-            { id: 'TCK-201', type: 'Support Ticket', clientName: 'Malabar Traders', phone: '+91 9847123456', category: 'CCTV', priority: 'Medium', issue: 'DVR 4th Channel Video Loss', assignedTo: 'Unassigned', status: 'Pending' }
-        ];
-        localStorage.setItem('ms_tickets_db', JSON.stringify(initialDB));
-    }
-
-    if (!localStorage.getItem('ms_notifs_db')) {
-        localStorage.setItem('ms_notifs_db', JSON.stringify([]));
-    }
-
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
+
+    if (!localStorage.getItem('ms_tickets_db')) {
+        localStorage.setItem('ms_tickets_db', JSON.stringify([]));
+    }
+
     if (currentUser) { showPortal(); }
 
-    window.addEventListener('load', () => {
-        const currentUrl = window.location.href;
-        new QRCode(document.getElementById("qrcode"), {
-            text: currentUrl,
-            width: 110,
-            height: 110,
-            colorDark : "#0b0f19",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-
-        // Realtime Periodic Notification Sync (every 3 seconds)
-        setInterval(() => {
-            if (currentUser) {
-                loadNotifications();
-                if (currentUser.role !== 'CLIENT') {
-                    loadAdminPanel();
-                }
-            }
-        }, 3000);
-    });
-
-    function shareOnWhatsApp() {
-        const url = window.location.href;
-        const message = `Check out MS NETWORK Enterprise Support & Solutions Console for fast IT, CCTV, Network & Telecom Support: ${url}`;
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    function shareOnInstagram() {
-        alert('Copying link! You can share this link on your Instagram story or DM.');
-        copyWebsiteLink();
-    }
-
-    function shareOnTwitter() {
-        const url = window.location.href;
-        const text = `Check out MS NETWORK Enterprise Support & Solutions Console:`;
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-    }
-
-    function shareOnFacebook() {
-        const url = window.location.href;
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-    }
-
-    function copyWebsiteLink() {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-            alert('MS NETWORK Portal Link Copied to Clipboard!');
-        });
-    }
-
-    function nativeMobileShare() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'MS NETWORK Support Desk',
-                text: 'Need IT, CCTV, Network, or Telecom Support? Check out MS NETWORK Support Desk:',
-                url: window.location.href
-            }).catch(err => console.log('Share canceled'));
-        } else {
-            copyWebsiteLink();
-        }
-    }
-
-    function shareQRCode() {
-        const url = window.location.href;
-        if (navigator.share) {
-            navigator.share({
-                title: 'MS NETWORK QR Code & Portal',
-                text: 'Scan the QR code or visit our support portal:',
-                url: url
-            }).catch(err => console.log('Share canceled'));
-        } else {
-            copyWebsiteLink();
-        }
+    function switchTab(tab) {
+        document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+        document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
     }
 
     function scrollToConsole() {
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function switchTab(tab) {
-        if (tab === 'login') {
-            document.getElementById('loginTabBtn').classList.add('active');
-            document.getElementById('signupTabBtn').classList.remove('active');
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('signupForm').style.display = 'none';
-        } else {
-            document.getElementById('signupTabBtn').classList.add('active');
-            document.getElementById('loginTabBtn').classList.remove('active');
-            document.getElementById('signupForm').style.display = 'block';
-            document.getElementById('loginForm').style.display = 'none';
-        }
-    }
-
-    function toggleCustomReason(value) {
-        const customBox = document.getElementById('customReasonBox');
-        if (value === 'Other') {
-            customBox.style.display = 'block';
-            document.getElementById('callbackCustomText').setAttribute('required', 'true');
-        } else {
-            customBox.style.display = 'none';
-            document.getElementById('callbackCustomText').removeAttribute('required');
-        }
-    }
-
-    // HELPER: CREATE & STORE NOTIFICATION
-    function addNotification(targetUserRoleOrName, text) {
-        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
-        const newNotif = {
-            id: Date.now(),
-            target: targetUserRoleOrName, // 'CEO' or Member Name like 'VIPIN'
-            text: text,
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
-        notifs.unshift(newNotif);
-        localStorage.setItem('ms_notifs_db', JSON.stringify(notifs));
-    }
-
-    // CALL BACK REQUEST (Triggers Notification for CEO)
-    function handleCallbackRequest(e) {
-        e.preventDefault();
-        const phone = document.getElementById('callbackPhone').value;
-        let selectedReason = document.getElementById('callbackReason').value;
-
-        if (selectedReason === 'Other') {
-            selectedReason = document.getElementById('callbackCustomText').value;
-        }
-
-        const callId = 'CALL-' + Math.floor(100 + Math.random() * 900);
-        const newCallReq = {
-            id: callId,
-            type: 'Call Back Request',
-            clientName: 'Call Back Request',
-            phone: phone,
-            category: 'Call Back',
-            priority: 'High',
-            issue: selectedReason,
-            assignedTo: 'Unassigned',
-            status: 'Pending'
-        };
-
-        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
-        db.unshift(newCallReq);
-        localStorage.setItem('ms_tickets_db', JSON.stringify(db));
-
-        // Send Notification to CEO & Co-CEO
-        addNotification('CEO', `📞 New Call Back Request (${callId}) from Phone: ${phone}`);
-
-        alert('Call Back Request Submitted! Our CEO & Management team will assign a technician to call you shortly.');
-        document.getElementById('callbackForm').reset();
-        toggleCustomReason('Emergency Technical Issue');
     }
 
     function handleLogin(e) {
@@ -1113,57 +297,23 @@
         if (foundSysUser) {
             currentUser = { name: foundSysUser.name, email: foundSysUser.email, role: foundSysUser.role };
             localStorage.setItem('supportUser', JSON.stringify(currentUser));
+            
+            // Register Mobile Device in OneSignal with User Email
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.login(currentUser.email);
+            });
+
             showPortal();
             return;
         }
-
-        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
-        const foundClient = clientDB.find(c => c.email.toLowerCase() === email.toLowerCase() && c.password === password);
-
-        if (foundClient) {
-            currentUser = { name: foundClient.name, email: foundClient.email, phone: foundClient.phone, role: 'CLIENT' };
-            localStorage.setItem('supportUser', JSON.stringify(currentUser));
-            showPortal();
-            return;
-        }
-
-        alert('Invalid Email or Password! Please check your credentials.');
-    }
-
-    function handleSignup(e) {
-        e.preventDefault();
-        const newClient = {
-            name: document.getElementById('signupName').value,
-            email: document.getElementById('signupEmail').value,
-            phone: document.getElementById('signupPhone').value,
-            password: document.getElementById('signupPassword').value,
-            role: 'CLIENT'
-        };
-
-        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
-        clientDB.push(newClient);
-        localStorage.setItem('ms_clients_db', JSON.stringify(clientDB));
-
-        alert('Client Account Created Successfully! Please Sign In.');
-        switchTab('login');
+        alert('Invalid Email or Password!');
     }
 
     function showPortal() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('mainPortal').style.display = 'block';
         document.getElementById('welcomeUser').innerText = `👤 ${currentUser.name}`;
-
-        const roleBadge = document.getElementById('userRoleBadge');
-        if (currentUser.role === 'CEO') {
-            roleBadge.innerText = "Founder & CEO / Full System Admin Control";
-            roleBadge.className = "role-tag-ceo";
-        } else if (currentUser.role === 'MEMBER') {
-            roleBadge.innerText = "Technical Staff Member";
-            roleBadge.className = "role-tag-member";
-        } else {
-            roleBadge.innerText = "Verified Client";
-            roleBadge.className = "region-badge";
-        }
 
         if (currentUser.role === 'CLIENT') {
             document.getElementById('clientTicketSection').style.display = 'block';
@@ -1173,8 +323,6 @@
             document.getElementById('adminPanelSection').style.display = 'block';
             loadAdminPanel();
         }
-
-        loadNotifications();
     }
 
     function handleLogout() {
@@ -1182,41 +330,52 @@
         currentUser = null;
         document.getElementById('mainPortal').style.display = 'none';
         document.getElementById('landingPage').style.display = 'block';
-        document.getElementById('loginForm').reset();
     }
 
-    // CLIENT TICKET SUBMISSION (Triggers Notification to CEO)
+    // FUNCTION TO SEND REALTIME PUSH NOTIFICATION WITH SOUND VIA ONESIGNAL
+    async function sendPushNotification(targetEmail, title, message) {
+        const options = {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                app_id: "YOUR_ONESIGNAL_APP_ID_HERE", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
+                include_aliases: { external_id: [targetEmail] },
+                target_channel: "push",
+                headings: { en: title },
+                contents: { en: message },
+                sound: "default" // Plays sound on mobile devices
+            })
+        };
+
+        try {
+            await fetch('https://onesignal.com/api/v1/notifications', options);
+        } catch (err) {
+            console.log("Notification send error:", err);
+        }
+    }
+
+    // CLIENT RAISES TICKET -> SENDS SOUND PUSH NOTIFICATION TO CEO & CO-CEO
     function handleTicketSubmit(e) {
         e.preventDefault();
         const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
         const newTicket = {
-            id: tckId,
-            type: 'Support Ticket',
-            clientName: currentUser.name,
-            phone: currentUser.phone || 'N/A',
-            category: document.getElementById('category').value,
-            priority: document.getElementById('priority').value,
-            issue: document.getElementById('issue').value,
-            assignedTo: 'Unassigned',
-            status: 'Pending'
+            id: tckId, type: 'Support Ticket', clientName: currentUser.name,
+            issue: document.getElementById('issue').value, assignedTo: 'Unassigned', status: 'Pending'
         };
 
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newTicket);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
-        // Send Notification to CEO & Co-CEO
-        addNotification('CEO', `🎫 New Ticket (${tckId}) raised by ${currentUser.name}`);
+        // Send Mobile Push Notification with sound to CEO & Co-CEO
+        sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
+        sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
+        alert(`Ticket Submitted! ID: ${tckId}`);
         document.getElementById('ticketForm').reset();
-        document.getElementById('ticketForm').style.display = 'none';
-        document.getElementById('assignedTicketId').innerText = newTicket.id;
-        document.getElementById('successCard').style.display = 'block';
-    }
-
-    function resetToNewTicket() {
-        document.getElementById('successCard').style.display = 'none';
-        document.getElementById('ticketForm').style.display = 'block';
     }
 
     function loadAdminPanel() {
@@ -1224,128 +383,40 @@
         tbody.innerHTML = '';
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
 
-        let filteredList = [];
-
-        if (currentUser.role === 'CEO') {
-            filteredList = db;
-            document.getElementById('adminTitle').innerHTML = '<i class="fa-solid fa-crown" style="color: #f59e0b;"></i> CEO Management Control Panel (Assign & Monitor)';
-        } else {
-            const techName = currentUser.name.trim();
-            filteredList = db.filter(item => item.assignedTo.toUpperCase() === techName.toUpperCase());
-            document.getElementById('adminTitle').innerHTML = `<i class="fa-solid fa-user-gear" style="color: #38bdf8;"></i> Assigned Work Orders for ${currentUser.name}`;
-        }
-
-        if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found for you right now.</td></tr>`;
-            return;
-        }
+        let filteredList = currentUser.role === 'CEO' ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
 
         filteredList.forEach((item) => {
             const tr = document.createElement('tr');
-
             let optionsHTML = '<option value="Unassigned">Unassigned</option>';
-            TEAM_LIST.forEach(member => {
-                optionsHTML += `<option value="${member}" ${item.assignedTo === member ? 'selected' : ''}>${member}</option>`;
-            });
+            TEAM_LIST.forEach(m => optionsHTML += `<option value="${m}" ${item.assignedTo === m ? 'selected' : ''}>${m}</option>`);
 
-            const statusClass = item.status === 'Pending' ? 'badge-pending' : (item.status === 'In Progress' ? 'badge-assigned' : 'badge-resolved');
+            let actionHTML = currentUser.role === 'CEO' 
+                ? `<select onchange="assignTechnician('${item.id}', this.value)">${optionsHTML}</select>`
+                : `<button onclick="updateTicketStatus('${item.id}', 'Resolved')">Mark Resolved</button>`;
 
-            let actionHTML = '';
-            if (currentUser.role === 'CEO') {
-                actionHTML = `
-                    <select onchange="assignTechnician('${item.id}', this.value)" style="padding: 4px; font-size: 0.8rem; background: #0b0f19;">
-                        ${optionsHTML}
-                    </select>
-                `;
-            } else {
-                actionHTML = `
-                    <select onchange="updateTicketStatus('${item.id}', this.value)" style="padding: 4px; font-size: 0.8rem; background: #0b0f19;">
-                        <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
-                        <option value="In Progress" ${item.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                        <option value="Resolved" ${item.status === 'Resolved' ? 'selected' : ''}>Mark Resolved</option>
-                    </select>
-                `;
-            }
-
-            tr.innerHTML = `
-                <td><strong>${item.id}</strong><br><small style="color: #9ca3af;">${item.type}</small></td>
-                <td>${item.clientName}<br><small style="color: #60a5fa;">${item.phone}</small></td>
-                <td><strong>[${item.category}]</strong> ${item.issue}</td>
-                <td><span class="badge ${statusClass}">${item.status}</span></td>
-                <td><strong style="color: #38bdf8;">${item.assignedTo}</strong></td>
-                <td>${actionHTML}</td>
-            `;
-
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td>${item.status}</td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }
 
-    // CEO ASSIGNS WORK (Triggers Notification to Team Member)
+    // CEO ASSIGNS WORK -> SENDS SOUND PUSH NOTIFICATION TO PARTICULAR TEAM MEMBER
     function assignTechnician(id, techName) {
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         const item = db.find(t => t.id === id);
         if (item) {
             item.assignedTo = techName;
-            if (item.status === 'Pending' && techName !== 'Unassigned') {
-                item.status = 'In Progress';
-            }
+            item.status = 'In Progress';
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
-            // Send Notification to Team Member
-            if (techName !== 'Unassigned') {
-                addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} [${item.category}] to you.`);
+            // Find tech email and send sound notification
+            const sysUser = SYSTEM_USERS.find(u => u.name.toUpperCase() === techName.toUpperCase());
+            if (sysUser) {
+                sendPushNotification(sysUser.email, "⚡ New Work Assigned!", `CEO assigned Ticket ${id} to you.`);
             }
 
             alert(`Assigned ${id} to ${techName}`);
             loadAdminPanel();
         }
-    }
-
-    function updateTicketStatus(id, newStatus) {
-        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
-        const item = db.find(t => t.id === id);
-        if (item) {
-            item.status = newStatus;
-            localStorage.setItem('ms_tickets_db', JSON.stringify(db));
-
-            // Notify CEO about status update
-            addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
-
-            alert(`Updated status of ${id} to ${newStatus}`);
-            loadAdminPanel();
-        }
-    }
-
-    // NOTIFICATION DROPDOWN LOGIC
-    function loadNotifications() {
-        if (!currentUser) return;
-        const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
-        const notifList = document.getElementById('notifList');
-        const notifBadge = document.getElementById('notifBadge');
-
-        const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
-
-        if (userNotifs.length > 0) {
-            notifBadge.style.display = 'inline-block';
-            notifBadge.innerText = userNotifs.length;
-            notifList.innerHTML = '';
-            userNotifs.forEach(n => {
-                notifList.innerHTML += `
-                    <div class="notif-item">
-                        ${n.text}
-                        <span class="notif-time">${n.time}</span>
-                    </div>
-                `;
-            });
-        } else {
-            notifBadge.style.display = 'none';
-            notifList.innerHTML = '<div class="notif-item">No new notifications.</div>';
-        }
-    }
-
-    function toggleNotifDropdown() {
-        const drop = document.getElementById('notifDropdown');
-        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 </script>
 

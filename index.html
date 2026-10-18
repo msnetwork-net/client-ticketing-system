@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS NETWORK | Enterprise Support & Solutions Console</title>
+    <title>MS NETWORK | Enterprise Support & Team Operations Console</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- QRCode JS Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -69,7 +69,7 @@
 
         .signin-nav-btn:hover { background: #0052a3; }
 
-        /* Main Hero Banner */
+        /* Hero Banner */
         .hero-banner {
             background: #111827;
             border: 1px solid #1f2937;
@@ -443,6 +443,39 @@
         .share-qr-btn:hover { background: #0052a3; }
 
         .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+
+        /* Admin Table & Badges */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1px solid #1f2937;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background: #1f2937;
+            color: #60a5fa;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .badge-assigned { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .badge-resolved { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+
+        .role-tag-ceo { background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
+        .role-tag-member { background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -615,24 +648,24 @@
 
     <!-- 6. Client Support Console (Login / Register Console) -->
     <div class="section-card" id="consoleSection">
-        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client Support Console</h2>
+        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client & Staff Portal Login</h2>
         <div class="auth-container">
             <div class="tab-btns">
                 <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
-                <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Register</button>
+                <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Client Register</button>
             </div>
 
             <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label>Work Email</label>
-                    <input type="email" id="loginEmail" required placeholder="name@company.com">
+                    <label>Work Email / ID</label>
+                    <input type="email" id="loginEmail" required placeholder="name@msnetwork.com or client email">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" id="loginPassword" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="submit-btn">Sign In to Portal</button>
+                <button type="submit" class="submit-btn">Sign In to Dashboard</button>
             </form>
 
             <!-- Signup Form -->
@@ -653,7 +686,7 @@
                     <label>Password</label>
                     <input type="password" id="signupPassword" required placeholder="Create strong password">
                 </div>
-                <button type="submit" class="submit-btn">Create Account</button>
+                <button type="submit" class="submit-btn">Create Client Account</button>
             </form>
         </div>
     </div>
@@ -664,7 +697,6 @@
             <h3><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
             <p>Share our portal link quickly via social channels or scan the QR code to visit instantly.</p>
             
-            <!-- Icon-only Social Share Buttons (Using Classic Blue Bird Twitter Icon) -->
             <div class="social-icons-grid">
                 <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp" title="Share on WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
@@ -680,7 +712,6 @@
                 </button>
             </div>
 
-            <!-- Utility Share Options -->
             <div class="share-utility-btns">
                 <button onclick="copyWebsiteLink()" class="utility-btn">
                     <i class="fa-solid fa-copy"></i> Copy Link
@@ -694,7 +725,6 @@
         <div class="qr-box-wrapper">
             <div id="qrcode"></div>
             <p>Scan to Visit</p>
-            <!-- Share QR Button -->
             <button onclick="shareQRCode()" class="share-qr-btn">
                 <i class="fa-solid fa-qrcode"></i> Share QR
             </button>
@@ -703,21 +733,24 @@
 
 </div>
 
-<!-- Main Ticketing Portal (Hidden Initially) -->
-<div class="container" id="mainPortal" style="display: none; max-width: 600px;">
+<!-- Portal Dashboard for Client & Admin Team -->
+<div class="container" id="mainPortal" style="display: none; max-width: 950px;">
     <div class="section-card" style="margin-top: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 20px;">
-            <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb; display: flex; align-items: center; gap: 10px;">
-                <i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Support Desk
-            </h1>
+            <div>
+                <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Support Management Dashboard
+                </h1>
+                <span id="userRoleBadge" class="role-tag-member" style="margin-top: 5px; display: inline-block;">Member</span>
+            </div>
             <div>
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
                 <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
             </div>
         </div>
 
-        <!-- Ticket Form -->
-        <div id="formCard">
+        <!-- 1. Client View: Create Ticket -->
+        <div id="clientTicketSection" style="display: none;">
             <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
                 <div class="form-group">
@@ -728,6 +761,8 @@
                         <option value="Camera" style="background: #111827;">CCTV Camera / DVR / NVR Issue</option>
                         <option value="Telecom" style="background: #111827;">Telecom / Intercom / EPABX Issue</option>
                         <option value="Hardware" style="background: #111827;">IT Hardware / Server Issue</option>
+                        <option value="Biometric" style="background: #111827;">Biometric / Attendance Machine Issue</option>
+                        <option value="Cabling" style="background: #111827;">Fiber Splicing / LAN Cabling Issue</option>
                     </select>
                 </div>
 
@@ -747,25 +782,77 @@
 
                 <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Ticket</button>
             </form>
+
+            <div id="successCard" style="display: none; text-align: center; padding: 30px 10px;">
+                <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Ticket Submitted Successfully!</h2>
+                <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
+                    Your ticket ID is <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our Founder & CEO SHAJEEL MS will review and assign an expert team member to resolve it shortly.
+                </p>
+                <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
+                    Raise Another Ticket
+                </button>
+            </div>
         </div>
 
-        <!-- Thank You / Success Card -->
-        <div id="successCard" style="display: none; text-align: center; padding: 30px 10px;">
-            <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
-                <i class="fa-solid fa-circle-check"></i>
+        <!-- 2. Admin / CEO / Team Panel View -->
+        <div id="adminPanelSection" style="display: none;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">
+                <i class="fa-solid fa-list-check" style="color: #0066cc;"></i> Active Operations Console
+            </h3>
+
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Type / ID</th>
+                            <th>Client Info</th>
+                            <th>Details / Reason</th>
+                            <th>Status</th>
+                            <th>Assigned Tech</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Table Rows Generated Dynamically -->
+                    </tbody>
+                </table>
             </div>
-            <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Thank You for Contacting Us!</h2>
-            <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                Your support ticket has been registered with ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our MS NETWORK technical team has been notified and will resolve your problem soon.
-            </p>
-            <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
-                Raise Another Ticket
-            </button>
         </div>
+
     </div>
 </div>
 
 <script>
+    // PRE-DEFINED SYSTEM USERS & ROLES (Includes GENZ as 10th Team Member)
+    const SYSTEM_USERS = [
+        { email: 'ceo@msnetwork.com', pass: 'shajeel123', name: 'SHAJEEL MS (Founder & CEO)', role: 'CEO' },
+        { email: 'coceo@msnetwork.com', pass: 'coceo123', name: 'Co-CEO / System Admin', role: 'CEO' },
+        { email: 'vipin@msnetwork.com', pass: 'vipin123', name: 'VIPIN', role: 'MEMBER' },
+        { email: 'aswin@msnetwork.com', pass: 'aswin123', name: 'ASWIN', role: 'MEMBER' },
+        { email: 'rabeeb@msnetwork.com', pass: 'rabeeb123', name: 'RABEEB', role: 'MEMBER' },
+        { email: 'saheer@msnetwork.com', pass: 'saheer123', name: 'SAHEER', role: 'MEMBER' },
+        { email: 'murshid@msnetwork.com', pass: 'murshid123', name: 'MURSHID', role: 'MEMBER' },
+        { email: 'sinan@msnetwork.com', pass: 'sinan123', name: 'SINAN', role: 'MEMBER' },
+        { email: 'ibnu@msnetwork.com', pass: 'ibnu123', name: 'IBNU', role: 'MEMBER' },
+        { email: 'naseeb@msnetwork.com', pass: 'naseeb123', name: 'NASEEB', role: 'MEMBER' },
+        { email: 'vishnu@msnetwork.com', pass: 'vishnu123', name: 'VISHNU', role: 'MEMBER' },
+        { email: 'genz@msnetwork.com', pass: 'genz123', name: 'GENZ', role: 'MEMBER' }
+    ];
+
+    const TEAM_LIST = ['VIPIN', 'ASWIN', 'RABEEB', 'SAHEER', 'MURSHID', 'SINAN', 'IBNU', 'NASEEB', 'VISHNU', 'GENZ'];
+
+    // DEMO LOCAL STORAGE INITIAL DATABASE
+    if (!localStorage.getItem('ms_tickets_db')) {
+        const initialDB = [
+            { id: 'CALL-101', type: 'Call Back Request', clientName: 'Call Back Request', phone: '+91 9895000001', category: 'Call Back', priority: 'High', issue: 'Emergency Fiber Line Issue', assignedTo: 'Unassigned', status: 'Pending' },
+            { id: 'TCK-201', type: 'Support Ticket', clientName: 'Malabar Traders', phone: '+91 9847123456', category: 'CCTV', priority: 'Medium', issue: 'DVR 4th Channel Video Loss', assignedTo: 'Unassigned', status: 'Pending' }
+        ];
+        localStorage.setItem('ms_tickets_db', JSON.stringify(initialDB));
+    }
+
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     if (currentUser) { showPortal(); }
 
@@ -782,7 +869,7 @@
         });
     });
 
-    // SOCIAL SHARE FUNCTIONS (Icon-only)
+    // SOCIAL SHARE FUNCTIONS
     function shareOnWhatsApp() {
         const url = window.location.href;
         const message = `Check out MS NETWORK Enterprise Support & Solutions Console for fast IT, CCTV, Network & Telecom Support: ${url}`;
@@ -790,7 +877,7 @@
     }
 
     function shareOnInstagram() {
-        alert('Instagram direct web-sharing is restricted. Please copy link or use mobile share options to share on Instagram story/DM!');
+        alert('Copying link! You can share this link on your Instagram story or DM.');
         copyWebsiteLink();
     }
 
@@ -824,7 +911,6 @@
         }
     }
 
-    // SHARE QR CODE FUNCTION
     function shareQRCode() {
         const url = window.location.href;
         if (navigator.share) {
@@ -835,7 +921,6 @@
             }).catch(err => console.log('Share canceled'));
         } else {
             copyWebsiteLink();
-            alert('Link copied! You can share it anywhere to let others scan/visit.');
         }
     }
 
@@ -868,7 +953,8 @@
         }
     }
 
-    async function handleCallbackRequest(e) {
+    // CALL BACK REQUEST (Directly goes to CEO / Admin Console)
+    function handleCallbackRequest(e) {
         e.preventDefault();
         const phone = document.getElementById('callbackPhone').value;
         let selectedReason = document.getElementById('callbackReason').value;
@@ -877,79 +963,100 @@
             selectedReason = document.getElementById('callbackCustomText').value;
         }
 
-        try {
-            const res = await fetch('/api/tickets', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    clientName: 'Call Back Request',
-                    phone: phone,
-                    email: 'N/A',
-                    category: 'Call Back Request',
-                    priority: 'High',
-                    issue: selectedReason
-                })
-            });
-            if (res.ok) {
-                alert('Call Back Request Submitted! Our team will review the reason and call you shortly.');
-                document.getElementById('callbackForm').reset();
-                toggleCustomReason('Emergency Technical Issue');
-            } else {
-                alert('Failed to submit request. Please try again.');
-            }
-        } catch (err) {
-            alert('Request submitted. We will call you back soon!');
-            document.getElementById('callbackForm').reset();
-        }
+        const newCallReq = {
+            id: 'CALL-' + Math.floor(100 + Math.random() * 900),
+            type: 'Call Back Request',
+            clientName: 'Call Back Request',
+            phone: phone,
+            category: 'Call Back',
+            priority: 'High',
+            issue: selectedReason,
+            assignedTo: 'Unassigned',
+            status: 'Pending'
+        };
+
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        db.unshift(newCallReq);
+        localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+
+        alert('Call Back Request Submitted! Our CEO & Management team will assign a technician to call you shortly.');
+        document.getElementById('callbackForm').reset();
+        toggleCustomReason('Emergency Technical Issue');
     }
 
-    async function handleSignup(e) {
+    // AUTHENTICATION SYSTEM
+    function handleLogin(e) {
         e.preventDefault();
-        const data = {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        // 1. Check System Users (CEO, Co-CEO, 10 Team Members)
+        const foundSysUser = SYSTEM_USERS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === password);
+
+        if (foundSysUser) {
+            currentUser = { name: foundSysUser.name, email: foundSysUser.email, role: foundSysUser.role };
+            localStorage.setItem('supportUser', JSON.stringify(currentUser));
+            showPortal();
+            return;
+        }
+
+        // 2. Check Client Local Users
+        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
+        const foundClient = clientDB.find(c => c.email.toLowerCase() === email.toLowerCase() && c.password === password);
+
+        if (foundClient) {
+            currentUser = { name: foundClient.name, email: foundClient.email, phone: foundClient.phone, role: 'CLIENT' };
+            localStorage.setItem('supportUser', JSON.stringify(currentUser));
+            showPortal();
+            return;
+        }
+
+        alert('Invalid Email or Password! Please check your credentials.');
+    }
+
+    function handleSignup(e) {
+        e.preventDefault();
+        const newClient = {
             name: document.getElementById('signupName').value,
             email: document.getElementById('signupEmail').value,
             phone: document.getElementById('signupPhone').value,
-            password: document.getElementById('signupPassword').value
+            password: document.getElementById('signupPassword').value,
+            role: 'CLIENT'
         };
-        const res = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (res.ok) {
-            alert('Registration Successful! Please Sign In.');
-            switchTab('login');
-        } else {
-            alert(result.error || 'Registration failed');
-        }
-    }
 
-    async function handleLogin(e) {
-        e.preventDefault();
-        const data = {
-            email: document.getElementById('loginEmail').value,
-            password: document.getElementById('loginPassword').value
-        };
-        const res = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (res.ok) {
-            currentUser = result.user;
-            localStorage.setItem('supportUser', JSON.stringify(currentUser));
-            showPortal();
-        } else {
-            alert(result.error || 'Invalid credentials');
-        }
+        const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
+        clientDB.push(newClient);
+        localStorage.setItem('ms_clients_db', JSON.stringify(clientDB));
+
+        alert('Client Account Created Successfully! Please Sign In.');
+        switchTab('login');
     }
 
     function showPortal() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('mainPortal').style.display = 'block';
         document.getElementById('welcomeUser').innerText = `👤 ${currentUser.name}`;
+
+        const roleBadge = document.getElementById('userRoleBadge');
+        if (currentUser.role === 'CEO') {
+            roleBadge.innerText = "Founder & CEO / Full System Admin Control";
+            roleBadge.className = "role-tag-ceo";
+        } else if (currentUser.role === 'MEMBER') {
+            roleBadge.innerText = "Technical Staff Member";
+            roleBadge.className = "role-tag-member";
+        } else {
+            roleBadge.innerText = "Verified Client";
+            roleBadge.className = "region-badge";
+        }
+
+        if (currentUser.role === 'CLIENT') {
+            document.getElementById('clientTicketSection').style.display = 'block';
+            document.getElementById('adminPanelSection').style.display = 'none';
+        } else {
+            document.getElementById('clientTicketSection').style.display = 'none';
+            document.getElementById('adminPanelSection').style.display = 'block';
+            loadAdminPanel();
+        }
     }
 
     function handleLogout() {
@@ -959,35 +1066,125 @@
         document.getElementById('mainPortal').style.display = 'none';
     }
 
-    async function handleTicketSubmit(e) {
+    // TICKET SUBMISSION BY CLIENT
+    function handleTicketSubmit(e) {
         e.preventDefault();
-        const data = {
+        const newTicket = {
+            id: 'TCK-' + Math.floor(100 + Math.random() * 900),
+            type: 'Support Ticket',
             clientName: currentUser.name,
-            phone: currentUser.phone,
-            email: currentUser.email,
+            phone: currentUser.phone || 'N/A',
             category: document.getElementById('category').value,
             priority: document.getElementById('priority').value,
-            issue: document.getElementById('issue').value
+            issue: document.getElementById('issue').value,
+            assignedTo: 'Unassigned',
+            status: 'Pending'
         };
-        const res = await fetch('/api/tickets', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (res.ok) {
-            document.getElementById('ticketForm').reset();
-            document.getElementById('formCard').style.display = 'none';
-            document.getElementById('assignedTicketId').innerText = result.ticket.id;
-            document.getElementById('successCard').style.display = 'block';
-        } else {
-            alert('Failed to submit ticket.');
-        }
+
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        db.unshift(newTicket);
+        localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+
+        document.getElementById('ticketForm').reset();
+        document.getElementById('ticketForm').style.display = 'none';
+        document.getElementById('assignedTicketId').innerText = newTicket.id;
+        document.getElementById('successCard').style.display = 'block';
     }
 
     function resetToNewTicket() {
         document.getElementById('successCard').style.display = 'none';
-        document.getElementById('formCard').style.display = 'block';
+        document.getElementById('ticketForm').style.display = 'block';
+    }
+
+    // ADMIN & TEAM MEMBER DASHBOARD LOGIC
+    function loadAdminPanel() {
+        const tbody = document.getElementById('adminTableBody');
+        tbody.innerHTML = '';
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+
+        let filteredList = [];
+
+        if (currentUser.role === 'CEO') {
+            // CEO sees ALL tickets and Call Back Requests
+            filteredList = db;
+            document.getElementById('adminTitle').innerHTML = '<i class="fa-solid fa-crown" style="color: #f59e0b;"></i> CEO Management Control Panel (Assign & Monitor)';
+        } else {
+            // Team Members (1-10) ONLY see tickets assigned to their name
+            const techName = currentUser.name.trim();
+            filteredList = db.filter(item => item.assignedTo.toUpperCase() === techName.toUpperCase());
+            document.getElementById('adminTitle').innerHTML = `<i class="fa-solid fa-user-gear" style="color: #38bdf8;"></i> Assigned Work Orders for ${currentUser.name}`;
+        }
+
+        if (filteredList.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found.</td></tr>`;
+            return;
+        }
+
+        filteredList.forEach((item) => {
+            const tr = document.createElement('tr');
+
+            let optionsHTML = '<option value="Unassigned">Unassigned</option>';
+            TEAM_LIST.forEach(member => {
+                optionsHTML += `<option value="${member}" ${item.assignedTo === member ? 'selected' : ''}>${member}</option>`;
+            });
+
+            const statusClass = item.status === 'Pending' ? 'badge-pending' : (item.status === 'In Progress' ? 'badge-assigned' : 'badge-resolved');
+
+            let actionHTML = '';
+            if (currentUser.role === 'CEO') {
+                actionHTML = `
+                    <select onchange="assignTechnician('${item.id}', this.value)" style="padding: 4px; font-size: 0.8rem; background: #0b0f19;">
+                        ${optionsHTML}
+                    </select>
+                `;
+            } else {
+                actionHTML = `
+                    <select onchange="updateTicketStatus('${item.id}', this.value)" style="padding: 4px; font-size: 0.8rem; background: #0b0f19;">
+                        <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                        <option value="In Progress" ${item.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                        <option value="Resolved" ${item.status === 'Resolved' ? 'selected' : ''}>Mark Resolved</option>
+                    </select>
+                `;
+            }
+
+            tr.innerHTML = `
+                <td><strong>${item.id}</strong><br><small style="color: #9ca3af;">${item.type}</small></td>
+                <td>${item.clientName}<br><small style="color: #60a5fa;">${item.phone}</small></td>
+                <td><strong>[${item.category}]</strong> ${item.issue}</td>
+                <td><span class="badge ${statusClass}">${item.status}</span></td>
+                <td><strong style="color: #38bdf8;">${item.assignedTo}</strong></td>
+                <td>${actionHTML}</td>
+            `;
+
+            tbody.appendChild(tr);
+        });
+    }
+
+    // CEO DELEGATES WORK TO TEAM MEMBER
+    function assignTechnician(id, techName) {
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        const item = db.find(t => t.id === id);
+        if (item) {
+            item.assignedTo = techName;
+            if (item.status === 'Pending' && techName !== 'Unassigned') {
+                item.status = 'In Progress';
+            }
+            localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+            alert(`Assigned ${id} to ${techName}`);
+            loadAdminPanel();
+        }
+    }
+
+    // TEAM MEMBER UPDATES STATUS
+    function updateTicketStatus(id, newStatus) {
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        const item = db.find(t => t.id === id);
+        if (item) {
+            item.status = newStatus;
+            localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+            alert(`Updated status of ${id} to ${newStatus}`);
+            loadAdminPanel();
+        }
     }
 </script>
 

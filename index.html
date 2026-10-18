@@ -14,7 +14,7 @@
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
-          appId: "56e2717d-c699-4c22-8e4c-40a12c19149d", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
+          appId: "56e2717d-c699-4c22-8e4c-40a12c19149d",
           safari_web_id: "web.onesignal.auto.xxxxxx",
           notifyButton: { enable: true },
         });
@@ -64,7 +64,7 @@
 
         .navbar-brand i { color: #0066cc; }
 
-        .nav-buttons-group { display: flex; gap: 10px; align-items: center; }
+        .nav-buttons-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
         .signin-nav-btn {
             background: #0066cc; color: #fff; border: none; padding: 8px 18px;
@@ -74,6 +74,11 @@
         .admin-nav-btn {
             background: #7c3aed; color: #fff; border: none; padding: 8px 14px;
             border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
+        }
+
+        .call-nav-btn {
+            background: #10b981; color: #fff; border: none; padding: 8px 14px;
+            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
         }
 
         .hero-banner {
@@ -201,7 +206,8 @@
     <div class="navbar">
         <div class="navbar-brand"><i class="fa-solid fa-network-wired"></i> MS NETWORK</div>
         <div class="nav-buttons-group">
-            <button class="admin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-user-shield"></i> Staff / Admin Login</button>
+            <a href="tel:+919846000000" class="call-nav-btn"><i class="fa-solid fa-phone-volume"></i> Call Now</a>
+            <button class="admin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-user-shield"></i> Staff Login</button>
             <button class="signin-nav-btn" onclick="scrollToConsole()"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
         </div>
     </div>
@@ -210,7 +216,10 @@
     <div class="hero-banner">
         <h1 class="hero-headline">"Your technical challenges and their precise resolution form the foundation of our growth."</h1>
         <p class="hero-subtext">For over 10+ years, MS NETWORK has been delivering high-reliability, budget-friendly infrastructure services across Network, CCTV, Telecom, and IT Hardware solutions.</p>
-        <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <button class="submit-btn" style="max-width: 220px;" onclick="scrollToConsole()">Access Support Console</button>
+            <a href="tel:+919846000000" class="submit-btn" style="max-width: 200px; background: #10b981; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-phone"></i> Request Callback</a>
+        </div>
     </div>
 
     <!-- 6 Key Services -->
@@ -322,6 +331,7 @@
             <div class="share-utility-btns">
                 <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
                 <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
+                <a href="tel:+919846000000" class="utility-btn" style="text-decoration:none;"><i class="fa-solid fa-phone"></i> Direct Call Support</a>
             </div>
         </div>
 
@@ -537,7 +547,7 @@
             method: 'POST',
             headers: { 'accept': 'application/json', 'content-type': 'application/json' },
             body: JSON.stringify({
-                app_id: "56e2717d-c699-4c22-8e4c-40a12c19149d", // 👈 ഇവിടെ നിങ്ങളുടെ OneSignal App ID നൽകുക
+                app_id: "56e2717d-c699-4c22-8e4c-40a12c19149d",
                 include_aliases: { external_id: [targetEmail] },
                 target_channel: "push",
                 headings: { en: title },

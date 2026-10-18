@@ -186,9 +186,34 @@
         .notif-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: 800; }
         .notif-dropdown { display: none; position: absolute; right: 0; top: 40px; width: 320px; background: #111827; border: 1px solid #374151; border-radius: 12px; z-index: 1000; padding: 10px; max-height: 300px; overflow-y: auto; }
         .notif-item { padding: 10px; border-bottom: 1px solid #1f2937; font-size: 0.8rem; color: #d1d5db; }
+
+        /* Thank You Modal Styling */
+        .thankyou-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000;
+            align-items: center; justify-content: center;
+        }
+        .thankyou-box {
+            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
+            padding: 35px 30px; text-align: center; max-width: 400px; width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .thankyou-box i { font-size: 3rem; color: #10b981; margin-bottom: 16px; }
+        .thankyou-box h3 { font-size: 1.4rem; color: #f9fafb; margin-bottom: 10px; }
+        .thankyou-box p { font-size: 0.9rem; color: #9ca3af; margin-bottom: 20px; line-height: 1.5; }
     </style>
 </head>
 <body>
+
+<!-- Thank You Popup Modal -->
+<div class="thankyou-modal" id="thankYouModal">
+    <div class="thankyou-box">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3 id="tyTitle">Thank You!</h3>
+        <p id="tyMessage">Your submission has been successfully recorded. Our team will get back to you shortly.</p>
+        <button onclick="closeThankYouModal()" class="submit-btn">Got It, Thanks!</button>
+    </div>
+</div>
 
 <div class="container" id="landingPage">
     <div class="navbar">
@@ -434,6 +459,9 @@
     if (!localStorage.getItem('ms_notifs_db')) {
         localStorage.setItem('ms_notifs_db', JSON.stringify([]));
     }
+    if (!localStorage.getItem('ms_seen_notifs')) {
+        localStorage.setItem('ms_seen_notifs', JSON.stringify([]));
+    }
 
     window.addEventListener('load', () => {
         new QRCode(document.getElementById("qrcode"), {
@@ -462,6 +490,16 @@
         document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
     }
 
+    function showThankYou(title, msg) {
+        document.getElementById('tyTitle').innerText = title;
+        document.getElementById('tyMessage').innerText = msg;
+        document.getElementById('thankYouModal').style.display = 'flex';
+    }
+
+    function closeThankYouModal() {
+        document.getElementById('thankYouModal').style.display = 'none';
+    }
+
     function handleCallRequestSubmit(e) {
         e.preventDefault();
         const callId = 'CALL-' + Math.floor(100 + Math.random() * 900);
@@ -482,7 +520,7 @@
         sendPushNotification("ceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
         sendPushNotification("coceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
 
-        alert("Call Request Submitted Successfully! CEO & Co-CEO have been notified.");
+        showThankYou("Call Request Submitted!", `Thank you ${name}! Your callback request has been sent to CEO & Co-CEO successfully.`);
         document.getElementById('callRequestForm').reset();
         switchTab('login');
     }
@@ -535,8 +573,9 @@
 
     function handleSignup(e) {
         e.preventDefault();
+        const name = document.getElementById('signupName').value;
         const newClient = {
-            name: document.getElementById('signupName').value,
+            name: name,
             email: document.getElementById('signupEmail').value,
             phone: document.getElementById('signupPhone').value,
             password: document.getElementById('signupPassword').value,
@@ -547,7 +586,8 @@
         clientDB.push(newClient);
         localStorage.setItem('ms_clients_db', JSON.stringify(clientDB));
 
-        alert('Client Account Created Successfully! Please Sign In.');
+        showThankYou("Registration Successful!", `Welcome ${name}! Your client account has been created successfully. Please sign in.`);
+        document.getElementById('signupForm').reset();
         switchTab('login');
     }
 
@@ -612,7 +652,7 @@
         sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
         sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
-        alert(`Ticket Submitted Successfully! ID: ${tckId}`);
+        showThankYou("Ticket Submitted!", `Your support ticket (${tckId}) has been created successfully. Our team will review it.`);
         document.getElementById('ticketForm').reset();
     }
 
@@ -672,7 +712,6 @@
             item.status = newStatus;
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
             
-            // Notify CEO & Co-CEO when member resolves the task
             addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
             sendPushNotification("ceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
             sendPushNotification("coceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
@@ -686,14 +725,24 @@
     function loadNotifications() {
         if (!currentUser) return;
         const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+        const seenNotifs = JSON.parse(localStorage.getItem('ms_seen_notifs_' + currentUser.email)) || [];
+        
         const notifList = document.getElementById('notifList');
         const notifBadge = document.getElementById('notifBadge');
 
         const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
+        
+        // Count unseen notifications
+        const unseenCount = userNotifs.filter(n => !seenNotifs.includes(n.id)).length;
 
         if (userNotifs.length > 0) {
-            notifBadge.style.display = 'inline-block';
-            notifBadge.innerText = userNotifs.length;
+            if (unseenCount > 0) {
+                notifBadge.style.display = 'inline-block';
+                notifBadge.innerText = unseenCount;
+            } else {
+                notifBadge.style.display = 'none';
+            }
+
             notifList.innerHTML = '';
             userNotifs.forEach(n => {
                 notifList.innerHTML += `<div class="notif-item">${n.text}<span style="font-size:0.7rem; color:#6b7280; display:block; margin-top:2px;">${n.time}</span></div>`;
@@ -706,7 +755,19 @@
 
     function toggleNotifDropdown() {
         const drop = document.getElementById('notifDropdown');
-        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
+        const isVisible = drop.style.display === 'block';
+        drop.style.display = isVisible ? 'none' : 'block';
+
+        if (!isVisible && currentUser) {
+            // Mark all current user notifications as seen
+            const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
+            const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
+            const allIds = userNotifs.map(n => n.id);
+
+            localStorage.setItem('ms_seen_notifs_' + currentUser.email, JSON.stringify(allIds));
+            document.getElementById('notifBadge.style.display = 'none'; // Clear badge
+            loadNotifications();
+        }
     }
 </script>
 

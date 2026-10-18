@@ -21,213 +21,281 @@
             padding: 20px;
         }
 
-        .main-wrapper {
-            display: flex;
-            gap: 40px;
-            max-width: 1050px;
+        .wrapper {
             width: 100%;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+            max-width: 720px;
+            position: relative;
             z-index: 10;
         }
 
-        /* Introduction Info Column */
-        .intro-section {
-            flex: 1;
-            min-width: 320px;
-            max-width: 500px;
-        }
-
-        .intro-section h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #f9fafb;
-            margin-bottom: 6px;
-            line-height: 1.2;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .intro-section h1 i { color: #0066cc; }
-
-        .intro-section p {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        .feature-list {
+        /* Slide Card Wrapper */
+        .slide-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            min-height: 480px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            justify-content: space-between;
+            transition: all 0.3s ease;
         }
 
-        .feature-item {
+        /* Header Navigation for Presentation */
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .brand-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f9fafb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-header h1 i { color: #0066cc; }
+
+        .slide-badge {
+            background: rgba(0, 102, 204, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Content Styling */
+        .slide-content { flex: 1; }
+        
+        .slide-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #f9fafb;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .slide-desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Grid Cards inside Slide 2 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .service-box {
             background: rgba(31, 41, 55, 0.4);
             border: 1px solid #1f2937;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 16px;
+            border-radius: 10px;
             display: flex;
-            gap: 14px;
+            gap: 12px;
             align-items: flex-start;
         }
 
-        .feature-item i {
-            color: #60a5fa;
-            font-size: 1.1rem;
-            margin-top: 2px;
+        .service-box i { color: #38bdf8; font-size: 1.2rem; margin-top: 3px; }
+        .service-box h4 { font-size: 0.95rem; font-weight: 600; color: #f9fafb; margin-bottom: 4px; }
+        .service-box p { font-size: 0.82rem; color: #9ca3af; margin: 0; line-height: 1.4; }
+
+        /* Slide Footer Controls */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #1f2937;
+            padding-top: 20px;
+            margin-top: 24px;
         }
 
-        .feature-item h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
+        .nav-btn {
+            background: #1f2937;
             color: #f9fafb;
-            margin-bottom: 2px;
+            border: 1px solid #374151;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .feature-item p {
-            font-size: 0.8rem;
-            color: #9ca3af;
-            margin: 0;
-        }
+        .nav-btn:hover { background: #374151; }
+        .nav-btn.primary { background: #0066cc; border-color: #0066cc; }
+        .nav-btn.primary:hover { background: #0052a3; }
 
-        /* Enterprise Auth Modal Card */
-        .auth-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            padding: 30px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            flex: 1;
-            min-width: 320px;
-        }
+        .indicators { display: flex; gap: 8px; }
+        .dot { width: 10px; height: 10px; background: #374151; border-radius: 50%; cursor: pointer; transition: background 0.2s; }
+        .dot.active { background: #0066cc; width: 24px; border-radius: 10px; }
 
-        .auth-card h2 { text-align: center; margin-bottom: 20px; color: #f9fafb; font-size: 1.25rem; font-weight: 600; }
-        
+        /* Forms Styling */
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
-        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s; }
-        .tab-btn.active { background: #0066cc; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .tab-btn { flex: 1; padding: 8px; background: transparent; border: none; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .tab-btn.active { background: #0066cc; color: #fff; }
 
-        /* Cloud Enterprise Card Style */
-        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); width: 100%; max-width: 600px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #1f2937; padding-bottom: 15px; }
-        .header h1 { font-size: 1.25rem; font-weight: 600; color: #f9fafb; display: flex; align-items: center; gap: 10px; }
-        .header h1 i { color: #0066cc; }
-        
-        .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
-        .logout-btn:hover { background: rgba(239, 68, 68, 0.2); }
-
-        .form-group { margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; text-align: left; }
         label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #9ca3af; }
-        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
-        input:focus, select:focus, textarea:focus { border-color: #0066cc; box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2); }
+        input, select, textarea { width: 100%; padding: 10px 14px; background: #0b0f19; border: 1px solid #374151; border-radius: 8px; color: #f9fafb; font-size: 0.9rem; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: #0066cc; }
         
-        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button.submit-btn { width: 100%; padding: 12px; background: #0066cc; border: none; border-radius: 8px; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
         button.submit-btn:hover { background: #0052a3; }
+
+        .logout-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper" id="authWrapper">
-    <!-- MS NETWORK Introduction Section -->
-    <div class="intro-section">
-        <h1><i class="fa-solid fa-network-wired"></i> MS NETWORK</h1>
-        <p style="color: #60a5fa; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
-            Headquartered in Kunnummal, Malappuram
-        </p>
-        <p>
-            Over <strong>10+ years of excellence</strong> in providing budget-friendly, high-reliability solutions for Network, CCTV Camera, Telecom, and IT Hardware issues.
-        </p>
+<div class="wrapper" id="slidePresentation">
+    <div class="slide-card">
+        <!-- Header -->
+        <div class="brand-header">
+            <h1><i class="fa-solid fa-network-wired"></i> MS NETWORK</h1>
+            <span class="slide-badge" id="slideBadge">Slide 1 of 3</span>
+        </div>
 
-        <!-- Why Choose Us Highlight Box -->
-        <div style="background: rgba(17, 24, 39, 0.8); border: 1px solid #1f2937; padding: 16px; border-radius: 10px; margin-bottom: 20px;">
-            <h3 style="font-size: 0.95rem; color: #f9fafb; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                <i class="fa-solid fa-circle-question" style="color: #38bdf8;"></i> Why Choose MS NETWORK Console?
-            </h3>
-            <p style="font-size: 0.85rem; color: #9ca3af; line-height: 1.5; margin: 0;">
-                From our roots in Kunnummal, Malappuram, our soft customer-centric approach has enabled us to serve clients across <strong>all districts in Kerala</strong> and major centers including <strong>Bangalore, Chennai, Mumbai, Tamil Nadu, and Karnataka</strong>. This support platform ensures 24/7 online access for fast technical assistance.
+        <!-- SLIDE 1: ABOUT MS NETWORK -->
+        <div class="slide-content" id="slide1">
+            <h2 class="slide-title">10+ Years of Trusted Infrastructure Solutions</h2>
+            <p style="color: #60a5fa; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px;">
+                Headquartered in Kunnummal, Malappuram
             </p>
-        </div>
-
-        <!-- Core Features List -->
-        <div class="feature-list">
-            <div class="feature-item">
-                <i class="fa-solid fa-headset"></i>
-                <div>
-                    <h4>Online & On-Site Support</h4>
-                    <p>Register complaints easily for Network, CCTV, Telecom, and Hardware issues from anywhere.</p>
-                </div>
-            </div>
-            <div class="feature-item">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-                <div>
-                    <h4>Budget-Friendly & Friendly Care</h4>
-                    <p>10+ years of trusted service with transparent pricing and soft, helpful customer support.</p>
-                </div>
-            </div>
-            <div class="feature-item">
-                <i class="fa-solid fa-globe"></i>
-                <div>
-                    <h4>Multi-State Presence</h4>
-                    <p>Serving enterprise and retail clients across Kerala, Bangalore, Chennai, Mumbai, Karnataka, and Tamil Nadu.</p>
-                </div>
+            <p class="slide-desc">
+                From our roots in Kunnummal, Malappuram, MS NETWORK has grown into a trusted technology partner over the past decade. Built on budget-friendly solutions and a soft, client-first approach, we specialize in repairing, deploying, and maintaining critical IT hardware and network systems.
+            </p>
+            
+            <div style="background: rgba(17, 24, 39, 0.8); border: 1px solid #1f2937; padding: 18px; border-radius: 12px; margin-top: 15px;">
+                <h4 style="font-size: 0.95rem; color: #f9fafb; margin-bottom: 6px;"><i class="fa-solid fa-map-location-dot" style="color: #38bdf8; margin-right: 8px;"></i> Expanding Multi-State Operations</h4>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin: 0; line-height: 1.5;">
+                    Proudly serving clients across <strong>all districts in Kerala</strong>, alongside major commercial centers in <strong>Bangalore, Chennai, Mumbai, Karnataka, and Tamil Nadu</strong>.
+                </p>
             </div>
         </div>
-    </div>
 
-    <!-- Login / Signup Card -->
-    <div class="auth-card">
-        <h2 id="authTitle">Sign In to MS Console</h2>
-        <div class="tab-btns">
-            <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
-            <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Register</button>
+        <!-- SLIDE 2: WHY CHOOSE & SERVICES -->
+        <div class="slide-content" id="slide2" style="display: none;">
+            <h2 class="slide-title">Why Use Our Online Support Console?</h2>
+            <p class="slide-desc">
+                Our web console provides direct, 24/7 access to our engineering desk for immediate grievance logging and real-time tracking.
+            </p>
+
+            <div class="services-grid">
+                <div class="service-box">
+                    <i class="fa-solid fa-wifi"></i>
+                    <div>
+                        <h4>Network & Router Care</h4>
+                        <p>VPC connectivity, router configuration, and bandwidth optimization.</p>
+                    </div>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-video"></i>
+                    <div>
+                        <h4>CCTV & Security Hardware</h4>
+                        <p>DVR/NVR troubleshooting, camera feed restoration, and storage management.</p>
+                    </div>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <h4>Telecom & VOIP Systems</h4>
+                        <p>Intercom gateways, EPABX setups, and telecommunication maintenance.</p>
+                    </div>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+                    <div>
+                        <h4>Automated Email Dispatch</h4>
+                        <p>Instant background email alerts to support engineers as soon as tickets are raised.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Login Form -->
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>Work Email</label>
-                <input type="email" id="loginEmail" required placeholder="name@company.com">
+        <!-- SLIDE 3: SIGN IN / REGISTER FORM -->
+        <div class="slide-content" id="slide3" style="display: none;">
+            <h2 class="slide-title" style="text-align: center; margin-bottom: 20px;">Access Support Console</h2>
+            
+            <div class="tab-btns">
+                <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
+                <button class="tab-btn" id="signupTabBtn" onclick="switchTab('signup')">Register</button>
             </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" required placeholder="••••••••">
-            </div>
-            <button type="submit" class="submit-btn">Sign In to Console</button>
-        </form>
 
-        <!-- Signup Form -->
-        <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
-            <div class="form-group">
-                <label>Organization / Full Name</label>
-                <input type="text" id="signupName" required placeholder="Enterprise / Client Name">
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Work Email</label>
+                    <input type="email" id="loginEmail" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="submit-btn">Sign In to Portal</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>Organization / Client Name</label>
+                    <input type="text" id="signupName" required placeholder="Enterprise Name">
+                </div>
+                <div class="form-group">
+                    <label>Work Email</label>
+                    <input type="email" id="signupEmail" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signupPhone" required placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required placeholder="Create strong password">
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+        </div>
+
+        <!-- Slide Footer Controls -->
+        <div class="slide-footer">
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" style="visibility: hidden;">
+                <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+
+            <div class="indicators">
+                <div class="dot active" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+                <div class="dot" onclick="goToSlide(3)"></div>
             </div>
-            <div class="form-group">
-                <label>Work Email</label>
-                <input type="email" id="signupEmail" required placeholder="name@company.com">
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" id="signupPhone" required placeholder="+91 XXXXX XXXXX">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="signupPassword" required placeholder="Create strong password">
-            </div>
-            <button type="submit" class="submit-btn">Create Account</button>
-        </form>
+
+            <button class="nav-btn primary" id="nextBtn" onclick="changeSlide(1)">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
     </div>
 </div>
 
-<!-- Main Ticketing Portal (Hidden initially) -->
-<div class="container" id="mainPortal" style="display: none; max-width: 600px; width: 100%; margin: auto;">
-    <div class="card">
-        <div class="header">
+<!-- Main Ticketing Portal (Hidden Initially) -->
+<div class="wrapper" id="mainPortal" style="display: none; max-width: 600px;">
+    <div class="slide-card" style="min-height: auto;">
+        <div class="brand-header">
             <h1><i class="fa-solid fa-network-wired"></i> MS NETWORK Support Desk</h1>
             <div>
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
@@ -235,9 +303,9 @@
             </div>
         </div>
 
-        <!-- Ticket Form Card -->
+        <!-- Ticket Form -->
         <div id="formCard">
-            <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Support Ticket</h2>
+            <h2 style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; color: #f9fafb;">Create Incident Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
                 <div class="form-group">
                     <label>Service Category</label>
@@ -261,10 +329,10 @@
 
                 <div class="form-group">
                     <label>Problem Description</label>
-                    <textarea id="issue" rows="4" placeholder="Describe the issue in detail..." required></textarea>
+                    <textarea id="issue" rows="4" placeholder="Describe the technical issue in detail..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Support Ticket</button>
+                <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Submit Ticket</button>
             </form>
         </div>
 
@@ -275,7 +343,7 @@
             </div>
             <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: #f9fafb; font-weight: 600;">Thank You for Contacting Us!</h2>
             <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                Your support ticket has been registered with ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our MS NETWORK technical team has been notified and will resolve your problem soon.
+                Your support ticket has been registered with ID <strong id="assignedTicketId" style="color: #60a5fa;"></strong>. Our technical team has been notified via email and will resolve your problem soon.
             </p>
             <button onclick="resetToNewTicket()" class="submit-btn" style="max-width: 220px; margin: 0 auto;">
                 Raise Another Ticket
@@ -285,8 +353,47 @@
 </div>
 
 <script>
+    let currentSlide = 1;
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     if (currentUser) { showPortal(); }
+
+    function updateSlide() {
+        document.getElementById('slide1').style.display = currentSlide === 1 ? 'block' : 'none';
+        document.getElementById('slide2').style.display = currentSlide === 2 ? 'block' : 'none';
+        document.getElementById('slide3').style.display = currentSlide === 3 ? 'block' : 'none';
+
+        document.getElementById('slideBadge').innerText = `Slide ${currentSlide} of 3`;
+        document.getElementById('prevBtn').style.visibility = currentSlide === 1 ? 'hidden' : 'visible';
+        
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentSlide === 3) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'flex';
+            nextBtn.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+        }
+
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            if (index + 1 === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 1) currentSlide = 1;
+        if (currentSlide > 3) currentSlide = 3;
+        updateSlide();
+    }
+
+    function goToSlide(slideNum) {
+        currentSlide = slideNum;
+        updateSlide();
+    }
 
     function switchTab(tab) {
         if (tab === 'login') {
@@ -294,13 +401,11 @@
             document.getElementById('signupTabBtn').classList.remove('active');
             document.getElementById('loginForm').style.display = 'block';
             document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('authTitle').innerText = 'Sign In to MS Console';
         } else {
             document.getElementById('signupTabBtn').classList.add('active');
             document.getElementById('loginTabBtn').classList.remove('active');
             document.getElementById('signupForm').style.display = 'block';
             document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('authTitle').innerText = 'Enterprise Registration';
         }
     }
 
@@ -348,7 +453,7 @@
     }
 
     function showPortal() {
-        document.getElementById('authWrapper').style.display = 'none';
+        document.getElementById('slidePresentation').style.display = 'none';
         document.getElementById('mainPortal').style.display = 'block';
         document.getElementById('welcomeUser').innerText = `👤 ${currentUser.name}`;
     }
@@ -356,8 +461,9 @@
     function handleLogout() {
         localStorage.removeItem('supportUser');
         currentUser = null;
-        document.getElementById('authWrapper').style.display = 'flex';
+        document.getElementById('slidePresentation').style.display = 'block';
         document.getElementById('mainPortal').style.display = 'none';
+        goToSlide(1);
     }
 
     async function handleTicketSubmit(e) {

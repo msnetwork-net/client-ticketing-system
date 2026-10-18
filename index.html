@@ -459,9 +459,6 @@
     if (!localStorage.getItem('ms_notifs_db')) {
         localStorage.setItem('ms_notifs_db', JSON.stringify([]));
     }
-    if (!localStorage.getItem('ms_seen_notifs')) {
-        localStorage.setItem('ms_seen_notifs', JSON.stringify([]));
-    }
 
     window.addEventListener('load', () => {
         new QRCode(document.getElementById("qrcode"), {
@@ -732,7 +729,6 @@
 
         const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
         
-        // Count unseen notifications
         const unseenCount = userNotifs.filter(n => !seenNotifs.includes(n.id)).length;
 
         if (userNotifs.length > 0) {
@@ -759,13 +755,12 @@
         drop.style.display = isVisible ? 'none' : 'block';
 
         if (!isVisible && currentUser) {
-            // Mark all current user notifications as seen
             const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
             const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
             const allIds = userNotifs.map(n => n.id);
 
             localStorage.setItem('ms_seen_notifs_' + currentUser.email, JSON.stringify(allIds));
-            document.getElementById('notifBadge.style.display = 'none'; // Clear badge
+            document.getElementById('notifBadge').style.display = 'none';
             loadNotifications();
         }
     }

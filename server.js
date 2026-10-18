@@ -97,8 +97,8 @@ app.post('/api/tickets', (req, res) => {
 
     // 📩 2. Email background-il ayakkunnu (Client wait cheyyenda)
     const mailOptions = {
-        from: 'genztest@gmail.com',
-        to: 'genztest@gmail.com',
+        from: 'genztestgmail@gmail.com',
+        to: 'genztestgmail@gmail.com',
         subject: `🚨 New Support Ticket: ${newTicket.id} (${category})`,
         text: `New ticket raised!\n\nID: ${newTicket.id}\nClient: ${clientName}\nPhone: ${phone}\nCategory: ${category}\nPriority: ${priority}\nIssue: ${issue}`
     };

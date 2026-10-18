@@ -398,7 +398,7 @@
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>ID</th><th>Client</th><th>Issue</th><th>Status</th><th>Assigned To</th><th>Action</th>
+                            <th>ID</th><th>Client</th><th>Issue / Reason</th><th>Status</th><th>Assigned To</th><th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="adminTableBody"></tbody>
@@ -464,15 +464,25 @@
 
     function handleCallRequestSubmit(e) {
         e.preventDefault();
+        const callId = 'CALL-' + Math.floor(100 + Math.random() * 900);
         const name = document.getElementById('callName').value.trim();
         const phone = document.getElementById('callPhone').value.trim();
         const reason = document.getElementById('callReason').value.trim();
 
-        addNotification('CEO', `📞 Call Request from ${name} (${phone}) - Reason: ${reason}`);
+        const newCallReq = {
+            id: callId, type: 'Call Request', clientName: `${name} (${phone})`,
+            issue: `Reason: ${reason}`, assignedTo: 'Unassigned', status: 'Pending'
+        };
+
+        const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        db.unshift(newCallReq);
+        localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+
+        addNotification('CEO', `📞 Call Request (${callId}) from ${name} - Reason: ${reason}`);
         sendPushNotification("ceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
         sendPushNotification("coceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
 
-        alert("Call Request Submitted Successfully! CEO & Co-CEO have been notified with your reason.");
+        alert("Call Request Submitted Successfully! CEO & Co-CEO have been notified.");
         document.getElementById('callRequestForm').reset();
         switchTab('login');
     }
@@ -647,7 +657,7 @@
             const sysUser = SYSTEM_USERS.find(u => u.name.toUpperCase() === techName.toUpperCase());
             if (sysUser) {
                 addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} to you.`);
-                sendPushNotification(sysUser.email, "⚡ New Work Assigned!", `CEO assigned Ticket ${id} to you.`);
+                sendPushNotification(sysUser.email, "⚡ New Work Assigned!", `CEO assigned Item ${id} to you.`);
             }
 
             alert(`Assigned ${id} to ${techName}`);
@@ -661,9 +671,15 @@
         if (item) {
             item.status = newStatus;
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+            
+            // Notify CEO & Co-CEO when member resolves the task
             addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
+            sendPushNotification("ceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
+            sendPushNotification("coceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
+
             alert(`Updated status to ${newStatus}`);
             loadAdminPanel();
+            loadNotifications();
         }
     }
 

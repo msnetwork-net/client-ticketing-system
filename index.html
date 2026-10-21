@@ -33,21 +33,13 @@
             scroll-behavior: smooth;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container { max-width: 1050px; margin: 0 auto; }
 
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid #1f2937;
-            padding: 16px 24px;
-            border-radius: 12px;
-            position: sticky;
-            top: 15px;
-            z-index: 100;
-            margin-bottom: 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(17, 24, 39, 0.8); backdrop-filter: blur(10px);
+            border: 1px solid #1f2937; padding: 16px 24px; border-radius: 12px;
+            position: sticky; top: 15px; z-index: 100; margin-bottom: 30px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
 
@@ -127,99 +119,30 @@
         .thankyou-box h3 { font-size: 1.4rem; color: #f9fafb; margin-bottom: 10px; }
         .thankyou-box p { font-size: 0.9rem; color: #9ca3af; margin-bottom: 20px; line-height: 1.5; }
 
-        .ceo-config-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #374151;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .date-filter-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(31, 41, 55, 0.6);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #374151;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
+        .ceo-config-card { background: rgba(30, 41, 59, 0.5); border: 1px solid #374151; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+        .date-filter-box { display: flex; align-items: center; gap: 10px; background: rgba(31, 41, 55, 0.6); padding: 10px 15px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; flex-wrap: wrap; }
 
         .icon-bright-cyan { color: #38bdf8 !important; }
         .icon-bright-gold { color: #f59e0b !important; }
         .icon-bright-green { color: #10b981 !important; }
 
-        input[type="date"], input[type="time"] {
-            color-scheme: dark;
-            background: #0b0f19;
-            color: #f9fafb;
-            border: 1px solid #374151;
-            border-radius: 6px;
-        }
+        input[type="date"], input[type="time"] { color-scheme: dark; background: #0b0f19; color: #f9fafb; border: 1px solid #374151; border-radius: 6px; }
 
-        .media-options-box {
-            background: rgba(31, 41, 55, 0.4);
-            border: 1px dashed #374151;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        .media-btn {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #f9fafb;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
+        .media-options-box { background: rgba(31, 41, 55, 0.4); border: 1px dashed #374151; padding: 15px; border-radius: 10px; margin-top: 15px; margin-bottom: 15px; }
+        .media-btn { background: #1f2937; border: 1px solid #374151; color: #f9fafb; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; margin-right: 8px; margin-bottom: 8px; }
         .media-btn:hover { background: #374151; }
         .record-btn-active { background: #ef4444 !important; animation: pulse 1s infinite; }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
-        /* ATTACHMENTS LIST & DELETE STYLES */
-        .attachment-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #0b0f19;
-            border: 1px solid #374151;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-top: 8px;
-            font-size: 0.8rem;
-        }
-
-        .attachment-delete-btn {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            padding: 4px 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-
+        .attachment-item { display: flex; align-items: center; justify-content: space-between; background: #0b0f19; border: 1px solid #374151; padding: 8px 12px; border-radius: 8px; margin-top: 8px; font-size: 0.8rem; }
+        .attachment-delete-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
         .attachment-delete-btn:hover { background: #ef4444; color: #fff; }
+
+        /* HARDWARE CHECKLIST FORM STYLES */
+        .hardware-checklist-box { background: rgba(17, 24, 39, 0.95); border: 1px solid #374151; padding: 15px; border-radius: 10px; margin-top: 15px; margin-bottom: 15px; }
+        .hw-item-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px; background: rgba(31, 41, 55, 0.4); padding: 10px; border-radius: 8px; }
+        @media(max-width: 768px) { .hw-item-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -321,7 +244,7 @@
     </div>
 </div>
 
-<div class="container" id="mainPortal" style="display: none; max-width: 950px;">
+<div class="container" id="mainPortal" style="display: none; max-width: 1050px;">
     <div class="section-card" style="margin-top: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 20px;">
             <div>
@@ -338,7 +261,7 @@
             </div>
         </div>
 
-        <!-- CLIENT TICKET SECTION WITH MULTIPLE MEDIA & DELETE OPTIONS -->
+        <!-- CLIENT TICKET SECTION -->
         <div id="clientTicketSection" style="display: none;">
             <h2 style="margin-bottom: 20px; font-size: 1.1rem; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
@@ -355,30 +278,17 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Problem Description (Optional if audio/video attached)</label>
-                    <textarea id="issue" rows="3" placeholder="Explain your problem here or attach multiple voice/photos/videos below..."></textarea>
+                    <label>Problem Description</label>
+                    <textarea id="issue" rows="3" placeholder="Explain your problem here..."></textarea>
                 </div>
 
-                <!-- MULTIPLE ATTACHMENTS MANAGER -->
                 <div class="media-options-box">
                     <label style="font-weight: 700; color: #f9fafb; margin-bottom: 10px; display:block;"><i class="fa-solid fa-paperclip icon-bright-cyan"></i> Multiple Attachments (Voice / Photos / Videos under 2MB):</label>
-                    
                     <div>
-                        <!-- Voice Recording Button -->
                         <button type="button" id="recordVoiceBtn" onclick="toggleVoiceRecord()" class="media-btn"><i class="fa-solid fa-microphone icon-bright-gold"></i> <span id="recordText">Record Voice</span></button>
-
-                        <!-- Photos Upload Button (Multiple allowed) -->
-                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-camera icon-bright-cyan"></i> Add Photo(s)
-                            <input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display:none;" onchange="handleMultiplePhotosSelect(event)">
-                        </label>
-
-                        <!-- Videos Upload Button (Multiple under 2MB allowed) -->
-                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-video icon-bright-green"></i> Add Video(s) (Max 2MB)
-                            <input type="file" id="videoInput" accept="video/*" multiple capture="environment" style="display:none;" onchange="handleMultipleVideosSelect(event)">
-                        </label>
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-camera icon-bright-cyan"></i> Add Photo(s)<input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display:none;" onchange="handleMultiplePhotosSelect(event)"></label>
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-video icon-bright-green"></i> Add Video(s) (Max 2MB)<input type="file" id="videoInput" accept="video/*" multiple capture="environment" style="display:none;" onchange="handleMultipleVideosSelect(event)"></label>
                     </div>
-
-                    <!-- ATTACHED ITEMS PREVIEW LIST WITH DELETE BUTTON -->
                     <div id="attachmentsPreviewList" style="margin-top: 10px;"></div>
                 </div>
 
@@ -397,9 +307,7 @@
                 <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days icon-bright-cyan"></i> Daily Attendance & Overtime Log History</h4>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
-                        <thead>
-                            <tr><th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD) Hours</th></tr>
-                        </thead>
+                        <thead><tr><th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD) Hours</th></tr></thead>
                         <tbody id="memberAttendanceHistoryBody"></tbody>
                     </table>
                 </div>
@@ -418,9 +326,7 @@
                         <label style="font-size: 0.8rem; font-weight:700; color:#f59e0b;"><i class="fa-solid fa-business-time icon-bright-gold"></i> Common Overtime (OD) Hours:</label>
                         <input type="number" id="globalODInput" style="width: 100px; padding: 5px; margin-top: 4px;" onchange="saveGlobalOD(this.value)" min="0"> Hours
                     </div>
-                    <div style="font-size:0.75rem; color:#9ca3af; flex:1; min-width:200px;">
-                        *Changing these values applies globally across all staff members.
-                    </div>
+                    <div style="font-size:0.75rem; color:#9ca3af; flex:1; min-width:200px;">*Changing these values applies globally across all staff members.</div>
                 </div>
 
                 <div class="date-filter-box">
@@ -431,20 +337,26 @@
 
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Staff Name</th><th>Selected Date</th><th>Punch In Time</th><th>Attendance Status</th><th>Common OD Hours</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Staff Name</th><th>Selected Date</th><th>Punch In Time</th><th>Attendance Status</th><th>Common OD Hours</th></tr></thead>
                         <tbody id="ceoAttendanceTableBody"></tbody>
                     </table>
                 </div>
             </div>
 
+            <!-- CEO CUSTOM ACCESSORY MANAGER -->
+            <div id="ceoAccessoryManagerBox" style="background: rgba(30, 41, 59, 0.4); border: 1px solid #374151; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 12px;"><i class="fa-solid fa-toolbox icon-bright-gold"></i> Custom Accessory / Item Manager (CEO Control)</h3>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-bottom: 15px;">Add new hardware/accessories items here so they automatically appear in staff billing/checklist forms.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                    <input type="text" id="newCustomItemName" placeholder="Accessory Name (e.g., HDMI Splitter, Fiber Patch Cord)" style="flex:1; min-width:250px;">
+                    <button onclick="addNewCustomAccessory()" class="submit-btn" style="max-width:180px; background:#10b981;"><i class="fa-solid fa-plus"></i> Add Item</button>
+                </div>
+                <div id="customAccessoriesListContainer" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+            </div>
+
             <!-- TICKETS & CALL REQUESTS TABLE -->
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 15px; gap:10px;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb;" id="adminTitle"><i class="fa-solid fa-list-check icon-bright-cyan"></i> Operations Console (Tickets & Calls)</h3>
-                
                 <div class="date-filter-box" style="margin-bottom:0; padding: 6px 12px;" id="ticketDateFilterWrapper">
                     <label style="margin-bottom:0; font-size:0.85rem; font-weight:700;"><i class="fa-solid fa-calendar-day icon-bright-gold"></i> Filter Tickets by Date:</label>
                     <input type="date" id="ticketFilterDate" onchange="loadAdminPanel()" style="width: 150px; padding:4px 8px; font-size:0.85rem;">
@@ -456,7 +368,7 @@
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>ID</th><th>Client</th><th>Issue Details & Media Attachments</th><th>Created Date</th><th>Status</th><th>Assigned To</th><th>Action</th>
+                            <th>ID</th><th>Client</th><th>Issue Details & Client Media</th><th>Staff Solution & Hardware Used</th><th>Created Date</th><th>Status</th><th>Assigned To</th><th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="adminTableBody"></tbody>
@@ -484,16 +396,42 @@
 
     const TEAM_LIST = ['VIPIN', 'ASWIN', 'RABEEB', 'SAHEER', 'MURSHID', 'SINAN', 'IBNU', 'NASEEB', 'VISHNU', 'GENZ'];
 
+    // STANDARD PRE-DEFINED HARDWARE & ACCESSORIES CHECKLIST TEMPLATES
+    const DEFAULT_HARDWARE_ITEMS = [
+        { key: 'camera', name: 'Camera', fields: ['Type (IP/Analog)', 'Brand', 'MP'] },
+        { key: 'hdd', name: 'Hard Disk (HDD)', fields: ['Brand', 'Capacity (TB/GB)'] },
+        { key: 'ssd', name: 'SSD', fields: ['Brand', 'Capacity (TB/GB)'] },
+        { key: 'ram', name: 'RAM', fields: ['Brand', 'Capacity (GB)'] },
+        { key: 'nvr', name: 'NVR', fields: ['Brand', 'Channels', 'Max MP'] },
+        { key: 'dvr', name: 'DVR', fields: ['Brand', 'Channels', 'Max MP'] },
+        { key: 'smps', name: 'SMPS (Power Supply)', fields: ['Brand', 'Channels', 'Amps'] },
+        { key: 'switch', name: 'Network Switch', fields: ['Brand', 'Ports', 'Speed (Gigabit/100)', 'PoE (Yes/No)', 'Managed (L2/Unmanaged)'] },
+        { key: 'ap', name: 'Access Point', fields: ['Brand', 'Model (225/245/610)', 'Type (Indoor/Outdoor)'] },
+        { key: 'router', name: 'Router', fields: ['Brand', 'Bands (2.4G/5G)'] },
+        { key: 'telephone', name: 'Telephone', fields: ['Brand', 'Type (Caller ID/Normal)'] },
+        { key: 'rj45', name: 'RJ45 Connectors', fields: ['Quantity'] },
+        { key: 'rj11', name: 'RJ11 Connectors', fields: ['Quantity'] },
+        { key: 'cable', name: 'Cabling', fields: ['Brand', 'Type (Cat6 / 3+1)', 'Mount (Outdoor/Indoor)'] },
+        { key: 'cable_manager', name: 'Cable Manager', fields: ['Brand'] },
+        { key: 'pdu', name: 'PDU (Power Distribution Unit)', fields: ['Quantity'] },
+        { key: 'patch_panel', name: 'Patch Panel', fields: ['Brand', 'Quantity'] },
+        { key: 'keystone', name: 'Keystone Jack', fields: ['Brand', 'Quantity'] }
+    ];
+
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     let mediaRecorder = null;
     let audioChunks = [];
-    
-    // MULTIPLE ATTACHMENTS ARRAY
     let ticketAttachments = [];
+
+    // Solution Form Media variables for staff
+    let staffMediaRecorder = null;
+    let staffAudioChunks = [];
+    let staffSolutionAttachments = [];
 
     if (!localStorage.getItem('ms_tickets_db')) localStorage.setItem('ms_tickets_db', JSON.stringify([]));
     if (!localStorage.getItem('ms_notifs_db')) localStorage.setItem('ms_notifs_db', JSON.stringify([]));
     if (!localStorage.getItem('ms_attendance_db')) localStorage.setItem('ms_attendance_db', JSON.stringify([]));
+    if (!localStorage.getItem('ms_custom_accessories')) localStorage.setItem('ms_custom_accessories', JSON.stringify([]));
     if (!localStorage.getItem('ms_global_od')) localStorage.setItem('ms_global_od', '0');
     if (!localStorage.getItem('ms_office_time')) localStorage.setItem('ms_office_time', '09:30');
 
@@ -504,11 +442,12 @@
         const todayStr = getFormattedDate();
         document.getElementById('ceoFilterDate').value = todayStr;
         document.getElementById('ticketFilterDate').value = todayStr;
+        renderCustomAccessoriesManager();
     });
 
     if (currentUser) { showPortal(); }
 
-    /* VOICE RECORDING LOGIC FOR MULTIPLE VOICES */
+    /* CLIENT VOICE RECORDING */
     async function toggleVoiceRecord() {
         const btn = document.getElementById('recordVoiceBtn');
         const text = document.getElementById('recordText');
@@ -518,23 +457,16 @@
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 mediaRecorder = new MediaRecorder(stream);
                 audioChunks = [];
-
                 mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
                 mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                     const reader = new FileReader();
                     reader.readAsDataURL(audioBlob);
                     reader.onloadend = () => { 
-                        ticketAttachments.push({
-                            id: Date.now(),
-                            type: 'voice',
-                            name: `Voice Record (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`,
-                            data: reader.result
-                        });
+                        ticketAttachments.push({ id: Date.now(), type: 'voice', name: `Voice Record (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`, data: reader.result });
                         renderAttachmentsList();
                     };
                 };
-
                 mediaRecorder.start();
                 btn.classList.add('record-btn-active');
                 text.innerText = "Recording... Click to Stop";
@@ -546,75 +478,147 @@
         }
     }
 
-    /* MULTIPLE PHOTOS UPLOAD LOGIC */
     function handleMultiplePhotosSelect(e) {
-        const files = Array.from(e.target.files);
-        files.forEach(file => {
+        Array.from(e.target.files).forEach(file => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                ticketAttachments.push({
-                    id: Date.now() + Math.random(),
-                    type: 'photo',
-                    name: file.name,
-                    data: reader.result
-                });
-                renderAttachmentsList();
-            };
+            reader.onloadend = () => { ticketAttachments.push({ id: Date.now() + Math.random(), type: 'photo', name: file.name, data: reader.result }); renderAttachmentsList(); };
         });
         e.target.value = "";
     }
 
-    /* MULTIPLE VIDEOS UPLOAD LOGIC (MAX 2MB PER VIDEO) */
     function handleMultipleVideosSelect(e) {
-        const files = Array.from(e.target.files);
-        files.forEach(file => {
-            if (file.size > 2 * 1024 * 1024) {
-                alert(`File "${file.name}" exceeds 2MB limit! Please upload videos under 2MB.`);
-                return;
-            }
+        Array.from(e.target.files).forEach(file => {
+            if (file.size > 2 * 1024 * 1024) { alert(`File "${file.name}" exceeds 2MB limit!`); return; }
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                ticketAttachments.push({
-                    id: Date.now() + Math.random(),
-                    type: 'video',
-                    name: file.name,
-                    data: reader.result
-                });
-                renderAttachmentsList();
-            };
+            reader.onloadend = () => { ticketAttachments.push({ id: Date.now() + Math.random(), type: 'video', name: file.name, data: reader.result }); renderAttachmentsList(); };
         });
         e.target.value = "";
     }
 
-    /* RENDER ATTACHMENTS PREVIEW WITH DELETE BUTTON */
     function renderAttachmentsList() {
         const previewList = document.getElementById('attachmentsPreviewList');
         previewList.innerHTML = "";
-
-        if (ticketAttachments.length === 0) return;
-
-        ticketAttachments.forEach((item, index) => {
+        ticketAttachments.forEach((item) => {
             const div = document.createElement('div');
             div.className = "attachment-item";
-
-            let iconClass = "fa-microphone icon-bright-gold";
-            if (item.type === 'photo') iconClass = "fa-image icon-bright-cyan";
-            if (item.type === 'video') iconClass = "fa-video icon-bright-green";
-
-            div.innerHTML = `
-                <div><i class="fa-solid ${iconClass}"></i> <b>${item.name}</b></div>
-                <button type="button" onclick="deleteAttachment(${item.id})" class="attachment-delete-btn"><i class="fa-solid fa-trash"></i> Remove</button>
-            `;
+            let iconClass = item.type === 'voice' ? "fa-microphone icon-bright-gold" : (item.type === 'photo' ? "fa-image icon-bright-cyan" : "fa-video icon-bright-green");
+            div.innerHTML = `<div><i class="fa-solid ${iconClass}"></i> <b>${item.name}</b></div><button type="button" onclick="deleteAttachment(${item.id})" class="attachment-delete-btn"><i class="fa-solid fa-trash"></i> Remove</button>`;
             previewList.appendChild(div);
         });
     }
 
-    /* DELETE SINGLE ATTACHMENT FROM LIST */
     function deleteAttachment(id) {
         ticketAttachments = ticketAttachments.filter(item => item.id !== id);
         renderAttachmentsList();
+    }
+
+    /* STAFF SOLUTION MEDIA RECORDING */
+    async function toggleStaffVoiceRecord() {
+        const btn = document.getElementById('staffRecordVoiceBtn');
+        const text = document.getElementById('staffRecordText');
+
+        if (!staffMediaRecorder || staffMediaRecorder.state === "inactive") {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                staffMediaRecorder = new MediaRecorder(stream);
+                staffAudioChunks = [];
+                staffMediaRecorder.ondataavailable = event => staffAudioChunks.push(event.data);
+                staffMediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(staffAudioChunks, { type: 'audio/webm' });
+                    const reader = new FileReader();
+                    reader.readAsDataURL(audioBlob);
+                    reader.onloadend = () => { 
+                        staffSolutionAttachments.push({ id: Date.now(), type: 'voice', name: `Solution Voice (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`, data: reader.result });
+                        renderStaffAttachmentsList();
+                    };
+                };
+                staffMediaRecorder.start();
+                btn.classList.add('record-btn-active');
+                text.innerText = "Recording... Stop";
+            } catch (err) { alert("Microphone access denied."); }
+        } else {
+            staffMediaRecorder.stop();
+            btn.classList.remove('record-btn-active');
+            text.innerText = "Record Voice Solution";
+        }
+    }
+
+    function handleStaffPhotosSelect(e) {
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => { staffSolutionAttachments.push({ id: Date.now() + Math.random(), type: 'photo', name: file.name, data: reader.result }); renderStaffAttachmentsList(); };
+        });
+        e.target.value = "";
+    }
+
+    function handleStaffVideosSelect(e) {
+        Array.from(e.target.files).forEach(file => {
+            if (file.size > 2 * 1024 * 1024) { alert(`File exceeds 2MB limit!`); return; }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => { staffSolutionAttachments.push({ id: Date.now() + Math.random(), type: 'video', name: file.name, data: reader.result }); renderStaffAttachmentsList(); };
+        });
+        e.target.value = "";
+    }
+
+    function renderStaffAttachmentsList() {
+        const previewList = document.getElementById('staffAttachmentsPreviewList');
+        if (!previewList) return;
+        previewList.innerHTML = "";
+        staffSolutionAttachments.forEach((item) => {
+            const div = document.createElement('div');
+            div.className = "attachment-item";
+            let iconClass = item.type === 'voice' ? "fa-microphone icon-bright-gold" : (item.type === 'photo' ? "fa-image icon-bright-cyan" : "fa-video icon-bright-green");
+            div.innerHTML = `<div><i class="fa-solid ${iconClass}"></i> <b>${item.name}</b></div><button type="button" onclick="deleteStaffAttachment(${item.id})" class="attachment-delete-btn"><i class="fa-solid fa-trash"></i> Remove</button>`;
+            previewList.appendChild(div);
+        });
+    }
+
+    function deleteStaffAttachment(id) {
+        staffSolutionAttachments = staffSolutionAttachments.filter(item => item.id !== id);
+        renderStaffAttachmentsList();
+    }
+
+    /* CEO CUSTOM ACCESSORY MANAGER */
+    function addNewCustomAccessory() {
+        const nameInput = document.getElementById('newCustomItemName');
+        const itemName = nameInput.value.trim();
+        if (!itemName) { alert("Enter accessory name!"); return; }
+
+        let customList = JSON.parse(localStorage.getItem('ms_custom_accessories')) || [];
+        customList.push({ key: 'custom_' + Date.now(), name: itemName, fields: ['Brand', 'Quantity / Details'] });
+        localStorage.setItem('ms_custom_accessories', JSON.stringify(customList));
+
+        nameInput.value = "";
+        renderCustomAccessoriesManager();
+        alert(`Custom accessory "${itemName}" added successfully!`);
+    }
+
+    function deleteCustomAccessory(key) {
+        let customList = JSON.parse(localStorage.getItem('ms_custom_accessories')) || [];
+        customList = customList.filter(item => item.key !== key);
+        localStorage.setItem('ms_custom_accessories', JSON.stringify(customList));
+        renderCustomAccessoriesManager();
+    }
+
+    function renderCustomAccessoriesManager() {
+        const container = document.getElementById('customAccessoriesListContainer');
+        if (!container) return;
+        container.innerHTML = "";
+        let customList = JSON.parse(localStorage.getItem('ms_custom_accessories')) || [];
+        if (customList.length === 0) {
+            container.innerHTML = `<span style="font-size:0.8rem; color:#9ca3af;">No custom accessories added yet.</span>`;
+            return;
+        }
+        customList.forEach(item => {
+            const span = document.createElement('span');
+            span.style.cssText = "background:#1f2937; border:1px solid #374151; padding:6px 12px; border-radius:8px; font-size:0.8rem; display:inline-flex; align-items:center; gap:8px;";
+            span.innerHTML = `<span><b>${item.name}</b></span> <button type="button" onclick="deleteCustomAccessory('${item.key}')" style="background:transparent; border:none; color:#f87171; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>`;
+            container.appendChild(span);
+        });
     }
 
     function switchTab(tab) {
@@ -664,7 +668,6 @@
         e.preventDefault();
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
-
         const foundSysUser = SYSTEM_USERS.find(u => u.email.toLowerCase() === email.toLowerCase() && u.pass === password);
 
         if (foundSysUser) {
@@ -678,7 +681,6 @@
 
         const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
         const foundClient = clientDB.find(c => c.email.toLowerCase() === email.toLowerCase() && c.password === password);
-
         if (foundClient) {
             currentUser = { name: foundClient.name, email: foundClient.email, phone: foundClient.phone, role: 'CLIENT' };
             localStorage.setItem('supportUser', JSON.stringify(currentUser));
@@ -715,12 +717,14 @@
             if (currentUser.role === 'CEO') {
                 document.getElementById('employeeAttendanceBox').style.display = 'none';
                 document.getElementById('ceoAttendanceSection').style.display = 'block';
+                document.getElementById('ceoAccessoryManagerBox').style.display = 'block';
                 document.getElementById('globalOfficeTimeInput').value = localStorage.getItem('ms_office_time') || '09:30';
                 document.getElementById('globalODInput').value = localStorage.getItem('ms_global_od') || '0';
                 loadCEOAttendancePanel();
             } else {
                 document.getElementById('employeeAttendanceBox').style.display = 'block';
                 document.getElementById('ceoAttendanceSection').style.display = 'none';
+                document.getElementById('ceoAccessoryManagerBox').style.display = 'none';
                 checkMemberAttendance();
             }
             loadAdminPanel();
@@ -753,42 +757,29 @@
 
     function getPunchStatusBadge(punchTimeStr) {
         if (!punchTimeStr) return '<span class="badge badge-absent">Not Marked</span>';
-        
         const targetOfficeTime = localStorage.getItem('ms_office_time') || '09:30';
         const [targetHours, targetMins] = targetOfficeTime.split(':').map(Number);
-
         let punchDate = new Date("1970-01-01 " + punchTimeStr);
-        let punchHours = punchDate.getHours();
-        let punchMins = punchDate.getMinutes();
-
         let targetTotalMins = targetHours * 60 + targetMins;
-        let punchTotalMins = punchHours * 60 + punchMins;
+        let punchTotalMins = punchDate.getHours() * 60 + punchDate.getMinutes();
 
-        if (punchTotalMins < targetTotalMins) {
-            return `<span class="badge badge-early"><i class="fa-solid fa-circle-check"></i> Early (${punchTimeStr})</span>`;
-        } else if (punchTotalMins === targetTotalMins) {
-            return `<span class="badge badge-ontime"><i class="fa-solid fa-clock"></i> On Time (${punchTimeStr})</span>`;
-        } else {
-            return `<span class="badge badge-late"><i class="fa-solid fa-triangle-exclamation"></i> Late Punch (${punchTimeStr})</span>`;
-        }
+        if (punchTotalMins < targetTotalMins) return `<span class="badge badge-early">Early (${punchTimeStr})</span>`;
+        else if (punchTotalMins === targetTotalMins) return `<span class="badge badge-ontime">On Time (${punchTimeStr})</span>`;
+        else return `<span class="badge badge-late">Late (${punchTimeStr})</span>`;
     }
 
     function markAttendance() {
         const todayDate = getFormattedDate();
         const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
-        const existing = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
-        if (existing) {
+        if (attendanceDB.some(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate)) {
             alert("Attendance already marked for today!");
             return;
         }
-
         attendanceDB.unshift({ name: currentUser.name, date: todayDate, time: currentTime, status: 'Present' });
         localStorage.setItem('ms_attendance_db', JSON.stringify(attendanceDB));
         addNotification('CEO', `🕒 Punch-In: ${currentUser.name} at ${currentTime}`);
-        
-        alert(`Attendance marked successfully at ${currentTime}!`);
+        alert(`Attendance marked successfully!`);
         checkMemberAttendance();
     }
 
@@ -796,103 +787,45 @@
         const todayDate = getFormattedDate();
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
         const record = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
+        document.getElementById('attendanceStatusText').innerHTML = record ? `Today's Status (${todayDate}): ${getPunchStatusBadge(record.time)}` : `Today's Status (${todayDate}): <span class="badge badge-absent">Not Marked</span>`;
+        document.getElementById('markAttendanceBtn').style.display = record ? 'none' : 'block';
 
-        const statusText = document.getElementById('attendanceStatusText');
-        const btn = document.getElementById('markAttendanceBtn');
-
-        if (record) {
-            statusText.innerHTML = `Today's Status (${todayDate}): ${getPunchStatusBadge(record.time)}`;
-            btn.style.display = 'none';
-        } else {
-            statusText.innerHTML = `Today's Status (${todayDate}): <span class="badge badge-absent">Not Marked</span>`;
-            btn.style.display = 'block';
-        }
-
-        const myLogs = attendanceDB.filter(a => a.name.toUpperCase() === currentUser.name.toUpperCase());
         const historyBody = document.getElementById('memberAttendanceHistoryBody');
         historyBody.innerHTML = '';
-
-        if (myLogs.length === 0) {
-            historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af; padding:15px;">No logs found.</td></tr>`;
-            return;
-        }
-
+        const myLogs = attendanceDB.filter(a => a.name.toUpperCase() === currentUser.name.toUpperCase());
+        if (myLogs.length === 0) { historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af; padding:15px;">No logs found.</td></tr>`; return; }
         const commonOD = localStorage.getItem('ms_global_od') || '0';
-
         myLogs.forEach(log => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><b>${log.date}</b></td>
-                <td>${log.time}</td>
-                <td>${getPunchStatusBadge(log.time)}</td>
-                <td><b style="color:#38bdf8;">${commonOD} Hours</b></td>
-            `;
-            historyBody.appendChild(tr);
+            historyBody.innerHTML += `<tr><td><b>${log.date}</b></td><td>${log.time}</td><td>${getPunchStatusBadge(log.time)}</td><td><b style="color:#38bdf8;">${commonOD} Hours</b></td></tr>`;
         });
     }
 
-    function saveGlobalOfficeTime(val) {
-        localStorage.setItem('ms_office_time', val);
-        alert(`Global Office Start Time set to ${val}. All status indicators updated!`);
-        loadCEOAttendancePanel();
-    }
-
-    function saveGlobalOD(val) {
-        localStorage.setItem('ms_global_od', val);
-        alert(`Common Overtime (OD) set to ${val} Hours for all employees!`);
-        loadCEOAttendancePanel();
-    }
-
-    function resetDateToToday() {
-        document.getElementById('ceoFilterDate').value = getFormattedDate();
-        loadCEOAttendancePanel();
-    }
-
-    function resetTicketDateToToday() {
-        document.getElementById('ticketFilterDate').value = getFormattedDate();
-        loadAdminPanel();
-    }
+    function saveGlobalOfficeTime(val) { localStorage.setItem('ms_office_time', val); alert(`Global Office Start Time set to ${val}`); loadCEOAttendancePanel(); }
+    function saveGlobalOD(val) { localStorage.setItem('ms_global_od', val); alert(`Common Overtime set to ${val} Hours`); loadCEOAttendancePanel(); }
+    function resetDateToToday() { document.getElementById('ceoFilterDate').value = getFormattedDate(); loadCEOAttendancePanel(); }
+    function resetTicketDateToToday() { document.getElementById('ticketFilterDate').value = getFormattedDate(); loadAdminPanel(); }
 
     function loadCEOAttendancePanel() {
         const selectedDate = document.getElementById('ceoFilterDate').value || getFormattedDate();
         const tbody = document.getElementById('ceoAttendanceTableBody');
         tbody.innerHTML = '';
-
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
         const commonOD = localStorage.getItem('ms_global_od') || '0';
-
         TEAM_LIST.forEach(member => {
             const record = attendanceDB.find(a => a.name.toUpperCase() === member.toUpperCase() && a.date === selectedDate);
-
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><b>${member}</b></td>
-                <td>${selectedDate}</td>
-                <td>${record ? record.time : '-'}</td>
-                <td>${record ? getPunchStatusBadge(record.time) : '<span class="badge badge-absent">Absent / Not Marked</span>'}</td>
-                <td><b style="color:#f59e0b;">${commonOD} Hours</b></td>
-            `;
-            tbody.appendChild(tr);
+            tbody.innerHTML += `<tr><td><b>${member}</b></td><td>${selectedDate}</td><td>${record ? record.time : '-'}</td><td>${record ? getPunchStatusBadge(record.time) : '<span class="badge badge-absent">Absent</span>'}</td><td><b style="color:#f59e0b;">${commonOD} Hours</b></td></tr>`;
         });
     }
 
     function handleTicketSubmit(e) {
         e.preventDefault();
         const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
-        const createdDate = getFormattedDate();
-        const textIssue = document.getElementById('issue').value.trim();
-
         const newTicket = { 
-            id: tckId, 
-            type: 'Support Ticket', 
-            clientName: currentUser.name, 
-            issue: textIssue || 'Voice/Media Attachments Raised', 
-            assignedTo: 'Unassigned', 
-            status: 'Pending', 
-            date: createdDate,
-            attachments: ticketAttachments
+            id: tckId, type: 'Support Ticket', clientName: currentUser.name, 
+            issue: document.getElementById('issue').value.trim() || 'Media Attachment Raised', 
+            assignedTo: 'Unassigned', status: 'Pending', date: getFormattedDate(),
+            attachments: ticketAttachments, solutionText: '', solutionAttachments: [], hardwareUsed: []
         };
-
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newTicket);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
@@ -901,9 +834,7 @@
         sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
         sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
-        showThankYou("Ticket Submitted!", `Ticket (${tckId}) created successfully with ${ticketAttachments.length} attachments.`);
-        
-        // Reset Form & Clear Attachments Array
+        showThankYou("Ticket Submitted!", `Ticket (${tckId}) created successfully.`);
         document.getElementById('ticketForm').reset();
         ticketAttachments = [];
         renderAttachmentsList();
@@ -913,20 +844,15 @@
         const tbody = document.getElementById('adminTableBody');
         tbody.innerHTML = '';
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
-        
         const selectedTicketDate = document.getElementById('ticketFilterDate').value || getFormattedDate();
 
-        let filteredList = db.filter(item => {
-            const itemDate = item.date || getFormattedDate();
-            return itemDate === selectedTicketDate;
-        });
-
+        let filteredList = db.filter(item => (item.date || getFormattedDate()) === selectedTicketDate);
         if (currentUser.role !== 'CEO') {
             filteredList = filteredList.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
         }
 
         if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #9ca3af; padding: 20px;">No tickets or call requests found for selected date (${selectedTicketDate}).</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #9ca3af; padding: 20px;">No tickets found for selected date (${selectedTicketDate}).</td></tr>`;
             return;
         }
 
@@ -935,29 +861,50 @@
             let optionsHTML = '<option value="Unassigned">Unassigned</option>';
             TEAM_LIST.forEach(m => optionsHTML += `<option value="${m}" ${item.assignedTo === m ? 'selected' : ''}>${m}</option>`);
 
-            let actionHTML = (currentUser.role === 'CEO') 
-                ? `<select onchange="assignTechnician('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:6px; border-radius:6px; border:1px solid #374151;">${optionsHTML}</select>`
-                : `<select onchange="updateTicketStatus('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:6px; border-radius:6px; border:1px solid #374151;">
-                     <option value="Pending" ${item.status === 'Pending'?'selected':''}>Pending</option>
-                     <option value="In Progress" ${item.status === 'In Progress'?'selected':''}>In Progress</option>
-                     <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>
-                   </select>`;
-
-            const itemDate = item.date || getFormattedDate();
-
-            // MEDIA PREVIEW HTML GENERATION FOR MULTIPLE ATTACHMENTS
-            let mediaHTML = '';
-            if (item.attachments && item.attachments.length > 0) {
-                mediaHTML += `<div style="margin-top:8px; border-top: 1px dashed #374151; padding-top: 6px;">`;
-                item.attachments.forEach(att => {
-                    if (att.type === 'voice') mediaHTML += `<div style="margin-top:4px;"><audio src="${att.data}" controls style="height:28px; width:170px;"></audio></div>`;
-                    if (att.type === 'photo') mediaHTML += `<div style="margin-top:4px;"><a href="${att.data}" target="_blank" style="color:#38bdf8; font-size:0.75rem;"><i class="fa-solid fa-image"></i> View Photo (${att.name})</a></div>`;
-                    if (att.type === 'video') mediaHTML += `<div style="margin-top:4px;"><video src="${att.data}" controls style="max-width:170px; max-height:90px; border-radius:6px;"></video></div>`;
-                });
-                mediaHTML += `</div>`;
+            let actionHTML = '';
+            if (currentUser.role === 'CEO') {
+                actionHTML = `<select onchange="assignTechnician('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:6px; border-radius:6px; border:1px solid #374151;">${optionsHTML}</select>`;
+            } else {
+                actionHTML = `
+                    <div style="font-size:0.8rem; margin-bottom:8px;">
+                        Status: <select onchange="updateTicketStatus('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:4px; border-radius:6px; border:1px solid #374151; margin-top:4px;">
+                             <option value="Pending" ${item.status === 'Pending'?'selected':''}>Pending</option>
+                             <option value="In Progress" ${item.status === 'In Progress'?'selected':''}>In Progress</option>
+                             <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>
+                           </select>
+                    </div>
+                    <button type="button" onclick="openSolutionModal('${item.id}')" class="utility-btn" style="background:#10b981; width:100%; justify-content:center;"><i class="fa-solid fa-pen-to-square"></i> Update Solution & Hardware</button>
+                `;
             }
 
-            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td><div>${item.issue}</div>${mediaHTML}</td><td>${itemDate}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td><b>${item.assignedTo}</b></td><td>${actionHTML}</td>`;
+            // Client Media Preview
+            let clientMediaHTML = '';
+            if (item.attachments && item.attachments.length > 0) {
+                clientMediaHTML += `<div style="margin-top:6px; border-top:1px dashed #374151; padding-top:4px;">`;
+                item.attachments.forEach(att => {
+                    if (att.type === 'voice') clientMediaHTML += `<div><audio src="${att.data}" controls style="height:24px; width:150px;"></audio></div>`;
+                    if (att.type === 'photo') clientMediaHTML += `<div><a href="${att.data}" target="_blank" style="color:#38bdf8; font-size:0.75rem;"><i class="fa-solid fa-image"></i> ${att.name}</a></div>`;
+                    if (att.type === 'video') clientMediaHTML += `<div><video src="${att.data}" controls style="max-width:140px; max-height:80px;"></video></div>`;
+                });
+                clientMediaHTML += `</div>`;
+            }
+
+            // Staff Solution Preview
+            let staffSolutionHTML = `<div style="color:#9ca3af; font-style:italic;">Not resolved yet</div>`;
+            if (item.status === 'Resolved' || item.solutionText || (item.hardwareUsed && item.hardwareUsed.length > 0)) {
+                let hwListText = item.hardwareUsed && item.hardwareUsed.length > 0 ? `<div style="margin-top:4px; font-size:0.75rem; color:#38bdf8;"><b>Hardware Used:</b> ${item.hardwareUsed.join(', ')}</div>` : '';
+                let staffAttHTML = '';
+                if (item.solutionAttachments && item.solutionAttachments.length > 0) {
+                    item.solutionAttachments.forEach(att => {
+                        if (att.type === 'voice') staffAttHTML += `<div><audio src="${att.data}" controls style="height:24px; width:140px;"></audio></div>`;
+                        if (att.type === 'photo') staffAttHTML += `<div><a href="${att.data}" target="_blank" style="color:#10b981; font-size:0.75rem;"><i class="fa-solid fa-image"></i> ${att.name}</a></div>`;
+                        if (att.type === 'video') staffAttHTML += `<div><video src="${att.data}" controls style="max-width:130px; max-height:70px;"></video></div>`;
+                    });
+                }
+                staffSolutionHTML = `<div><b>Desc:</b> ${item.solutionText || 'No description'}</div>${hwListText}${staffAttHTML}`;
+            }
+
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td><div>${item.issue}</div>${clientMediaHTML}</td><td>${staffSolutionHTML}</td><td>${item.date || getFormattedDate()}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td><b>${item.assignedTo}</b></td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }
@@ -969,7 +916,6 @@
             item.assignedTo = techName;
             item.status = 'In Progress';
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
-
             const sysUser = SYSTEM_USERS.find(u => u.name.toUpperCase() === techName.toUpperCase());
             if (sysUser) {
                 addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} to you.`);
@@ -986,15 +932,130 @@
         if (item) {
             item.status = newStatus;
             localStorage.setItem('ms_tickets_db', JSON.stringify(db));
-            
             addNotification('CEO', `📌 Status Updated: ${currentUser.name} marked ${id} as ${newStatus}`);
             sendPushNotification("ceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
             sendPushNotification("coceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} marked ${id} as ${newStatus}`);
-
-            alert(`Updated status to ${newStatus}`);
             loadAdminPanel();
-            loadNotifications();
         }
+    }
+
+    /* OPEN SOLUTION MODAL FOR STAFF TO FILL SOLUTIONS & HARDWARE CHECKLIST */
+    function openSolutionModal(id) {
+        let db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        let item = db.find(t => t.id === id);
+        if (!item) return;
+
+        let modalHTML = `
+            <div id="solutionModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; display:flex; align-items:center; justify-content:center; padding:15px; overflow-y:auto;">
+                <div style="background:#111827; border:1px solid #374151; padding:25px; border-radius:16px; max-width:700px; width:100%; max-height:90vh; overflow-y:auto;">
+                    <h3 style="font-size:1.2rem; color:#f9fafb; margin-bottom:15px;"><i class="fa-solid fa-screwdriver-wrench icon-bright-green"></i> Submit Solution & Hardware Checklist for ${item.id}</h3>
+                    
+                    <div class="form-group">
+                        <label>Resolution Description / What was done</label>
+                        <textarea id="modalSolutionText" rows="3" placeholder="Describe the solution...">${item.solutionText || ''}</textarea>
+                    </div>
+
+                    <div class="media-options-box">
+                        <label style="font-weight:700; color:#f9fafb; margin-bottom:8px; display:block;">Attach Solution Media (Voice, Photos, Videos):</label>
+                        <button type="button" id="staffRecordVoiceBtn" onclick="toggleStaffVoiceRecord()" class="media-btn"><i class="fa-solid fa-microphone icon-bright-gold"></i> <span id="staffRecordText">Record Voice</span></button>
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-camera icon-bright-cyan"></i> Add Photo<input type="file" accept="image/*" multiple style="display:none;" onchange="handleStaffPhotosSelect(event)"></label>
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-video icon-bright-green"></i> Add Video (Max 2MB)<input type="file" accept="video/*" multiple style="display:none;" onchange="handleStaffVideosSelect(event)"></label>
+                        <div id="staffAttachmentsPreviewList" style="margin-top:8px;"></div>
+                    </div>
+
+                    <div class="hardware-checklist-box">
+                        <label style="font-weight:700; color:#38bdf8; margin-bottom:10px; display:block;"><i class="fa-solid fa-box-archive"></i> Hardware & Accessories Used Checklist:</label>
+                        <div id="hardwareChecklistContainer"></div>
+                    </div>
+
+                    <div style="display:flex; gap:10px; margin-top:20px;">
+                        <button type="button" onclick="saveSolutionData('${item.id}')" class="submit-btn" style="background:#10b981;">Save Solution & Mark Resolved</button>
+                        <button type="button" onclick="closeSolutionModal()" class="submit-btn" style="background:#374151;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        staffSolutionAttachments = item.solutionAttachments || [];
+        renderStaffAttachmentsList();
+        renderHardwareChecklistForm(item.hardwareDetails || {});
+    }
+
+    function closeSolutionModal() {
+        const modal = document.getElementById('solutionModal');
+        if (modal) modal.remove();
+    }
+
+    function renderHardwareChecklistForm(existingDetails) {
+        const container = document.getElementById('hardwareChecklistContainer');
+        if (!container) return;
+        container.innerHTML = "";
+
+        let allItems = [...DEFAULT_HARDWARE_ITEMS];
+        let customList = JSON.parse(localStorage.getItem('ms_custom_accessories')) || [];
+        allItems = allItems.concat(customList);
+
+        allItems.forEach(item => {
+            let existingVal = existingDetails[item.key] || '';
+            let fieldsHtml = item.fields.map(field => `<input type="text" placeholder="${field}" class="hw-input-${item.key}" value="" style="padding:6px; font-size:0.75rem;" />`).join(' ');
+            
+            const row = document.createElement('div');
+            row.className = "hw-item-row";
+            row.innerHTML = `
+                <div><input type="checkbox" id="chk_${item.key}" ${existingVal ? 'checked' : ''} onchange="toggleHwRow('${item.key}')"> <label for="chk_${item.key}" style="display:inline; font-weight:700; color:#f9fafb;">${item.name}</label></div>
+                <div id="fields_${item.key}" style="display:${existingVal ? 'grid' : 'none'}; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap:6px; grid-column: span 2;">
+                    ${item.fields.map(f => `<input type="text" id="val_${item.key}_${f}" placeholder="${f}" value="${existingDetails[item.key] && existingDetails[item.key][f] ? existingDetails[item.key][f] : ''}" style="padding:6px; font-size:0.75rem;">`).join('')}
+                </div>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function toggleHwRow(key) {
+        const chk = document.getElementById(`chk_${key}`);
+        const fieldsDiv = document.getElementById(`fields_${key}`);
+        fieldsDiv.style.display = chk.checked ? 'grid' : 'none';
+    }
+
+    function saveSolutionData(id) {
+        let db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        let item = db.find(t => t.id === id);
+        if (!item) return;
+
+        item.solutionText = document.getElementById('modalSolutionText').value.trim();
+        item.solutionAttachments = staffSolutionAttachments;
+        item.status = 'Resolved';
+
+        let hardwareDetails = {};
+        let hardwareUsedSummary = [];
+
+        let allItems = [...DEFAULT_HARDWARE_ITEMS, ...(JSON.parse(localStorage.getItem('ms_custom_accessories')) || [])];
+        allItems.forEach(i => {
+            const chk = document.getElementById(`chk_${i.key}`);
+            if (chk && chk.checked) {
+                let obj = {};
+                let summaryStr = `${i.name}: `;
+                i.fields.forEach(f => {
+                    const inputVal = document.getElementById(`val_${i.key}_${f}`).value.trim();
+                    obj[f] = inputVal;
+                    if(inputVal) summaryStr += `[${f}: ${inputVal}] `;
+                });
+                hardwareDetails[i.key] = obj;
+                hardwareUsedSummary.push(summaryStr);
+            }
+        });
+
+        item.hardwareDetails = hardwareDetails;
+        item.hardwareUsed = hardwareUsedSummary;
+
+        localStorage.setItem('ms_tickets_db', JSON.stringify(db));
+        addNotification('CEO', `✅ Task Resolved & Hardware Logged: ${currentUser.name} resolved ${id}`);
+        sendPushNotification("ceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} resolved ${id}`);
+        sendPushNotification("coceo@msnetwork.com", "📌 Task Resolved!", `${currentUser.name} resolved ${id}`);
+
+        closeSolutionModal();
+        alert("Solution and Hardware details saved successfully!");
+        loadAdminPanel();
     }
 
     function loadNotifications() {
@@ -1003,21 +1064,14 @@
         const seenNotifs = JSON.parse(localStorage.getItem('ms_seen_notifs_' + currentUser.email)) || [];
         const notifList = document.getElementById('notifList');
         const notifBadge = document.getElementById('notifBadge');
-
         const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
         const unseenCount = userNotifs.filter(n => !seenNotifs.includes(n.id)).length;
 
         if (userNotifs.length > 0) {
-            if (unseenCount > 0) {
-                notifBadge.style.display = 'inline-block';
-                notifBadge.innerText = unseenCount;
-            } else {
-                notifBadge.style.display = 'none';
-            }
+            notifBadge.style.display = unseenCount > 0 ? 'inline-block' : 'none';
+            notifBadge.innerText = unseenCount;
             notifList.innerHTML = '';
-            userNotifs.forEach(n => {
-                notifList.innerHTML += `<div class="notif-item">${n.text}<span style="font-size:0.7rem; color:#6b7280; display:block; margin-top:2px;">${n.time}</span></div>`;
-            });
+            userNotifs.forEach(n => { notifList.innerHTML += `<div class="notif-item">${n.text}<span style="font-size:0.7rem; color:#6b7280; display:block; margin-top:2px;">${n.time}</span></div>`; });
         } else {
             notifBadge.style.display = 'none';
             notifList.innerHTML = '<div class="notif-item">No new notifications.</div>';
@@ -1028,13 +1082,10 @@
         const drop = document.getElementById('notifDropdown');
         const isVisible = drop.style.display === 'block';
         drop.style.display = isVisible ? 'none' : 'block';
-
         if (!isVisible && currentUser) {
             const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
             const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
-            const allIds = userNotifs.map(n => n.id);
-
-            localStorage.setItem('ms_seen_notifs_' + currentUser.email, JSON.stringify(allIds));
+            localStorage.setItem('ms_seen_notifs_' + currentUser.email, JSON.stringify(userNotifs.map(n => n.id)));
             document.getElementById('notifBadge').style.display = 'none';
             loadNotifications();
         }

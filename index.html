@@ -242,7 +242,7 @@
         <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
     </div>
 
-    <!-- 6 Key Services -->
+    <!-- Key Services -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
@@ -433,19 +433,18 @@
         <!-- MEMBER / CEO DASHBOARD SECTION -->
         <div id="adminPanelSection" style="display: none;">
             
-            <!-- EMPLOYEE ATTENDANCE & HISTORY SECTION (For Staff Members) -->
+            <!-- EMPLOYEE ATTENDANCE & HISTORY SECTION -->
             <div id="employeeAttendanceBox" style="background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none;">
-                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> Daily Attendance & Overtime (OD)</h3>
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> My Attendance & Overtime (OD) Console</h3>
                 <p id="attendanceStatusText" style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;">Status: Not marked for today.</p>
                 <button onclick="markAttendance()" id="markAttendanceBtn" class="submit-btn" style="max-width: 220px; background: #10b981; margin-bottom:15px;"><i class="fa-solid fa-fingerprint"></i> Punch In Today</button>
                 
-                <!-- Member Past Attendance History List -->
-                <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:15px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days"></i> My Attendance & OD Log History</h4>
+                <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days"></i> Daily Attendance & Overtime Log History</h4>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD)</th>
+                                <th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD) Hours</th>
                             </tr>
                         </thead>
                         <tbody id="memberAttendanceHistoryBody"></tbody>
@@ -453,11 +452,10 @@
                 </div>
             </div>
 
-            <!-- CEO / CO-CEO FULL ATTENDANCE & HISTORICAL DATA MANAGEMENT TABLE -->
+            <!-- CEO / CO-CEO FULL ATTENDANCE MANAGEMENT -->
             <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Daily & Past Attendance Control Hub</h3>
                 
-                <!-- Date Filter Selector for past dates -->
                 <div class="date-filter-box">
                     <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View/Edit:</label>
                     <input type="date" id="ceoFilterDate" onchange="loadCEOAttendancePanel()" style="max-width: 180px; padding:6px 10px;">
@@ -721,7 +719,7 @@
         
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
         
-        const existing = attendanceDB.find(a => a.name === currentUser.name && a.date === todayDate);
+        const existing = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
         if (existing) {
             alert("Attendance already marked for today!");
             return;
@@ -746,35 +744,35 @@
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
         let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || [];
 
-        const record = attendanceDB.find(a => a.name === currentUser.name && a.date === todayDate);
+        const record = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
 
         const statusText = document.getElementById('attendanceStatusText');
         const btn = document.getElementById('markAttendanceBtn');
 
         if (record) {
-            statusText.innerHTML = `Status: <span style="color:#10b981; font-weight:700;">Present</span> (Punched in at ${record.time})`;
+            statusText.innerHTML = `Today's Status (${todayDate}): <span style="color:#10b981; font-weight:700;">Present</span> (Punched in at ${record.time})`;
             btn.style.display = 'none';
         } else {
-            statusText.innerHTML = `Status: <span style="color:#f59e0b; font-weight:700;">Not Marked</span> for today (${todayDate})`;
+            statusText.innerHTML = `Today's Status (${todayDate}): <span style="color:#f59e0b; font-weight:700;">Not Marked</span>`;
             btn.style.display = 'block';
         }
 
-        const myLogs = attendanceDB.filter(a => a.name === currentUser.name);
+        const myLogs = attendanceDB.filter(a => a.name.toUpperCase() === currentUser.name.toUpperCase());
         const historyBody = document.getElementById('memberAttendanceHistoryBody');
         historyBody.innerHTML = '';
 
         if (myLogs.length === 0) {
-            historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af;">No past logs found.</td></tr>`;
+            historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af; padding:15px;">No attendance logs recorded yet.</td></tr>`;
             return;
         }
 
         myLogs.forEach(log => {
-            const odRecord = odDB.find(o => o.name === currentUser.name && o.date === log.date);
+            const odRecord = odDB.find(o => o.name.toUpperCase() === currentUser.name.toUpperCase() && o.date === log.date);
             const odHours = odRecord ? odRecord.hours : '0';
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${log.date}</td>
+                <td><b>${log.date}</b></td>
                 <td>${log.time}</td>
                 <td><span class="badge badge-resolved">Present</span></td>
                 <td><b style="color:#38bdf8;">${odHours} Hours</b></td>
@@ -851,7 +849,7 @@
         tbody.innerHTML = '';
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
 
-        let filteredList = currentUser.role === 'CEO' ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
+        let filteredList = (currentUser.role === 'CEO') ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
 
         if (filteredList.length === 0) {
             tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found.</td></tr>`;

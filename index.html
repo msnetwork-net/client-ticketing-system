@@ -150,6 +150,20 @@
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
+
+        /* BRIGHT ICON STYLES FOR HIGH VISIBILITY */
+        .icon-bright-cyan { color: #38bdf8 !important; }
+        .icon-bright-gold { color: #f59e0b !important; }
+        .icon-bright-green { color: #10b981 !important; }
+
+        /* Color schemes for date inputs in dark mode */
+        input[type="date"], input[type="time"] {
+            color-scheme: dark;
+            background: #0b0f19;
+            color: #f9fafb;
+            border: 1px solid #374151;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -178,19 +192,19 @@
     </div>
 
     <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
+        <h2 class="section-title"><i class="fa-solid fa-layer-group icon-bright-cyan"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
-            <div class="feature-box"><i class="fa-solid fa-wifi"></i><h4>Network & Connectivity</h4><p>Enterprise networking, VPC setups, and router configurations.</p></div>
-            <div class="feature-box"><i class="fa-solid fa-video"></i><h4>CCTV & Security</h4><p>CCTV installations, DVR/NVR maintenance, IP camera setups.</p></div>
-            <div class="feature-box"><i class="fa-solid fa-phone-volume"></i><h4>Telecom Gateways</h4><p>EPABX systems, intercom networking, and telecom routing.</p></div>
-            <div class="feature-box"><i class="fa-solid fa-microchip"></i><h4>IT Hardware Repair</h4><p>On-site server repair and workstation maintenance.</p></div>
-            <div class="feature-box"><i class="fa-solid fa-fingerprint"></i><h4>Biometric Systems</h4><p>Fingerprint, face recognition attendance systems.</p></div>
-            <div class="feature-box"><i class="fa-solid fa-diagram-project"></i><h4>Structured Cabling</h4><p>LAN cabling, rack dressing, fiber optic splicing.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-wifi icon-bright-cyan"></i><h4>Network & Connectivity</h4><p>Enterprise networking, VPC setups, and router configurations.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-video icon-bright-cyan"></i><h4>CCTV & Security</h4><p>CCTV installations, DVR/NVR maintenance, IP camera setups.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-phone-volume icon-bright-cyan"></i><h4>Telecom Gateways</h4><p>EPABX systems, intercom networking, and telecom routing.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-microchip icon-bright-cyan"></i><h4>IT Hardware Repair</h4><p>On-site server repair and workstation maintenance.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-fingerprint icon-bright-cyan"></i><h4>Biometric Systems</h4><p>Fingerprint, face recognition attendance systems.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-diagram-project icon-bright-cyan"></i><h4>Structured Cabling</h4><p>LAN cabling, rack dressing, fiber optic splicing.</p></div>
         </div>
     </div>
 
     <div class="section-card">
-        <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Leadership & Vision</h2>
+        <h2 class="section-title"><i class="fa-solid fa-user-shield icon-bright-cyan"></i> Leadership & Vision</h2>
         <div class="ceo-card">
             <div class="ceo-avatar-wrapper"><i class="fa-solid fa-user-tie"></i></div>
             <div class="ceo-info">
@@ -202,7 +216,7 @@
     </div>
 
     <div class="section-card" id="consoleSection">
-        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client & Staff Portal Login</h2>
+        <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket icon-bright-cyan"></i> Client & Staff Portal Login</h2>
         <div class="auth-container">
             <div class="tab-btns">
                 <button class="tab-btn active" id="loginTabBtn" onclick="switchTab('login')">Sign In</button>
@@ -235,7 +249,7 @@
 
     <div class="share-card">
         <div class="share-info">
-            <h3 style="font-size: 1.2rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-qrcode icon-bright-cyan" style="margin-right: 8px;"></i> Share Our Service</h3>
             <div class="social-icons-grid">
                 <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp"><i class="fa-brands fa-whatsapp"></i></button>
                 <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram"><i class="fa-brands fa-instagram"></i></button>
@@ -243,8 +257,8 @@
                 <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook"><i class="fa-brands fa-facebook-f"></i></button>
             </div>
             <div class="share-utility-btns">
-                <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
-                <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
+                <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy icon-bright-cyan"></i> Copy Link</button>
+                <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes icon-bright-cyan"></i> More Share Options</button>
             </div>
         </div>
         <div class="qr-box-wrapper"><div id="qrcode"></div><p>Scan to Visit</p><button onclick="shareQRCode()" class="share-qr-btn">Share QR</button></div>
@@ -255,12 +269,12 @@
     <div class="section-card" style="margin-top: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 20px;">
             <div>
-                <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Operations Dashboard</h1>
+                <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-network-wired icon-bright-cyan"></i> MS Operations Dashboard</h1>
                 <span id="userRoleBadge" class="role-tag-member">Member</span>
             </div>
             <div style="display: flex; align-items: center;">
                 <div class="notif-wrapper">
-                    <button class="notif-bell-btn" onclick="toggleNotifDropdown()"><i class="fa-solid fa-bell"></i><span id="notifBadge" class="notif-badge" style="display: none;">0</span></button>
+                    <button class="notif-bell-btn" onclick="toggleNotifDropdown()"><i class="fa-solid fa-bell icon-bright-gold"></i><span id="notifBadge" class="notif-badge" style="display: none;">0</span></button>
                     <div class="notif-dropdown" id="notifDropdown"><div style="font-weight: 700; color: #f9fafb; border-bottom: 1px solid #1f2937; padding-bottom: 6px; margin-bottom: 8px;">Notifications</div><div id="notifList"></div></div>
                 </div>
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
@@ -291,11 +305,11 @@
             
             <!-- MEMBER ATTENDANCE CONSOLE -->
             <div id="employeeAttendanceBox" style="background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none;">
-                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> My Attendance & Overtime (OD) Console</h3>
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left icon-bright-green"></i> My Attendance & Overtime (OD) Console</h3>
                 <p id="attendanceStatusText" style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;"></p>
                 <button onclick="markAttendance()" id="markAttendanceBtn" class="submit-btn" style="max-width: 220px; background: #10b981; margin-bottom:15px;"><i class="fa-solid fa-fingerprint"></i> Punch In Today</button>
                 
-                <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days"></i> Daily Attendance & Overtime Log History</h4>
+                <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days icon-bright-cyan"></i> Daily Attendance & Overtime Log History</h4>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
                         <thead>
@@ -308,15 +322,15 @@
 
             <!-- CEO / CO-CEO ATTENDANCE CONTROL PANEL -->
             <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
-                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Daily & Past Attendance Control Hub</h3>
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user icon-bright-cyan"></i> Staff Daily & Past Attendance Control Hub</h3>
                 
                 <div class="ceo-config-card">
                     <div>
-                        <label style="font-size: 0.8rem; font-weight:700; color:#38bdf8;"><i class="fa-solid fa-clock"></i> Global Office Start Time:</label>
+                        <label style="font-size: 0.8rem; font-weight:700; color:#38bdf8;"><i class="fa-solid fa-clock icon-bright-cyan"></i> Global Office Start Time:</label>
                         <input type="time" id="globalOfficeTimeInput" style="width: 120px; padding: 5px; margin-top: 4px;" onchange="saveGlobalOfficeTime(this.value)">
                     </div>
                     <div>
-                        <label style="font-size: 0.8rem; font-weight:700; color:#f59e0b;"><i class="fa-solid fa-business-time"></i> Common Overtime (OD) Hours:</label>
+                        <label style="font-size: 0.8rem; font-weight:700; color:#f59e0b;"><i class="fa-solid fa-business-time icon-bright-gold"></i> Common Overtime (OD) Hours:</label>
                         <input type="number" id="globalODInput" style="width: 100px; padding: 5px; margin-top: 4px;" onchange="saveGlobalOD(this.value)" min="0"> Hours
                     </div>
                     <div style="font-size:0.75rem; color:#9ca3af; flex:1; min-width:200px;">
@@ -325,7 +339,7 @@
                 </div>
 
                 <div class="date-filter-box">
-                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View Attendance Log:</label>
+                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day icon-bright-cyan"></i> Select Date to View Attendance Log:</label>
                     <input type="date" id="ceoFilterDate" onchange="loadCEOAttendancePanel()" style="max-width: 180px; padding:6px 10px;">
                     <button onclick="resetDateToToday()" class="utility-btn" style="background:#0066cc;"><i class="fa-solid fa-rotate-left"></i> Today</button>
                 </div>
@@ -343,14 +357,13 @@
             </div>
 
             <!-- TICKETS & CALL REQUESTS TABLE WITH DATE FILTER FOR CEO/STAFF -->
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 15px;">
-                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb;" id="adminTitle">Active Operations Console (Tickets & Calls)</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 15px; gap:10px;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb;" id="adminTitle"><i class="fa-solid fa-list-check icon-bright-cyan"></i> Operations Console (Tickets & Calls)</h3>
                 
-                <!-- Ticket Date Filter for CEO/Co-CEO -->
                 <div class="date-filter-box" style="margin-bottom:0; padding: 6px 12px;" id="ticketDateFilterWrapper">
-                    <label style="margin-bottom:0; font-size:0.8rem;"><i class="fa-solid fa-filter"></i> Date Filter:</label>
-                    <input type="date" id="ticketFilterDate" onchange="loadAdminPanel()" style="width: 140px; padding:4px 8px; font-size:0.8rem;">
-                    <button onclick="resetTicketDateToToday()" class="utility-btn" style="padding: 4px 8px; font-size:0.75rem;"><i class="fa-solid fa-rotate-left"></i> Today</button>
+                    <label style="margin-bottom:0; font-size:0.85rem; font-weight:700;"><i class="fa-solid fa-calendar-day icon-bright-gold"></i> Filter Tickets by Date:</label>
+                    <input type="date" id="ticketFilterDate" onchange="loadAdminPanel()" style="width: 150px; padding:4px 8px; font-size:0.85rem;">
+                    <button onclick="resetTicketDateToToday()" class="utility-btn" style="padding: 4px 10px; font-size:0.75rem; background:#0066cc;"><i class="fa-solid fa-rotate-left"></i> Today</button>
                 </div>
             </div>
 
@@ -690,15 +703,18 @@
         
         const selectedTicketDate = document.getElementById('ticketFilterDate').value || getFormattedDate();
 
-        // Filter tickets by selected date & user access
-        let filteredList = db.filter(item => (item.date === selectedTicketDate || !item.date));
+        // Filter tickets by selected date
+        let filteredList = db.filter(item => {
+            const itemDate = item.date || getFormattedDate();
+            return itemDate === selectedTicketDate;
+        });
 
         if (currentUser.role !== 'CEO') {
             filteredList = filteredList.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
         }
 
         if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #9ca3af; padding: 20px;">No tickets found for selected date (${selectedTicketDate}).</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #9ca3af; padding: 20px;">No tickets or call requests found for selected date (${selectedTicketDate}).</td></tr>`;
             return;
         }
 
@@ -717,7 +733,7 @@
 
             const itemDate = item.date || getFormattedDate();
 
-            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td>${itemDate}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td>${itemDate}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td><b>${item.assignedTo}</b></td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }

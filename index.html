@@ -163,7 +163,6 @@
             border-radius: 6px;
         }
 
-        /* MEDIA ATTACHMENTS CONTAINER */
         .media-options-box {
             background: rgba(31, 41, 55, 0.4);
             border: 1px dashed #374151;
@@ -196,6 +195,31 @@
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
+
+        /* ATTACHMENTS LIST & DELETE STYLES */
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0b0f19;
+            border: 1px solid #374151;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+
+        .attachment-delete-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .attachment-delete-btn:hover { background: #ef4444; color: #fff; }
     </style>
 </head>
 <body>
@@ -314,7 +338,7 @@
             </div>
         </div>
 
-        <!-- CLIENT TICKET SECTION WITH VOICE, PHOTO & VIDEO -->
+        <!-- CLIENT TICKET SECTION WITH MULTIPLE MEDIA & DELETE OPTIONS -->
         <div id="clientTicketSection" style="display: none;">
             <h2 style="margin-bottom: 20px; font-size: 1.1rem; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
@@ -332,30 +356,30 @@
                 
                 <div class="form-group">
                     <label>Problem Description (Optional if audio/video attached)</label>
-                    <textarea id="issue" rows="3" placeholder="Explain your problem here or use voice/photo/video options below..."></textarea>
+                    <textarea id="issue" rows="3" placeholder="Explain your problem here or attach multiple voice/photos/videos below..."></textarea>
                 </div>
 
-                <!-- EASY ATTACHMENTS (VOICE, PHOTO, 2MB VIDEO) -->
+                <!-- MULTIPLE ATTACHMENTS MANAGER -->
                 <div class="media-options-box">
-                    <label style="font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-paperclip icon-bright-cyan"></i> Attach Issue Media (Voice / Photo / Video):</label>
+                    <label style="font-weight: 700; color: #f9fafb; margin-bottom: 10px; display:block;"><i class="fa-solid fa-paperclip icon-bright-cyan"></i> Multiple Attachments (Voice / Photos / Videos under 2MB):</label>
                     
                     <div>
-                        <!-- Voice Recording Option -->
-                        <button type="button" id="recordVoiceBtn" onclick="toggleVoiceRecord()" class="media-btn"><i class="fa-solid fa-microphone icon-bright-gold"></i> <span id="recordText">Record Voice Issue</span></button>
-                        <audio id="audioPlayback" controls style="display:none; margin-top:10px; height:35px; width:100%; max-width:300px;"></audio>
+                        <!-- Voice Recording Button -->
+                        <button type="button" id="recordVoiceBtn" onclick="toggleVoiceRecord()" class="media-btn"><i class="fa-solid fa-microphone icon-bright-gold"></i> <span id="recordText">Record Voice</span></button>
 
-                        <!-- Photo Upload Option -->
-                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-camera icon-bright-cyan"></i> Take / Upload Photo
-                            <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none;" onchange="handlePhotoSelect(event)">
+                        <!-- Photos Upload Button (Multiple allowed) -->
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-camera icon-bright-cyan"></i> Add Photo(s)
+                            <input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display:none;" onchange="handleMultiplePhotosSelect(event)">
                         </label>
-                        <span id="photoFileName" style="font-size:0.75rem; color:#10b981;"></span>
 
-                        <!-- Video Upload Option (Max 2MB) -->
-                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-video icon-bright-green"></i> Record 2MB Video
-                            <input type="file" id="videoInput" accept="video/*" capture="environment" style="display:none;" onchange="handleVideoSelect(event)">
+                        <!-- Videos Upload Button (Multiple under 2MB allowed) -->
+                        <label class="media-btn" style="cursor:pointer;"><i class="fa-solid fa-video icon-bright-green"></i> Add Video(s) (Max 2MB)
+                            <input type="file" id="videoInput" accept="video/*" multiple capture="environment" style="display:none;" onchange="handleMultipleVideosSelect(event)">
                         </label>
-                        <span id="videoFileName" style="font-size:0.75rem; color:#10b981;"></span>
                     </div>
+
+                    <!-- ATTACHED ITEMS PREVIEW LIST WITH DELETE BUTTON -->
+                    <div id="attachmentsPreviewList" style="margin-top: 10px;"></div>
                 </div>
 
                 <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Submit Ticket</button>
@@ -417,7 +441,7 @@
                 </div>
             </div>
 
-            <!-- TICKETS & CALL REQUESTS TABLE WITH MEDIA PREVIEW -->
+            <!-- TICKETS & CALL REQUESTS TABLE -->
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 15px; gap:10px;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb;" id="adminTitle"><i class="fa-solid fa-list-check icon-bright-cyan"></i> Operations Console (Tickets & Calls)</h3>
                 
@@ -463,9 +487,9 @@
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
     let mediaRecorder = null;
     let audioChunks = [];
-    let recordedAudioBase64 = null;
-    let uploadedPhotoBase64 = null;
-    let uploadedVideoBase64 = null;
+    
+    // MULTIPLE ATTACHMENTS ARRAY
+    let ticketAttachments = [];
 
     if (!localStorage.getItem('ms_tickets_db')) localStorage.setItem('ms_tickets_db', JSON.stringify([]));
     if (!localStorage.getItem('ms_notifs_db')) localStorage.setItem('ms_notifs_db', JSON.stringify([]));
@@ -484,7 +508,7 @@
 
     if (currentUser) { showPortal(); }
 
-    /* VOICE RECORDING LOGIC */
+    /* VOICE RECORDING LOGIC FOR MULTIPLE VOICES */
     async function toggleVoiceRecord() {
         const btn = document.getElementById('recordVoiceBtn');
         const text = document.getElementById('recordText');
@@ -498,53 +522,99 @@
                 mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
                 mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    const audioPlayback = document.getElementById('audioPlayback');
-                    audioPlayback.src = audioUrl;
-                    audioPlayback.style.display = 'block';
-
                     const reader = new FileReader();
                     reader.readAsDataURL(audioBlob);
-                    reader.onloadend = () => { recordedAudioBase64 = reader.result; };
+                    reader.onloadend = () => { 
+                        ticketAttachments.push({
+                            id: Date.now(),
+                            type: 'voice',
+                            name: `Voice Record (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`,
+                            data: reader.result
+                        });
+                        renderAttachmentsList();
+                    };
                 };
 
                 mediaRecorder.start();
                 btn.classList.add('record-btn-active');
                 text.innerText = "Recording... Click to Stop";
-            } catch (err) { alert("Microphone access denied or not supported."); }
+            } catch (err) { alert("Microphone access denied."); }
         } else {
             mediaRecorder.stop();
             btn.classList.remove('record-btn-active');
-            text.innerText = "Voice Recorded ✓ (Click to Re-record)";
+            text.innerText = "Record Voice";
         }
     }
 
-    /* PHOTO SELECT LOGIC */
-    function handlePhotoSelect(e) {
-        const file = e.target.files[0];
-        if (file) {
-            document.getElementById('photoFileName').innerText = "✓ Photo Attached";
+    /* MULTIPLE PHOTOS UPLOAD LOGIC */
+    function handleMultiplePhotosSelect(e) {
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => { uploadedPhotoBase64 = reader.result; };
-        }
+            reader.onloadend = () => {
+                ticketAttachments.push({
+                    id: Date.now() + Math.random(),
+                    type: 'photo',
+                    name: file.name,
+                    data: reader.result
+                });
+                renderAttachmentsList();
+            };
+        });
+        e.target.value = "";
     }
 
-    /* VIDEO SELECT LOGIC (MAX 2MB) */
-    function handleVideoSelect(e) {
-        const file = e.target.files[0];
-        if (file) {
+    /* MULTIPLE VIDEOS UPLOAD LOGIC (MAX 2MB PER VIDEO) */
+    function handleMultipleVideosSelect(e) {
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
             if (file.size > 2 * 1024 * 1024) {
-                alert("Video size exceeds 2 MB limit! Please choose or record a shorter video.");
-                e.target.value = "";
-                document.getElementById('videoFileName').innerText = "";
+                alert(`File "${file.name}" exceeds 2MB limit! Please upload videos under 2MB.`);
                 return;
             }
-            document.getElementById('videoFileName').innerText = "✓ Video Attached (Under 2MB)";
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => { uploadedVideoBase64 = reader.result; };
-        }
+            reader.onloadend = () => {
+                ticketAttachments.push({
+                    id: Date.now() + Math.random(),
+                    type: 'video',
+                    name: file.name,
+                    data: reader.result
+                });
+                renderAttachmentsList();
+            };
+        });
+        e.target.value = "";
+    }
+
+    /* RENDER ATTACHMENTS PREVIEW WITH DELETE BUTTON */
+    function renderAttachmentsList() {
+        const previewList = document.getElementById('attachmentsPreviewList');
+        previewList.innerHTML = "";
+
+        if (ticketAttachments.length === 0) return;
+
+        ticketAttachments.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = "attachment-item";
+
+            let iconClass = "fa-microphone icon-bright-gold";
+            if (item.type === 'photo') iconClass = "fa-image icon-bright-cyan";
+            if (item.type === 'video') iconClass = "fa-video icon-bright-green";
+
+            div.innerHTML = `
+                <div><i class="fa-solid ${iconClass}"></i> <b>${item.name}</b></div>
+                <button type="button" onclick="deleteAttachment(${item.id})" class="attachment-delete-btn"><i class="fa-solid fa-trash"></i> Remove</button>
+            `;
+            previewList.appendChild(div);
+        });
+    }
+
+    /* DELETE SINGLE ATTACHMENT FROM LIST */
+    function deleteAttachment(id) {
+        ticketAttachments = ticketAttachments.filter(item => item.id !== id);
+        renderAttachmentsList();
     }
 
     function switchTab(tab) {
@@ -816,13 +886,11 @@
             id: tckId, 
             type: 'Support Ticket', 
             clientName: currentUser.name, 
-            issue: textIssue || 'Voice/Media Attachment Raised', 
+            issue: textIssue || 'Voice/Media Attachments Raised', 
             assignedTo: 'Unassigned', 
             status: 'Pending', 
             date: createdDate,
-            audio: recordedAudioBase64,
-            photo: uploadedPhotoBase64,
-            video: uploadedVideoBase64
+            attachments: ticketAttachments
         };
 
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
@@ -833,17 +901,12 @@
         sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
         sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
-        showThankYou("Ticket Submitted!", `Ticket (${tckId}) created successfully with your media attachments.`);
+        showThankYou("Ticket Submitted!", `Ticket (${tckId}) created successfully with ${ticketAttachments.length} attachments.`);
         
-        // Reset Form & Media variables
+        // Reset Form & Clear Attachments Array
         document.getElementById('ticketForm').reset();
-        recordedAudioBase64 = null;
-        uploadedPhotoBase64 = null;
-        uploadedVideoBase64 = null;
-        document.getElementById('audioPlayback').style.display = 'none';
-        document.getElementById('photoFileName').innerText = '';
-        document.getElementById('videoFileName').innerText = '';
-        document.getElementById('recordText').innerText = 'Record Voice Issue';
+        ticketAttachments = [];
+        renderAttachmentsList();
     }
 
     function loadAdminPanel() {
@@ -882,11 +945,17 @@
 
             const itemDate = item.date || getFormattedDate();
 
-            // MEDIA PREVIEW HTML GENERATION
+            // MEDIA PREVIEW HTML GENERATION FOR MULTIPLE ATTACHMENTS
             let mediaHTML = '';
-            if (item.audio) mediaHTML += `<div style="margin-top:6px;"><audio src="${item.audio}" controls style="height:30px; width:180px;"></audio></div>`;
-            if (item.photo) mediaHTML += `<div style="margin-top:6px;"><a href="${item.photo}" target="_blank" style="color:#38bdf8; font-size:0.75rem;"><i class="fa-solid fa-image"></i> View Photo</a></div>`;
-            if (item.video) mediaHTML += `<div style="margin-top:6px;"><video src="${item.video}" controls style="max-width:180px; max-height:100px; border-radius:6px;"></video></div>`;
+            if (item.attachments && item.attachments.length > 0) {
+                mediaHTML += `<div style="margin-top:8px; border-top: 1px dashed #374151; padding-top: 6px;">`;
+                item.attachments.forEach(att => {
+                    if (att.type === 'voice') mediaHTML += `<div style="margin-top:4px;"><audio src="${att.data}" controls style="height:28px; width:170px;"></audio></div>`;
+                    if (att.type === 'photo') mediaHTML += `<div style="margin-top:4px;"><a href="${att.data}" target="_blank" style="color:#38bdf8; font-size:0.75rem;"><i class="fa-solid fa-image"></i> View Photo (${att.name})</a></div>`;
+                    if (att.type === 'video') mediaHTML += `<div style="margin-top:4px;"><video src="${att.data}" controls style="max-width:170px; max-height:90px; border-radius:6px;"></video></div>`;
+                });
+                mediaHTML += `</div>`;
+            }
 
             tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td><div>${item.issue}</div>${mediaHTML}</td><td>${itemDate}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td><b>${item.assignedTo}</b></td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);

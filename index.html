@@ -108,9 +108,9 @@
         .admin-table th { background: #1f2937; color: #60a5fa; }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
-        .badge-early { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; } /* Green */
-        .badge-ontime { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; } /* Yellow */
-        .badge-late { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }   /* Red */
+        .badge-early { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+        .badge-ontime { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
+        .badge-late { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }
         .badge-absent { background: rgba(107, 114, 128, 0.2); color: #9ca3af; }
 
         .role-tag-member { background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
@@ -137,6 +137,18 @@
             gap: 20px;
             flex-wrap: wrap;
             align-items: center;
+        }
+
+        .date-filter-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(31, 41, 55, 0.6);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -298,7 +310,6 @@
             <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Daily & Past Attendance Control Hub</h3>
                 
-                <!-- GLOBAL SETTINGS CONTROL (CEO Only) -->
                 <div class="ceo-config-card">
                     <div>
                         <label style="font-size: 0.8rem; font-weight:700; color:#38bdf8;"><i class="fa-solid fa-clock"></i> Global Office Start Time:</label>
@@ -314,7 +325,7 @@
                 </div>
 
                 <div class="date-filter-box">
-                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View/Filter Chart:</label>
+                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View Attendance Log:</label>
                     <input type="date" id="ceoFilterDate" onchange="loadCEOAttendancePanel()" style="max-width: 180px; padding:6px 10px;">
                     <button onclick="resetDateToToday()" class="utility-btn" style="background:#0066cc;"><i class="fa-solid fa-rotate-left"></i> Today</button>
                 </div>
@@ -331,13 +342,23 @@
                 </div>
             </div>
 
-            <!-- TICKETS & CALL REQUESTS TABLE -->
-            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">Active Operations Console (Tickets & Calls)</h3>
+            <!-- TICKETS & CALL REQUESTS TABLE WITH DATE FILTER FOR CEO/STAFF -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 15px;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb;" id="adminTitle">Active Operations Console (Tickets & Calls)</h3>
+                
+                <!-- Ticket Date Filter for CEO/Co-CEO -->
+                <div class="date-filter-box" style="margin-bottom:0; padding: 6px 12px;" id="ticketDateFilterWrapper">
+                    <label style="margin-bottom:0; font-size:0.8rem;"><i class="fa-solid fa-filter"></i> Date Filter:</label>
+                    <input type="date" id="ticketFilterDate" onchange="loadAdminPanel()" style="width: 140px; padding:4px 8px; font-size:0.8rem;">
+                    <button onclick="resetTicketDateToToday()" class="utility-btn" style="padding: 4px 8px; font-size:0.75rem;"><i class="fa-solid fa-rotate-left"></i> Today</button>
+                </div>
+            </div>
+
             <div style="overflow-x: auto;">
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>ID</th><th>Client</th><th>Issue / Reason</th><th>Status</th><th>Assigned To</th><th>Action</th>
+                            <th>ID</th><th>Client</th><th>Issue / Reason</th><th>Created Date</th><th>Status</th><th>Assigned To</th><th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="adminTableBody"></tbody>
@@ -377,7 +398,9 @@
         new QRCode(document.getElementById("qrcode"), {
             text: window.location.href, width: 110, height: 110, colorDark : "#0b0f19", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H
         });
-        document.getElementById('ceoFilterDate').value = new Date().toISOString().split('T')[0];
+        const todayStr = getFormattedDate();
+        document.getElementById('ceoFilterDate').value = todayStr;
+        document.getElementById('ticketFilterDate').value = todayStr;
     });
 
     if (currentUser) { showPortal(); }
@@ -401,8 +424,9 @@
         const name = document.getElementById('callName').value.trim();
         const phone = document.getElementById('callPhone').value.trim();
         const reason = document.getElementById('callReason').value.trim();
+        const createdDate = getFormattedDate();
 
-        const newCallReq = { id: callId, type: 'Call Request', clientName: `${name} (${phone})`, issue: `Reason: ${reason}`, assignedTo: 'Unassigned', status: 'Pending' };
+        const newCallReq = { id: callId, type: 'Call Request', clientName: `${name} (${phone})`, issue: `Reason: ${reason}`, assignedTo: 'Unassigned', status: 'Pending', date: createdDate };
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newCallReq);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
@@ -515,14 +539,12 @@
         return d.toISOString().split('T')[0];
     }
 
-    /* COLOR CALCULATION LOGIC BASED ON OFFICE START TIME */
     function getPunchStatusBadge(punchTimeStr) {
         if (!punchTimeStr) return '<span class="badge badge-absent">Not Marked</span>';
         
         const targetOfficeTime = localStorage.getItem('ms_office_time') || '09:30';
         const [targetHours, targetMins] = targetOfficeTime.split(':').map(Number);
 
-        // Convert punchTimeStr (e.g. "09:25:00 AM") to 24h minutes
         let punchDate = new Date("1970-01-01 " + punchTimeStr);
         let punchHours = punchDate.getHours();
         let punchMins = punchDate.getMinutes();
@@ -614,6 +636,11 @@
         loadCEOAttendancePanel();
     }
 
+    function resetTicketDateToToday() {
+        document.getElementById('ticketFilterDate').value = getFormattedDate();
+        loadAdminPanel();
+    }
+
     function loadCEOAttendancePanel() {
         const selectedDate = document.getElementById('ceoFilterDate').value || getFormattedDate();
         const tbody = document.getElementById('ceoAttendanceTableBody');
@@ -640,7 +667,9 @@
     function handleTicketSubmit(e) {
         e.preventDefault();
         const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
-        const newTicket = { id: tckId, type: 'Support Ticket', clientName: currentUser.name, issue: document.getElementById('issue').value, assignedTo: 'Unassigned', status: 'Pending' };
+        const createdDate = getFormattedDate();
+        
+        const newTicket = { id: tckId, type: 'Support Ticket', clientName: currentUser.name, issue: document.getElementById('issue').value, assignedTo: 'Unassigned', status: 'Pending', date: createdDate };
 
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newTicket);
@@ -658,11 +687,18 @@
         const tbody = document.getElementById('adminTableBody');
         tbody.innerHTML = '';
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
+        
+        const selectedTicketDate = document.getElementById('ticketFilterDate').value || getFormattedDate();
 
-        let filteredList = (currentUser.role === 'CEO') ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
+        // Filter tickets by selected date & user access
+        let filteredList = db.filter(item => (item.date === selectedTicketDate || !item.date));
+
+        if (currentUser.role !== 'CEO') {
+            filteredList = filteredList.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
+        }
 
         if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No items found.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #9ca3af; padding: 20px;">No tickets found for selected date (${selectedTicketDate}).</td></tr>`;
             return;
         }
 
@@ -679,7 +715,9 @@
                      <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>
                    </select>`;
 
-            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
+            const itemDate = item.date || getFormattedDate();
+
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td>${itemDate}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }

@@ -457,7 +457,7 @@
             <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Daily & Past Attendance Control Hub</h3>
                 
-                <!-- Date Filter Selector for past dates (e.g. 14th of last month) -->
+                <!-- Date Filter Selector for past dates -->
                 <div class="date-filter-box">
                     <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View/Edit:</label>
                     <input type="date" id="ceoFilterDate" onchange="loadCEOAttendancePanel()" style="max-width: 180px; padding:6px 10px;">
@@ -535,7 +535,6 @@
             correctLevel : QRCode.CorrectLevel.H
         });
         
-        // Default CEO date picker to today
         document.getElementById('ceoFilterDate').value = new Date().toISOString().split('T')[0];
     });
 
@@ -711,7 +710,6 @@
         localStorage.setItem('ms_notifs_db', JSON.stringify(notifs));
     }
 
-    /* ATTENDANCE & HISTORICAL OD LOGIC */
     function getFormattedDate(isoString) {
         const d = isoString ? new Date(isoString) : new Date();
         return d.toISOString().split('T')[0];
@@ -761,7 +759,6 @@
             btn.style.display = 'block';
         }
 
-        // Render full personal attendance & OD history for member
         const myLogs = attendanceDB.filter(a => a.name === currentUser.name);
         const historyBody = document.getElementById('memberAttendanceHistoryBody');
         historyBody.innerHTML = '';
@@ -820,8 +817,6 @@
 
     function updateOD(memberName, selectedDate, hours) {
         let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || [];
-        
-        // Remove existing record for that date
         odDB = odDB.filter(o => !(o.name.toUpperCase() === memberName.toUpperCase() && o.date === selectedDate));
         
         odDB.push({ name: memberName, date: selectedDate, hours: hours });
@@ -868,9 +863,9 @@
             let optionsHTML = '<option value="Unassigned">Unassigned</option>';
             TEAM_LIST.forEach(m => optionsHTML += `<option value="${m}" ${item.assignedTo === m ? 'selected' : ''}>${m}</option>`);
 
-            let actionHTML = currentUser.role === 'CEO' 
-                ? `<select onchange="assignTechnician('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:4px;">${optionsHTML}</select>`
-                : `<select onchange="updateTicketStatus('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:4px;">
+            let actionHTML = (currentUser.role === 'CEO') 
+                ? `<select onchange="assignTechnician('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:6px; border-radius:6px; border:1px solid #374151;">${optionsHTML}</select>`
+                : `<select onchange="updateTicketStatus('${item.id}', this.value)" style="background:#0b0f19; color:#fff; padding:6px; border-radius:6px; border:1px solid #374151;">
                      <option value="Pending" ${item.status === 'Pending'?'selected':''}>Pending</option>
                      <option value="In Progress" ${item.status === 'In Progress'?'selected':''}>In Progress</option>
                      <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>

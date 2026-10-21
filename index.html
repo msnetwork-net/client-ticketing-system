@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MS NETWORK | Enterprise Support & Team Operations Console</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- QRCode JS Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
-    <!-- ONESIGNAL SDK FOR REALTIME MOBILE PUSH NOTIFICATION WITH SOUND -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -53,107 +51,43 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
 
-        .navbar-brand {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #f9fafb;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .navbar-brand { font-size: 1.3rem; font-weight: 800; color: #f9fafb; display: flex; align-items: center; gap: 10px; }
         .navbar-brand i { color: #0066cc; }
 
-        .signin-nav-btn {
-            background: #0066cc; color: #fff; border: none; padding: 8px 18px;
-            border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
-        }
+        .signin-nav-btn { background: #0066cc; color: #fff; border: none; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; }
 
-        .hero-banner {
-            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
-            padding: 40px 30px; text-align: center; margin-bottom: 30px;
-        }
-
+        .hero-banner { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 40px 30px; text-align: center; margin-bottom: 30px; }
         .hero-headline { font-size: 1.8rem; font-weight: 800; color: #f9fafb; margin-bottom: 16px; line-height: 1.4; }
         .hero-subtext { color: #9ca3af; font-size: 1rem; line-height: 1.6; max-width: 750px; margin: 0 auto 24px; }
 
-        .section-card {
-            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
-            padding: 35px 30px; margin-bottom: 30px;
-        }
+        .section-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 35px 30px; margin-bottom: 30px; }
+        .section-title { font-size: 1.35rem; font-weight: 700; color: #f9fafb; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 12px; }
 
-        .section-title {
-            font-size: 1.35rem; font-weight: 700; color: #f9fafb; margin-bottom: 20px;
-            display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .feature-box {
-            background: rgba(31, 41, 55, 0.4);
-            border: 1px solid #1f2937;
-            padding: 20px;
-            border-radius: 12px;
-        }
-
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .feature-box { background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; }
         .feature-box i { font-size: 1.5rem; color: #38bdf8; margin-bottom: 12px; display: inline-block; }
         .feature-box h4 { font-size: 1rem; font-weight: 600; color: #f9fafb; margin-bottom: 6px; }
         .feature-box p { font-size: 0.85rem; color: #9ca3af; line-height: 1.5; }
 
-        .ceo-card {
-            display: flex; gap: 25px; align-items: center;
-            background: rgba(17, 24, 39, 0.9); border: 1px solid #1f2937;
-            padding: 25px; border-radius: 14px; flex-wrap: wrap;
-        }
-        .ceo-avatar-wrapper {
-            width: 100px; height: 100px; border-radius: 50%; border: 3px solid #0066cc;
-            background: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #60a5fa;
-        }
+        .ceo-card { display: flex; gap: 25px; align-items: center; background: rgba(17, 24, 39, 0.9); border: 1px solid #1f2937; padding: 25px; border-radius: 14px; flex-wrap: wrap; }
+        .ceo-avatar-wrapper { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #0066cc; background: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #60a5fa; }
         .ceo-info { flex: 1; min-width: 250px; }
         .ceo-quote { font-size: 0.9rem; color: #9ca3af; font-style: italic; line-height: 1.6; border-left: 3px solid #0066cc; padding-left: 12px; margin-top: 8px; }
 
-        .share-card {
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
+        .share-card { background: rgba(17, 24, 39, 0.9); border: 1px solid #1f2937; border-radius: 16px; padding: 30px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
         .share-info { flex: 1; min-width: 280px; }
         .social-icons-grid { display: flex; gap: 12px; margin-bottom: 15px; margin-top: 12px; }
-        .social-icon-btn {
-            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; color: #fff; font-size: 1rem; border: none; cursor: pointer; text-decoration: none;
-        }
+        .social-icon-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; border: none; cursor: pointer; text-decoration: none; }
         .bg-whatsapp { background: #25D366; }
         .bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
         .bg-twitter { background: #1DA1F2; }
         .bg-facebook { background: #1877F2; }
 
         .share-utility-btns { display: flex; flex-wrap: wrap; gap: 10px; }
-        .utility-btn {
-            padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #fff;
-            background: #1f2937; border: 1px solid #374151; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-        }
-        .qr-box-wrapper {
-            background: #ffffff; padding: 14px; border-radius: 12px; display: flex;
-            flex-direction: column; align-items: center; justify-content: center; border: 2px solid #0066cc;
-        }
+        .utility-btn { padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #fff; background: #1f2937; border: 1px solid #374151; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .qr-box-wrapper { background: #ffffff; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #0066cc; }
         .qr-box-wrapper p { color: #111827; font-size: 0.75rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
-        .share-qr-btn {
-            margin-top: 10px; background: #0066cc; color: #fff; border: none; padding: 6px 10px;
-            font-size: 0.75rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%;
-        }
+        .share-qr-btn { margin-top: 10px; background: #0066cc; color: #fff; border: none; padding: 6px 10px; font-size: 0.75rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; }
 
         .auth-container { max-width: 450px; margin: 0 auto; }
         .tab-btns { display: flex; gap: 8px; margin-bottom: 20px; background: #1f2937; padding: 4px; border-radius: 8px; }
@@ -173,12 +107,12 @@
         .admin-table th, .admin-table td { border: 1px solid #1f2937; padding: 12px; text-align: left; }
         .admin-table th { background: #1f2937; color: #60a5fa; }
 
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-        .badge-pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
-        .badge-assigned { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-        .badge-resolved { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
+        .badge-early { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; } /* Green */
+        .badge-ontime { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; } /* Yellow */
+        .badge-late { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }   /* Red */
+        .badge-absent { background: rgba(107, 114, 128, 0.2); color: #9ca3af; }
 
-        .role-tag-ceo { background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
         .role-tag-member { background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
 
         .notif-wrapper { position: relative; display: inline-block; margin-right: 15px; }
@@ -187,42 +121,32 @@
         .notif-dropdown { display: none; position: absolute; right: 0; top: 40px; width: 320px; background: #111827; border: 1px solid #374151; border-radius: 12px; z-index: 1000; padding: 10px; max-height: 300px; overflow-y: auto; }
         .notif-item { padding: 10px; border-bottom: 1px solid #1f2937; font-size: 0.8rem; color: #d1d5db; }
 
-        /* Thank You Modal Styling */
-        .thankyou-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000;
-            align-items: center; justify-content: center;
-        }
-        .thankyou-box {
-            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
-            padding: 35px 30px; text-align: center; max-width: 400px; width: 90%;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-        }
+        .thankyou-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; }
+        .thankyou-box { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 35px 30px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
         .thankyou-box i { font-size: 3rem; color: #10b981; margin-bottom: 16px; }
         .thankyou-box h3 { font-size: 1.4rem; color: #f9fafb; margin-bottom: 10px; }
         .thankyou-box p { font-size: 0.9rem; color: #9ca3af; margin-bottom: 20px; line-height: 1.5; }
 
-        .date-filter-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(31, 41, 55, 0.6);
-            padding: 10px 15px;
-            border-radius: 8px;
+        .ceo-config-card {
+            background: rgba(30, 41, 59, 0.5);
             border: 1px solid #374151;
-            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
             flex-wrap: wrap;
+            align-items: center;
         }
     </style>
 </head>
 <body>
 
-<!-- Thank You Popup Modal -->
 <div class="thankyou-modal" id="thankYouModal">
     <div class="thankyou-box">
         <i class="fa-solid fa-circle-check"></i>
         <h3 id="tyTitle">Thank You!</h3>
-        <p id="tyMessage">Your submission has been successfully recorded. Our team will get back to you shortly.</p>
+        <p id="tyMessage">Your submission has been successfully recorded.</p>
         <button onclick="closeThankYouModal()" class="submit-btn">Got It, Thanks!</button>
     </div>
 </div>
@@ -235,51 +159,24 @@
         </div>
     </div>
 
-    <!-- Hero Banner -->
     <div class="hero-banner">
         <h1 class="hero-headline">"Your technical challenges and their precise resolution form the foundation of our growth."</h1>
         <p class="hero-subtext">For over 10+ years, MS NETWORK has been delivering high-reliability, budget-friendly infrastructure services across Network, CCTV, Telecom, and IT Hardware solutions.</p>
         <button class="submit-btn" style="max-width: 260px; margin: 0 auto;" onclick="scrollToConsole()">Access Support Console</button>
     </div>
 
-    <!-- Key Services -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Key Capabilities & Services</h2>
         <div class="features-grid">
-            <div class="feature-box">
-                <i class="fa-solid fa-wifi"></i>
-                <h4>Network & Connectivity</h4>
-                <p>Complete enterprise networking, VPC setups, router configurations, and broadband troubleshooting.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-video"></i>
-                <h4>CCTV & Security Hardware</h4>
-                <p>Advanced CCTV installations, DVR/NVR maintenance, IP camera configurations, and cloud backups.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-phone-volume"></i>
-                <h4>Telecom & VOIP Gateways</h4>
-                <p>EPABX systems, intercom networking, telecom routing, and business voice solutions.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-microchip"></i>
-                <h4>IT Hardware & Server Care</h4>
-                <p>On-site and remote repair of server hardware, workstation maintenance, and IT infrastructure health.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-fingerprint"></i>
-                <h4>Biometric & Access Control</h4>
-                <p>Fingerprint, face recognition attendance punch systems, door access control setups, and software integration.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-diagram-project"></i>
-                <h4>Structured Cabling & Fiber Optics</h4>
-                <p>Cat6/Cat7 LAN cabling layout, rack dressing, fiber optic splicing, and high-speed managed switch configuration.</p>
-            </div>
+            <div class="feature-box"><i class="fa-solid fa-wifi"></i><h4>Network & Connectivity</h4><p>Enterprise networking, VPC setups, and router configurations.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-video"></i><h4>CCTV & Security</h4><p>CCTV installations, DVR/NVR maintenance, IP camera setups.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-phone-volume"></i><h4>Telecom Gateways</h4><p>EPABX systems, intercom networking, and telecom routing.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-microchip"></i><h4>IT Hardware Repair</h4><p>On-site server repair and workstation maintenance.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-fingerprint"></i><h4>Biometric Systems</h4><p>Fingerprint, face recognition attendance systems.</p></div>
+            <div class="feature-box"><i class="fa-solid fa-diagram-project"></i><h4>Structured Cabling</h4><p>LAN cabling, rack dressing, fiber optic splicing.</p></div>
         </div>
     </div>
 
-    <!-- Leadership & CEO Vision -->
     <div class="section-card">
         <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Leadership & Vision</h2>
         <div class="ceo-card">
@@ -287,12 +184,11 @@
             <div class="ceo-info">
                 <h3 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;">SHAJEEL MS</h3>
                 <p style="font-size: 0.85rem; color: #60a5fa; font-weight: 600; text-transform: uppercase;">Founder & CEO, MS NETWORK</p>
-                <p class="ceo-quote">"No matter how advanced technology becomes, the true strength of our service lies in our unwavering loyalty and support to our clients. Whether your issue is minor or critical, you can reach out to us anytime, anywhere."</p>
+                <p class="ceo-quote">"No matter how advanced technology becomes, the true strength of our service lies in our loyalty and support to our clients."</p>
             </div>
         </div>
     </div>
 
-    <!-- Portal Login & Call Request Console -->
     <div class="section-card" id="consoleSection">
         <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-right-to-bracket"></i> Client & Staff Portal Login</h2>
         <div class="auth-container">
@@ -302,83 +198,44 @@
                 <button class="tab-btn" id="callTabBtn" onclick="switchTab('call')" style="background: #059669; color: #fff;"><i class="fa-solid fa-phone"></i> Call Request</button>
             </div>
 
-            <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Work Email / ID</label>
-                    <input type="email" id="loginEmail" required placeholder="ceo@msnetwork.com or client email">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
-                </div>
+                <div class="form-group"><label>Work Email / ID</label><input type="email" id="loginEmail" required placeholder="ceo@msnetwork.com or client email"></div>
+                <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required placeholder="••••••••"></div>
                 <button type="submit" class="submit-btn">Sign In to Dashboard</button>
             </form>
 
-            <!-- Signup Form -->
             <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
-                <div class="form-group">
-                    <label>Organization / Client Name</label>
-                    <input type="text" id="signupName" required placeholder="Enterprise Name">
-                </div>
-                <div class="form-group">
-                    <label>Work Email</label>
-                    <input type="email" id="signupEmail" required placeholder="name@company.com">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" id="signupPhone" required placeholder="+91 XXXXX XXXXX">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="signupPassword" required placeholder="Create strong password">
-                </div>
+                <div class="form-group"><label>Organization Name</label><input type="text" id="signupName" required></div>
+                <div class="form-group"><label>Work Email</label><input type="email" id="signupEmail" required></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" id="signupPhone" required></div>
+                <div class="form-group"><label>Password</label><input type="password" id="signupPassword" required></div>
                 <button type="submit" class="submit-btn">Create Client Account</button>
             </form>
 
-            <!-- Call Request Form with Reason -->
             <form id="callRequestForm" style="display: none;" onsubmit="handleCallRequestSubmit(event)">
-                <div class="form-group">
-                    <label>Your Name / Organization</label>
-                    <input type="text" id="callName" required placeholder="Name or Company">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" id="callPhone" required placeholder="+91 XXXXX XXXXX">
-                </div>
-                <div class="form-group">
-                    <label>Reason for Callback / Call Request</label>
-                    <textarea id="callReason" rows="3" required placeholder="Specify why you need a call (e.g., Network outage, CCTV installation inquiry)..."></textarea>
-                </div>
+                <div class="form-group"><label>Name / Organization</label><input type="text" id="callName" required></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" id="callPhone" required></div>
+                <div class="form-group"><label>Reason for Callback</label><textarea id="callReason" rows="3" required></textarea></div>
                 <button type="submit" class="call-submit-btn"><i class="fa-solid fa-paper-plane"></i> Submit Call Request</button>
             </form>
         </div>
     </div>
 
-    <!-- Share Our Service & QR Code Section -->
     <div class="share-card">
         <div class="share-info">
             <h3 style="font-size: 1.2rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-qrcode" style="color: #0066cc; margin-right: 8px;"></i> Share Our Service</h3>
-            <p style="font-size: 0.88rem; color: #9ca3af; margin-top: 4px;">Share our portal link quickly via social channels or scan the QR code to visit instantly.</p>
-            
             <div class="social-icons-grid">
-                <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
-                <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram" title="Share on Instagram"><i class="fa-brands fa-instagram"></i></button>
-                <button onclick="shareOnTwitter()" class="social-icon-btn bg-twitter" title="Share on Twitter"><i class="fa-brands fa-twitter"></i></button>
-                <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook" title="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+                <button onclick="shareOnWhatsApp()" class="social-icon-btn bg-whatsapp"><i class="fa-brands fa-whatsapp"></i></button>
+                <button onclick="shareOnInstagram()" class="social-icon-btn bg-instagram"><i class="fa-brands fa-instagram"></i></button>
+                <button onclick="shareOnTwitter()" class="social-icon-btn bg-twitter"><i class="fa-brands fa-twitter"></i></button>
+                <button onclick="shareOnFacebook()" class="social-icon-btn bg-facebook"><i class="fa-brands fa-facebook-f"></i></button>
             </div>
-
             <div class="share-utility-btns">
                 <button onclick="copyWebsiteLink()" class="utility-btn"><i class="fa-solid fa-copy"></i> Copy Link</button>
                 <button onclick="nativeMobileShare()" class="utility-btn"><i class="fa-solid fa-share-nodes"></i> More Share Options</button>
             </div>
         </div>
-
-        <div class="qr-box-wrapper">
-            <div id="qrcode"></div>
-            <p>Scan to Visit</p>
-            <button onclick="shareQRCode()" class="share-qr-btn"><i class="fa-solid fa-qrcode"></i> Share QR</button>
-        </div>
+        <div class="qr-box-wrapper"><div id="qrcode"></div><p>Scan to Visit</p><button onclick="shareQRCode()" class="share-qr-btn">Share QR</button></div>
     </div>
 </div>
 
@@ -389,75 +246,75 @@
                 <h1 style="font-size: 1.25rem; font-weight: 700; color: #f9fafb;"><i class="fa-solid fa-network-wired" style="color: #0066cc;"></i> MS Operations Dashboard</h1>
                 <span id="userRoleBadge" class="role-tag-member">Member</span>
             </div>
-            
             <div style="display: flex; align-items: center;">
                 <div class="notif-wrapper">
-                    <button class="notif-bell-btn" onclick="toggleNotifDropdown()">
-                        <i class="fa-solid fa-bell"></i>
-                        <span id="notifBadge" class="notif-badge" style="display: none;">0</span>
-                    </button>
-                    <div class="notif-dropdown" id="notifDropdown">
-                        <div style="font-weight: 700; color: #f9fafb; border-bottom: 1px solid #1f2937; padding-bottom: 6px; margin-bottom: 8px;">Notifications</div>
-                        <div id="notifList"><div class="notif-item">No new notifications.</div></div>
-                    </div>
+                    <button class="notif-bell-btn" onclick="toggleNotifDropdown()"><i class="fa-solid fa-bell"></i><span id="notifBadge" class="notif-badge" style="display: none;">0</span></button>
+                    <div class="notif-dropdown" id="notifDropdown"><div style="font-weight: 700; color: #f9fafb; border-bottom: 1px solid #1f2937; padding-bottom: 6px; margin-bottom: 8px;">Notifications</div><div id="notifList"></div></div>
                 </div>
-
                 <span id="welcomeUser" style="margin-right: 12px; font-size: 0.85rem; color: #9ca3af;"></span>
                 <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
             </div>
         </div>
 
-        <!-- CLIENT TICKET SECTION -->
         <div id="clientTicketSection" style="display: none;">
             <h2 style="margin-bottom: 20px; font-size: 1.1rem; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
                 <div class="form-group">
                     <label>Service Category</label>
                     <select id="category" required>
-                        <option value="Network">Network / Wi-Fi / Router Issue</option>
-                        <option value="Camera">CCTV Camera / DVR / NVR Issue</option>
-                        <option value="Telecom">Telecom / Intercom / EPABX Issue</option>
-                        <option value="Hardware">IT Hardware / Server Issue</option>
-                        <option value="Biometric">Biometric / Access Control Issue</option>
-                        <option value="Cabling">Fiber Splicing / LAN Cabling Issue</option>
+                        <option value="Network">Network Issue</option>
+                        <option value="Camera">CCTV Issue</option>
+                        <option value="Telecom">Telecom Issue</option>
+                        <option value="Hardware">IT Hardware Issue</option>
+                        <option value="Biometric">Biometric Issue</option>
+                        <option value="Cabling">Fiber/LAN Cabling</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Problem Description</label>
-                    <textarea id="issue" rows="4" required placeholder="Describe your issue..."></textarea>
-                </div>
+                <div class="form-group"><label>Problem Description</label><textarea id="issue" rows="4" required></textarea></div>
                 <button type="submit" class="submit-btn">Submit Ticket</button>
             </form>
         </div>
 
-        <!-- MEMBER / CEO DASHBOARD SECTION -->
         <div id="adminPanelSection" style="display: none;">
             
-            <!-- EMPLOYEE ATTENDANCE & HISTORY SECTION -->
+            <!-- MEMBER ATTENDANCE CONSOLE -->
             <div id="employeeAttendanceBox" style="background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> My Attendance & Overtime (OD) Console</h3>
-                <p id="attendanceStatusText" style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;">Status: Not marked for today.</p>
+                <p id="attendanceStatusText" style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;"></p>
                 <button onclick="markAttendance()" id="markAttendanceBtn" class="submit-btn" style="max-width: 220px; background: #10b981; margin-bottom:15px;"><i class="fa-solid fa-fingerprint"></i> Punch In Today</button>
                 
                 <h4 style="font-size: 0.95rem; font-weight:700; color:#60a5fa; margin-top:20px; margin-bottom:10px;"><i class="fa-solid fa-calendar-days"></i> Daily Attendance & Overtime Log History</h4>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
                         <thead>
-                            <tr>
-                                <th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD) Hours</th>
-                            </tr>
+                            <tr><th>Date</th><th>Punch In Time</th><th>Status</th><th>Overtime (OD) Hours</th></tr>
                         </thead>
                         <tbody id="memberAttendanceHistoryBody"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- CEO / CO-CEO FULL ATTENDANCE MANAGEMENT -->
+            <!-- CEO / CO-CEO ATTENDANCE CONTROL PANEL -->
             <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
                 <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Daily & Past Attendance Control Hub</h3>
                 
+                <!-- GLOBAL SETTINGS CONTROL (CEO Only) -->
+                <div class="ceo-config-card">
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight:700; color:#38bdf8;"><i class="fa-solid fa-clock"></i> Global Office Start Time:</label>
+                        <input type="time" id="globalOfficeTimeInput" style="width: 120px; padding: 5px; margin-top: 4px;" onchange="saveGlobalOfficeTime(this.value)">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight:700; color:#f59e0b;"><i class="fa-solid fa-business-time"></i> Common Overtime (OD) Hours:</label>
+                        <input type="number" id="globalODInput" style="width: 100px; padding: 5px; margin-top: 4px;" onchange="saveGlobalOD(this.value)" min="0"> Hours
+                    </div>
+                    <div style="font-size:0.75rem; color:#9ca3af; flex:1; min-width:200px;">
+                        *Changing these values applies globally across all staff members.
+                    </div>
+                </div>
+
                 <div class="date-filter-box">
-                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View/Edit:</label>
+                    <label style="margin-bottom:0; font-weight:600;"><i class="fa-solid fa-calendar-day"></i> Select Date to View/Filter Chart:</label>
                     <input type="date" id="ceoFilterDate" onchange="loadCEOAttendancePanel()" style="max-width: 180px; padding:6px 10px;">
                     <button onclick="resetDateToToday()" class="utility-btn" style="background:#0066cc;"><i class="fa-solid fa-rotate-left"></i> Today</button>
                 </div>
@@ -466,7 +323,7 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>Staff Name</th><th>Selected Date</th><th>Punch In Time</th><th>Status</th><th>Set Overtime (OD) Hours</th>
+                                <th>Staff Name</th><th>Selected Date</th><th>Punch In Time</th><th>Attendance Status</th><th>Common OD Hours</th>
                             </tr>
                         </thead>
                         <tbody id="ceoAttendanceTableBody"></tbody>
@@ -510,29 +367,16 @@
 
     let currentUser = JSON.parse(localStorage.getItem('supportUser')) || null;
 
-    if (!localStorage.getItem('ms_tickets_db')) {
-        localStorage.setItem('ms_tickets_db', JSON.stringify([]));
-    }
-    if (!localStorage.getItem('ms_notifs_db')) {
-        localStorage.setItem('ms_notifs_db', JSON.stringify([]));
-    }
-    if (!localStorage.getItem('ms_attendance_db')) {
-        localStorage.setItem('ms_attendance_db', JSON.stringify([]));
-    }
-    if (!localStorage.getItem('ms_od_db')) {
-        localStorage.setItem('ms_od_db', JSON.stringify([]));
-    }
+    if (!localStorage.getItem('ms_tickets_db')) localStorage.setItem('ms_tickets_db', JSON.stringify([]));
+    if (!localStorage.getItem('ms_notifs_db')) localStorage.setItem('ms_notifs_db', JSON.stringify([]));
+    if (!localStorage.getItem('ms_attendance_db')) localStorage.setItem('ms_attendance_db', JSON.stringify([]));
+    if (!localStorage.getItem('ms_global_od')) localStorage.setItem('ms_global_od', '0');
+    if (!localStorage.getItem('ms_office_time')) localStorage.setItem('ms_office_time', '09:30');
 
     window.addEventListener('load', () => {
         new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href,
-            width: 110,
-            height: 110,
-            colorDark : "#0b0f19",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+            text: window.location.href, width: 110, height: 110, colorDark : "#0b0f19", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H
         });
-        
         document.getElementById('ceoFilterDate').value = new Date().toISOString().split('T')[0];
     });
 
@@ -542,25 +386,14 @@
         document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
         document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
         document.getElementById('callRequestForm').style.display = tab === 'call' ? 'block' : 'none';
-        
         document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
         document.getElementById('signupTabBtn').classList.toggle('active', tab === 'signup');
         document.getElementById('callTabBtn').style.opacity = tab === 'call' ? '1' : '0.8';
     }
 
-    function scrollToConsole() {
-        document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function showThankYou(title, msg) {
-        document.getElementById('tyTitle').innerText = title;
-        document.getElementById('tyMessage').innerText = msg;
-        document.getElementById('thankYouModal').style.display = 'flex';
-    }
-
-    function closeThankYouModal() {
-        document.getElementById('thankYouModal').style.display = 'none';
-    }
+    function scrollToConsole() { document.getElementById('consoleSection').scrollIntoView({ behavior: 'smooth' }); }
+    function showThankYou(title, msg) { document.getElementById('tyTitle').innerText = title; document.getElementById('tyMessage').innerText = msg; document.getElementById('thankYouModal').style.display = 'flex'; }
+    function closeThankYouModal() { document.getElementById('thankYouModal').style.display = 'none'; }
 
     function handleCallRequestSubmit(e) {
         e.preventDefault();
@@ -569,35 +402,26 @@
         const phone = document.getElementById('callPhone').value.trim();
         const reason = document.getElementById('callReason').value.trim();
 
-        const newCallReq = {
-            id: callId, type: 'Call Request', clientName: `${name} (${phone})`,
-            issue: `Reason: ${reason}`, assignedTo: 'Unassigned', status: 'Pending'
-        };
-
+        const newCallReq = { id: callId, type: 'Call Request', clientName: `${name} (${phone})`, issue: `Reason: ${reason}`, assignedTo: 'Unassigned', status: 'Pending' };
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newCallReq);
         localStorage.setItem('ms_tickets_db', JSON.stringify(db));
 
-        addNotification('CEO', `📞 Call Request (${callId}) from ${name} - Reason: ${reason}`);
-        sendPushNotification("ceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
-        sendPushNotification("coceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call. Reason: ${reason}`);
+        addNotification('CEO', `📞 Call Request (${callId}) from ${name}`);
+        sendPushNotification("ceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call.`);
+        sendPushNotification("coceo@msnetwork.com", "📞 New Call Request!", `${name} requested a call.`);
 
-        showThankYou("Call Request Submitted!", `Thank you ${name}! Your callback request has been sent to CEO & Co-CEO successfully.`);
+        showThankYou("Call Request Submitted!", `Thank you ${name}! Callback request sent successfully.`);
         document.getElementById('callRequestForm').reset();
         switchTab('login');
     }
 
-    function shareOnWhatsApp() {
-        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`, '_blank');
-    }
-    function shareOnInstagram() { alert('Link copied! Share it on Instagram.'); copyWebsiteLink(); }
+    function shareOnWhatsApp() { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}`, '_blank'); }
+    function shareOnInstagram() { alert('Link copied!'); copyWebsiteLink(); }
     function shareOnTwitter() { window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}`, '_blank'); }
     function shareOnFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank'); }
     function copyWebsiteLink() { navigator.clipboard.writeText(window.location.href).then(() => alert('Link Copied!')); }
-    function nativeMobileShare() {
-        if (navigator.share) navigator.share({ title: 'MS NETWORK', url: window.location.href }).catch(() => {});
-        else copyWebsiteLink();
-    }
+    function nativeMobileShare() { if (navigator.share) navigator.share({ title: 'MS NETWORK', url: window.location.href }).catch(() => {}); else copyWebsiteLink(); }
     function shareQRCode() { nativeMobileShare(); }
 
     function handleLogin(e) {
@@ -610,12 +434,8 @@
         if (foundSysUser) {
             currentUser = { name: foundSysUser.name, email: foundSysUser.email, role: foundSysUser.role };
             localStorage.setItem('supportUser', JSON.stringify(currentUser));
-            
             window.OneSignalDeferred = window.OneSignalDeferred || [];
-            OneSignalDeferred.push(function(OneSignal) {
-                OneSignal.login(currentUser.email);
-            });
-
+            OneSignalDeferred.push(function(OneSignal) { OneSignal.login(currentUser.email); });
             showPortal();
             return;
         }
@@ -629,26 +449,17 @@
             showPortal();
             return;
         }
-
         alert('Invalid Email or Password!');
     }
 
     function handleSignup(e) {
         e.preventDefault();
         const name = document.getElementById('signupName').value;
-        const newClient = {
-            name: name,
-            email: document.getElementById('signupEmail').value,
-            phone: document.getElementById('signupPhone').value,
-            password: document.getElementById('signupPassword').value,
-            role: 'CLIENT'
-        };
-
+        const newClient = { name: name, email: document.getElementById('signupEmail').value, phone: document.getElementById('signupPhone').value, password: document.getElementById('signupPassword').value, role: 'CLIENT' };
         const clientDB = JSON.parse(localStorage.getItem('ms_clients_db')) || [];
         clientDB.push(newClient);
         localStorage.setItem('ms_clients_db', JSON.stringify(clientDB));
-
-        showThankYou("Registration Successful!", `Welcome ${name}! Your client account has been created successfully. Please sign in.`);
+        showThankYou("Registration Successful!", `Welcome ${name}! Account created.`);
         document.getElementById('signupForm').reset();
         switchTab('login');
     }
@@ -668,6 +479,8 @@
             if (currentUser.role === 'CEO') {
                 document.getElementById('employeeAttendanceBox').style.display = 'none';
                 document.getElementById('ceoAttendanceSection').style.display = 'block';
+                document.getElementById('globalOfficeTimeInput').value = localStorage.getItem('ms_office_time') || '09:30';
+                document.getElementById('globalODInput').value = localStorage.getItem('ms_global_od') || '0';
                 loadCEOAttendancePanel();
             } else {
                 document.getElementById('employeeAttendanceBox').style.display = 'block';
@@ -687,18 +500,7 @@
     }
 
     async function sendPushNotification(targetEmail, title, message) {
-        const options = {
-            method: 'POST',
-            headers: { 'accept': 'application/json', 'content-type': 'application/json' },
-            body: JSON.stringify({
-                app_id: "56e2717d-c699-4c22-8e4c-40a12c19149d",
-                include_aliases: { external_id: [targetEmail] },
-                target_channel: "push",
-                headings: { en: title },
-                contents: { en: message },
-                sound: "default"
-            })
-        };
+        const options = { method: 'POST', headers: { 'accept': 'application/json', 'content-type': 'application/json' }, body: JSON.stringify({ app_id: "56e2717d-c699-4c22-8e4c-40a12c19149d", include_aliases: { external_id: [targetEmail] }, target_channel: "push", headings: { en: title }, contents: { en: message }, sound: "default" }) };
         try { await fetch('https://onesignal.com/api/v1/notifications', options); } catch (err) { console.log(err); }
     }
 
@@ -713,27 +515,44 @@
         return d.toISOString().split('T')[0];
     }
 
+    /* COLOR CALCULATION LOGIC BASED ON OFFICE START TIME */
+    function getPunchStatusBadge(punchTimeStr) {
+        if (!punchTimeStr) return '<span class="badge badge-absent">Not Marked</span>';
+        
+        const targetOfficeTime = localStorage.getItem('ms_office_time') || '09:30';
+        const [targetHours, targetMins] = targetOfficeTime.split(':').map(Number);
+
+        // Convert punchTimeStr (e.g. "09:25:00 AM") to 24h minutes
+        let punchDate = new Date("1970-01-01 " + punchTimeStr);
+        let punchHours = punchDate.getHours();
+        let punchMins = punchDate.getMinutes();
+
+        let targetTotalMins = targetHours * 60 + targetMins;
+        let punchTotalMins = punchHours * 60 + punchMins;
+
+        if (punchTotalMins < targetTotalMins) {
+            return `<span class="badge badge-early"><i class="fa-solid fa-circle-check"></i> Early (${punchTimeStr})</span>`;
+        } else if (punchTotalMins === targetTotalMins) {
+            return `<span class="badge badge-ontime"><i class="fa-solid fa-clock"></i> On Time (${punchTimeStr})</span>`;
+        } else {
+            return `<span class="badge badge-late"><i class="fa-solid fa-triangle-exclamation"></i> Late Punch (${punchTimeStr})</span>`;
+        }
+    }
+
     function markAttendance() {
         const todayDate = getFormattedDate();
         const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
-        
         const existing = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
         if (existing) {
             alert("Attendance already marked for today!");
             return;
         }
 
-        attendanceDB.unshift({
-            name: currentUser.name,
-            date: todayDate,
-            time: currentTime,
-            status: 'Present'
-        });
-
+        attendanceDB.unshift({ name: currentUser.name, date: todayDate, time: currentTime, status: 'Present' });
         localStorage.setItem('ms_attendance_db', JSON.stringify(attendanceDB));
-        addNotification('CEO', `🕒 Attendance Marked: ${currentUser.name} punched in at ${currentTime} on ${todayDate}`);
+        addNotification('CEO', `🕒 Punch-In: ${currentUser.name} at ${currentTime}`);
         
         alert(`Attendance marked successfully at ${currentTime}!`);
         checkMemberAttendance();
@@ -742,18 +561,16 @@
     function checkMemberAttendance() {
         const todayDate = getFormattedDate();
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
-        let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || [];
-
         const record = attendanceDB.find(a => a.name.toUpperCase() === currentUser.name.toUpperCase() && a.date === todayDate);
 
         const statusText = document.getElementById('attendanceStatusText');
         const btn = document.getElementById('markAttendanceBtn');
 
         if (record) {
-            statusText.innerHTML = `Today's Status (${todayDate}): <span style="color:#10b981; font-weight:700;">Present</span> (Punched in at ${record.time})`;
+            statusText.innerHTML = `Today's Status (${todayDate}): ${getPunchStatusBadge(record.time)}`;
             btn.style.display = 'none';
         } else {
-            statusText.innerHTML = `Today's Status (${todayDate}): <span style="color:#f59e0b; font-weight:700;">Not Marked</span>`;
+            statusText.innerHTML = `Today's Status (${todayDate}): <span class="badge badge-absent">Not Marked</span>`;
             btn.style.display = 'block';
         }
 
@@ -762,23 +579,34 @@
         historyBody.innerHTML = '';
 
         if (myLogs.length === 0) {
-            historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af; padding:15px;">No attendance logs recorded yet.</td></tr>`;
+            historyBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#9ca3af; padding:15px;">No logs found.</td></tr>`;
             return;
         }
 
-        myLogs.forEach(log => {
-            const odRecord = odDB.find(o => o.name.toUpperCase() === currentUser.name.toUpperCase() && o.date === log.date);
-            const odHours = odRecord ? odRecord.hours : '0';
+        const commonOD = localStorage.getItem('ms_global_od') || '0';
 
+        myLogs.forEach(log => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td><b>${log.date}</b></td>
                 <td>${log.time}</td>
-                <td><span class="badge badge-resolved">Present</span></td>
-                <td><b style="color:#38bdf8;">${odHours} Hours</b></td>
+                <td>${getPunchStatusBadge(log.time)}</td>
+                <td><b style="color:#38bdf8;">${commonOD} Hours</b></td>
             `;
             historyBody.appendChild(tr);
         });
+    }
+
+    function saveGlobalOfficeTime(val) {
+        localStorage.setItem('ms_office_time', val);
+        alert(`Global Office Start Time set to ${val}. All status indicators updated!`);
+        loadCEOAttendancePanel();
+    }
+
+    function saveGlobalOD(val) {
+        localStorage.setItem('ms_global_od', val);
+        alert(`Common Overtime (OD) set to ${val} Hours for all employees!`);
+        loadCEOAttendancePanel();
     }
 
     function resetDateToToday() {
@@ -792,45 +620,27 @@
         tbody.innerHTML = '';
 
         let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
-        let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || [];
+        const commonOD = localStorage.getItem('ms_global_od') || '0';
 
         TEAM_LIST.forEach(member => {
             const record = attendanceDB.find(a => a.name.toUpperCase() === member.toUpperCase() && a.date === selectedDate);
-            const odRecord = odDB.find(o => o.name.toUpperCase() === member.toUpperCase() && o.date === selectedDate);
-            const assignedOD = odRecord ? odRecord.hours : '0';
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td><b>${member}</b></td>
                 <td>${selectedDate}</td>
                 <td>${record ? record.time : '-'}</td>
-                <td><span class="badge ${record ? 'badge-resolved' : 'badge-pending'}">${record ? 'Present' : 'Absent / Not Marked'}</span></td>
-                <td>
-                    <input type="number" min="0" value="${assignedOD}" style="width: 80px; background:#0b0f19; color:#fff; padding:4px;" onchange="updateOD('${member}', '${selectedDate}', this.value)"> Hours
-                </td>
+                <td>${record ? getPunchStatusBadge(record.time) : '<span class="badge badge-absent">Absent / Not Marked</span>'}</td>
+                <td><b style="color:#f59e0b;">${commonOD} Hours</b></td>
             `;
             tbody.appendChild(tr);
         });
     }
 
-    function updateOD(memberName, selectedDate, hours) {
-        let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || [];
-        odDB = odDB.filter(o => !(o.name.toUpperCase() === memberName.toUpperCase() && o.date === selectedDate));
-        
-        odDB.push({ name: memberName, date: selectedDate, hours: hours });
-        localStorage.setItem('ms_od_db', JSON.stringify(odDB));
-
-        addNotification(memberName, `⏱ Overtime Updated: CEO set ${hours} Hours OD for you on ${selectedDate}`);
-        alert(`Overtime (OD) for ${memberName} on ${selectedDate} updated to ${hours} hours successfully.`);
-    }
-
     function handleTicketSubmit(e) {
         e.preventDefault();
         const tckId = 'TCK-' + Math.floor(100 + Math.random() * 900);
-        const newTicket = {
-            id: tckId, type: 'Support Ticket', clientName: currentUser.name,
-            issue: document.getElementById('issue').value, assignedTo: 'Unassigned', status: 'Pending'
-        };
+        const newTicket = { id: tckId, type: 'Support Ticket', clientName: currentUser.name, issue: document.getElementById('issue').value, assignedTo: 'Unassigned', status: 'Pending' };
 
         const db = JSON.parse(localStorage.getItem('ms_tickets_db')) || [];
         db.unshift(newTicket);
@@ -840,7 +650,7 @@
         sendPushNotification("ceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
         sendPushNotification("coceo@msnetwork.com", "🚨 New Ticket Raised!", `Client ${currentUser.name} raised ticket ${tckId}`);
 
-        showThankYou("Ticket Submitted!", `Your support ticket (${tckId}) has been created successfully. Our team will review it.`);
+        showThankYou("Ticket Submitted!", `Ticket (${tckId}) created successfully.`);
         document.getElementById('ticketForm').reset();
     }
 
@@ -852,7 +662,7 @@
         let filteredList = (currentUser.role === 'CEO') ? db : db.filter(i => i.assignedTo.toUpperCase() === currentUser.name.toUpperCase());
 
         if (filteredList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No assigned items found.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #9ca3af; padding: 20px;">No items found.</td></tr>`;
             return;
         }
 
@@ -869,7 +679,7 @@
                      <option value="Resolved" ${item.status === 'Resolved'?'selected':''}>Resolved</option>
                    </select>`;
 
-            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'resolved' : 'pending'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
+            tr.innerHTML = `<td>${item.id}</td><td>${item.clientName}</td><td>${item.issue}</td><td><span class="badge badge-${item.status === 'Resolved' ? 'early' : 'ontime'}">${item.status}</span></td><td>${item.assignedTo}</td><td>${actionHTML}</td>`;
             tbody.appendChild(tr);
         });
     }
@@ -887,7 +697,6 @@
                 addNotification(techName, `⚡ New Work Assigned! CEO assigned ${id} to you.`);
                 sendPushNotification(sysUser.email, "⚡ New Work Assigned!", `CEO assigned Item ${id} to you.`);
             }
-
             alert(`Assigned ${id} to ${techName}`);
             loadAdminPanel();
         }
@@ -914,12 +723,10 @@
         if (!currentUser) return;
         const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
         const seenNotifs = JSON.parse(localStorage.getItem('ms_seen_notifs_' + currentUser.email)) || [];
-        
         const notifList = document.getElementById('notifList');
         const notifBadge = document.getElementById('notifBadge');
 
         const userNotifs = notifs.filter(n => n.target === currentUser.role || currentUser.name.toUpperCase().includes(n.target.toUpperCase()));
-        
         const unseenCount = userNotifs.filter(n => !seenNotifs.includes(n.id)).length;
 
         if (userNotifs.length > 0) {
@@ -929,7 +736,6 @@
             } else {
                 notifBadge.style.display = 'none';
             }
-
             notifList.innerHTML = '';
             userNotifs.forEach(n => {
                 notifList.innerHTML += `<div class="notif-item">${n.text}<span style="font-size:0.7rem; color:#6b7280; display:block; margin-top:2px;">${n.time}</span></div>`;

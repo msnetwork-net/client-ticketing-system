@@ -395,6 +395,7 @@
             </div>
         </div>
 
+        <!-- CLIENT TICKET SECTION -->
         <div id="clientTicketSection" style="display: none;">
             <h2 style="margin-bottom: 20px; font-size: 1.1rem; color: #f9fafb;">Create Support Ticket</h2>
             <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
@@ -417,8 +418,38 @@
             </form>
         </div>
 
+        <!-- MEMBER / CEO DASHBOARD SECTION -->
         <div id="adminPanelSection" style="display: none;">
-            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">Active Operations Console</h3>
+            
+            <!-- EMPLOYEE ATTENDANCE SECTION (Visible for Staff Members) -->
+            <div id="employeeAttendanceBox" style="background: rgba(31, 41, 55, 0.4); border: 1px solid #1f2937; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: none;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> Daily Attendance & Overtime (OD)</h3>
+                <p id="attendanceStatusText" style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;">Status: Not marked for today.</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="markAttendance()" id="markAttendanceBtn" class="submit-btn" style="max-width: 220px; background: #10b981;"><i class="fa-solid fa-fingerprint"></i> Mark Morning Attendance</button>
+                </div>
+                <div id="overtimeInfoBox" style="margin-top: 15px; font-size: 0.85rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 8px; display: none;">
+                    Assigned Overtime (OD) Hours: <span id="assignedODText" style="font-weight: 700;">0 Hours</span>
+                </div>
+            </div>
+
+            <!-- CEO / CO-CEO ATTENDANCE MANAGEMENT TABLE -->
+            <div id="ceoAttendanceSection" style="margin-bottom: 30px; display: none;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;"><i class="fa-solid fa-clipboard-user" style="color: #60a5fa;"></i> Staff Attendance & Overtime (OD) Management</h3>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Staff Name</th><th>Today's Date</th><th>Punch In Time</th><th>Status</th><th>Set Overtime (OD) Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ceoAttendanceTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TICKETS & CALL REQUESTS TABLE -->
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: #f9fafb; margin-bottom: 15px;" id="adminTitle">Active Operations Console (Tickets & Calls)</h3>
             <div style="overflow-x: auto;">
                 <table class="admin-table">
                     <thead>
@@ -458,6 +489,12 @@
     }
     if (!localStorage.getItem('ms_notifs_db')) {
         localStorage.setItem('ms_notifs_db', JSON.stringify([]));
+    }
+    if (!localStorage.getItem('ms_attendance_db')) {
+        localStorage.setItem('ms_attendance_db', JSON.stringify([]));
+    }
+    if (!localStorage.getItem('ms_od_db')) {
+        localStorage.setItem('ms_od_db', JSON.stringify({}));
     }
 
     window.addEventListener('load', () => {
@@ -599,6 +636,16 @@
         } else {
             document.getElementById('clientTicketSection').style.display = 'none';
             document.getElementById('adminPanelSection').style.display = 'block';
+            
+            if (currentUser.role === 'CEO') {
+                document.getElementById('employeeAttendanceBox').style.display = 'none';
+                document.getElementById('ceoAttendanceSection').style.display = 'block';
+                loadCEOAttendancePanel();
+            } else {
+                document.getElementById('employeeAttendanceBox').style.display = 'block';
+                document.getElementById('ceoAttendanceSection').style.display = 'none';
+                checkMemberAttendance();
+            }
             loadAdminPanel();
         }
         loadNotifications();
@@ -631,6 +678,89 @@
         const notifs = JSON.parse(localStorage.getItem('ms_notifs_db')) || [];
         notifs.unshift({ id: Date.now(), target: targetRoleOrName, text: text, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
         localStorage.setItem('ms_notifs_db', JSON.stringify(notifs));
+    }
+
+    /* ATTENDANCE & OD FUNCTIONS */
+    function markAttendance() {
+        const todayDate = new Date().toLocaleDateString();
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
+        
+        // Check if already marked today
+        const existing = attendanceDB.find(a => a.name === currentUser.name && a.date === todayDate);
+        if (existing) {
+            alert("Attendance already marked for today!");
+            return;
+        }
+
+        attendanceDB.unshift({
+            name: currentUser.name,
+            date: todayDate,
+            time: currentTime,
+            status: 'Present'
+        });
+
+        localStorage.setItem('ms_attendance_db', JSON.stringify(attendanceDB));
+        addNotification('CEO', `🕒 Attendance Marked: ${currentUser.name} punched in at ${currentTime} on ${todayDate}`);
+        
+        alert(`Attendance marked successfully at ${currentTime}!`);
+        checkMemberAttendance();
+    }
+
+    function checkMemberAttendance() {
+        const todayDate = new Date().toLocaleDateString();
+        let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
+        const record = attendanceDB.find(a => a.name === currentUser.name && a.date === todayDate);
+
+        const statusText = document.getElementById('attendanceStatusText');
+        const btn = document.getElementById('markAttendanceBtn');
+
+        if (record) {
+            statusText.innerHTML = `Status: <span style="color:#10b981; font-weight:700;">Present</span> (Punched in at ${record.time})`;
+            btn.style.display = 'none';
+        } else {
+            statusText.innerHTML = `Status: <span style="color:#f59e0b; font-weight:700;">Not Marked</span> for today (${todayDate})`;
+            btn.style.display = 'block';
+        }
+
+        // Show assigned Overtime (OD)
+        const odDB = JSON.parse(localStorage.getItem('ms_od_db')) || {};
+        const odHours = odDB[currentUser.name] || '0';
+        document.getElementById('assignedODText').innerText = `${odHours} Hours`;
+        document.getElementById('overtimeInfoBox').style.display = 'block';
+    }
+
+    function loadCEOAttendancePanel() {
+        const tbody = document.getElementById('ceoAttendanceTableBody');
+        tbody.innerHTML = '';
+        const todayDate = new Date().toLocaleDateString();
+        let attendanceDB = JSON.parse(localStorage.getItem('ms_attendance_db')) || [];
+        let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || {};
+
+        TEAM_LIST.forEach(member => {
+            const record = attendanceDB.find(a => a.name.toUpperCase() === member.toUpperCase() && a.date === todayDate);
+            const assignedOD = odDB[member] || '0';
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><b>${member}</b></td>
+                <td>${todayDate}</td>
+                <td>${record ? record.time : '-'}</td>
+                <td><span class="badge ${record ? 'badge-resolved' : 'badge-pending'}">${record ? 'Present' : 'Absent / Not Marked'}</span></td>
+                <td>
+                    <input type="number" min="0" value="${assignedOD}" style="width: 80px; background:#0b0f19; color:#fff; padding:4px;" onchange="updateOD('${member}', this.value)"> Hours
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function updateOD(memberName, hours) {
+        let odDB = JSON.parse(localStorage.getItem('ms_od_db')) || {};
+        odDB[memberName] = hours;
+        localStorage.setItem('ms_od_db', JSON.stringify(odDB));
+        alert(`Overtime (OD) for ${memberName} updated to ${hours} hours successfully.`);
     }
 
     function handleTicketSubmit(e) {
